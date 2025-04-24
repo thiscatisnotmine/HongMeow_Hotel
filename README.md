@@ -54,7 +54,7 @@ This project is developed as part of a learning project in database CS251.
     
 4. Push to remote branch:
     ```bash
-    git push origin develop/your-name-or-task
+    git push origin develop/your-name
     
 
 ## How to install this web application
