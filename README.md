@@ -41,21 +41,21 @@ This project is developed as part of a learning project in database CS251.
    ```bash
    git clone https://github.com/yourusername/hongmoew-hotel.git
    cd hongmeow-hotel
-   ---
+   
 2. Create your own branch:
     > Developers should create a separate branch for their work to keep development clean and organized.
-    ---bash
+    ```bash
     git checkout -b develop/your-name
-    ---
+    
 3. Make changes and commit:
-    ---bash
+    ```bash
     git add .
     git commit -m "Add: Description of your change"
-    ---
+    
 4. Push to remote branch:
-    ---bash
+    ```bash
     git push origin develop/your-name-or-task
-    ---
+    
 
 ## How to install this web application
 
