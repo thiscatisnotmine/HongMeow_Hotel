@@ -118,58 +118,85 @@ nav li.active {
 }
 
 .search-btn {
-  padding: 10px 16px;
-  background: #fff799;
+  
+  background: #FFFAA2;
   border: none;
-  border-radius: 10px;
+  border-radius: 20px;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 14px;
+  width: 94px;
+  height: 71px;
 }
 
 .room-card {
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   background: #f7fbf9;
   margin-bottom: 20px;
-  padding: 20px;
   border-radius: 16px;
-  align-items: flex-start;
-  justify-content: space-between;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
 }
 
+.room-card > div {
+  padding: 20px;
+  border-right: 1px solid #d0d0d0;
+  box-sizing: border-box;
+}
+
+.room-card > div:last-child {
+  border-right: none;
+  text-align: center;
+}
+
+
 .room-info {
-  max-width: 60%;
+  margin-top: 10px;
+  margin-left: 20px;
   color: #5C4538;
 }
 
 .room-info h3 {
   margin: 0 0 10px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
 }
 
 .room-images {
+  margin-top: 20px;
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  margin-bottom: 10px;
 }
 
-.room-images img {
-  width: 80px;
-  height: 60px;
+.main-image {
+  width: 232px;
+  height: 155px;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.thumbnail-row {
+  display: flex;
+  gap: 10px;
+}
+
+.thumbnail-row img {
+  width: 111px;
+  height: 68px;
   object-fit: cover;
   border-radius: 8px;
 }
 
 .room-detail {
-  font-size: 14px;
-  color: #666;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #939796;
 }
 
 .room-meta {
   text-align: center;
-  min-width: 140px;
   color: #5C4538;
 }
 
@@ -187,4 +214,57 @@ nav li.active {
   font-weight: 600;
   color: #ffffff;
   font-size: 16px;
+}
+
+.search-image{
+  width: 50%;
+  height: 50%;
+}
+
+.filter-dropdown {
+  background: #f0f7f2;
+  border-radius: 35px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+  color: #5C4538;
+  width: 281px;
+  height: 71px;
+  box-sizing: border-box;
+}
+
+.paw-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+}
+
+.dropdown-select {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  color: #5C4538;
+  appearance: none;
+  cursor: pointer;
+  padding: 12px 0;
+  line-height: 1.2;
+}
+
+.dropdown-select:focus {
+  outline: none;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  right: 20px;
+  pointer-events: none;
+  width: 12px;
+  height: 12px;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="gray" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px;
 }
