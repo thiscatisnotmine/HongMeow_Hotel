@@ -4,13 +4,16 @@
   <meta charset="UTF-8">
   <title>Available Room - Hong Meow Hotel</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/Avaiable_Room_(Admin).css">
+  <link rel="stylesheet" href="css/Avaiable_Room_(Admin).css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
 </head>
 <body>
   <div class="container">
     <aside class="sidebar">
       <div class="logo">
-        <img src="/image/logorm.png" alt="Hong Meow Logo" />
+        <img src="image/logorm.png" alt="Hong Meow Logo" />
       </div>
       <nav>
         <ul>
@@ -34,12 +37,16 @@
         <div class="user-icon">👤</div>
       </header>
 
-      <section class="filter-section">
-        <div class="filter-box">11 เม.ย. 2025<br><span>ศุกร์</span></div>
-        <div class="filter-box">12 เม.ย. 2025<br><span>เสาร์</span></div>
+      <div class="filter-section">
+        <div class="date-range-box">
+          <img src="/image/solar_calendar-linearSVG.svg" alt="calendar" class="calendar-icon">
+          <input type="text" id="startDate" class="date-input" readonly>
+          <div class="divider"></div>
+          <input type="text" id="endDate" class="date-input" readonly>
+        </div>
 
         <div class="filter-dropdown">
-          <img src="/image/dogSVG.svg" alt="paw" class="paw-icon">
+          <img src="image/dogSVG.svg" alt="paw" class="paw-icon">
           <select class="dropdown-select">
             <option value="dog">Room Type: Dog</option>
             <option value="cat">Room Type: Cat</option>
@@ -48,18 +55,18 @@
         </div>
 
         <button class="search-btn">
-          <img src="/image/material-symbols_searchSVG.svg" class="search-image">
+          <img src="image/material-symbols_searchSVG.svg" class="search-image">
         </button>
-      </section>
+      </div>
 
       <section class="room-card">
         <div class="room-info">
           <h3>Air-conditioned Capsule for dog</h3>
           <div class="room-images">
-            <img src="/image/image 11.png" class="main-image" alt="Main Image">
+            <img src="image/image 11.png" class="main-image" alt="Main Image">
             <div class="thumbnail-row">
-              <img src="/image/image 5.png" alt="Thumbnail 1">
-              <img src="/image/image 7.png" alt="Thumbnail 2">
+              <img src="image/image 5.png" alt="Thumbnail 1">
+              <img src="image/image 7.png" alt="Thumbnail 2">
             </div>
           </div>
           <p class="room-detail">ขนาดห้อง: 10 ตารางเมตร<br>ดูบริการและสิ่งอำนวยความสะดวกทั้งหมด</p>
@@ -75,25 +82,8 @@
           <button class="book-btn">Book</button>
         </div>
       </section>
-
-      <section class="room-card">
-        <div class="room-info">
-          <h3>Air-conditioned Deluxe for dog</h3>
-          <div class="room-images">
-            <img src="room1.jpg" alt="">
-            <img src="room2.jpg" alt="">
-            <img src="room3.jpg" alt="">
-          </div>
-          <p class="room-detail">ขนาดห้อง: 10 ตารางเมตร<br>ดูบริการและสิ่งอำนวยความสะดวกทั้งหมด</p>
-        </div>
-        <div class="room-meta">
-          <p><strong>Pet Type</strong><br>Dog</p>
-          <p><strong>Available Rooms</strong><br>2</p>
-          <p><strong>Price</strong><br>999<br><small>per night</small></p>
-          <button class="book-btn">Book</button>
-        </div>
-      </section>
     </main>
   </div>
+  <script src="javascript/date.js"></script>
 </body>
 </html>
