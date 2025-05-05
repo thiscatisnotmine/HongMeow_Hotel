@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  color: #5C4538;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: linear-gradient(to bottom, #D6F0FF, #FEFCBF);
+  padding: 20px;
+  height: 100vh;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo img {
+  width: 80px;
+  height: auto;
+}
+
+.logo h2 {
+  font-size: 16px;
+  line-height: 1.2;
+  margin: 8px 0 0;
+  font-weight: 600;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  padding: 12px 16px;
+  color: #5C4538;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 20px;
+  transition: background 0.2s;
+}
+
+nav li:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+nav li.active {
+  background: white;
+  font-weight: 600;
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header nav a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #5C4538;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: background 0.2s ease;
+}
+
+.header nav a:hover {
+  background-color: #f0f0f0;
+}
+
+.header nav a.active {
+  background-color: #b3e5ff;
+  font-weight: 600;
+}
+
+.user-icon {
+  font-size: 20px;
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.filter-box {
+  background: #f0f7f2;
+  padding: 10px 16px;
+  border-radius: 15px;
+  font-size: 14px;
+  text-align: center;
+  color: #5C4538;
+}
+
+.search-btn {
+  padding: 10px 16px;
+  background: #fff799;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.room-card {
+  display: flex;
+  background: #f7fbf9;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.room-info {
+  max-width: 60%;
+  color: #5C4538;
+}
+
+.room-info h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.room-images {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.room-images img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.room-detail {
+  font-size: 14px;
+  color: #666;
+}
+
+.room-meta {
+  text-align: center;
+  min-width: 140px;
+  color: #5C4538;
+}
+
+.room-meta p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.book-btn {
+  background: #89D3FF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 16px;
+}
