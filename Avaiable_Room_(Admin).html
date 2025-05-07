@@ -30,19 +30,27 @@
 
     <main class="main-content">
       <header class="header">
-        <nav>
-          <a class="active" href="#">Available Room</a>
-          <a href="#">Staff Management</a>
+        <nav class="top-nav">
+          <a href="#" class="nav-available active">Available Room</a>
+          <a href="#" class="nav-staff">Staff Management</a>
         </nav>
-        <div class="user-icon">👤</div>
+        <button class="user-button">
+          <img src="/image/solar_user-outline.svg" class="user-icon" alt="User Icon">
+        </button>        
       </header>
 
       <div class="filter-section">
         <div class="date-range-box">
           <img src="/image/solar_calendar-linearSVG.svg" alt="calendar" class="calendar-icon">
-          <input type="text" id="startDate" class="date-input" readonly>
+          <div class="date-group">
+            <input type="text" id="startDate" class="date-input" readonly>
+            <div id="startDay" class="day-label"></div>
+          </div>
           <div class="divider"></div>
-          <input type="text" id="endDate" class="date-input" readonly>
+          <div class="date-group">
+            <input type="text" id="endDate" class="date-input" readonly>
+            <div id="endDay" class="day-label"></div>
+          </div>
         </div>
 
         <div class="filter-dropdown">
@@ -69,17 +77,83 @@
               <img src="image/image 7.png" alt="Thumbnail 2">
             </div>
           </div>
-          <p class="room-detail">ขนาดห้อง: 10 ตารางเมตร<br>ดูบริการและสิ่งอำนวยความสะดวกทั้งหมด</p>
+          <div class="room-detail">
+            <div class="room-info-item">
+              <img src="/image/fluent-mdl2_room.svg" alt="Room Size Icon" class="info-icon">
+              <span>ขนาดห้อง: 10 ตารางเมตร</span>
+            </div>
+            <div class="room-info-item">
+              <img src="/image/ei_plus.svg" alt="Facilities Icon" class="info-icon">
+              <span>ดูบริการและสิ่งอำนวยความสะดวกทั้งหมด</span>
+            </div>
+          </div>               
         </div>
         <div class="room-meta">
-          <p><strong>Pet Type</strong><br>Dog</p>
+          <p><strong>Pet Type</strong></p>
+          <p class="price-detail"><br>Dog</p>
         </div>
         <div class="room-meta">
-          <p><strong>Available Rooms</strong><br>2</p>
+          <p><strong>Available Rooms</strong></p>
+          <p class="price-detail"><br>2</p>
+        </div>
+        
+        <div class="room-meta room-price">
+          <div class="price-box">
+            <p><strong>Price</strong></p>
+            <p class="price-detail">
+              999<br>
+              <small class="per-night">per night</small>
+            </p>
+          </div>
+        
+          <div class="book-wrapper">
+            <button class="book-btn">Book</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="room-card">
+        <div class="room-info">
+          <h3>Air-conditioned Deluxe for dog</h3>
+          <div class="room-images">
+            <img src="image/image 11.png" class="main-image" alt="Main Image">
+            <div class="thumbnail-row">
+              <img src="image/image 5.png" alt="Thumbnail 1">
+              <img src="image/image 7.png" alt="Thumbnail 2">
+            </div>
+          </div>
+          <div class="room-detail">
+            <div class="room-info-item">
+              <img src="/image/fluent-mdl2_room.svg" alt="Room Size Icon" class="info-icon">
+              <span>ขนาดห้อง: 20 ตารางเมตร</span>
+            </div>
+            <div class="room-info-item">
+              <img src="/image/ei_plus.svg" alt="Facilities Icon" class="info-icon">
+              <span>ดูบริการและสิ่งอำนวยความสะดวกทั้งหมด</span>
+            </div>
+          </div>               
         </div>
         <div class="room-meta">
-          <p><strong>Price</strong><br>999<br><small>per night</small></p>
-          <button class="book-btn">Book</button>
+          <p><strong>Pet Type</strong></p>
+          <p class="price-detail"><br>Dog</p>
+        </div>
+        <div class="room-meta">
+          <p><strong>Available Rooms</strong></p>
+          <p class="price-detail"><br>2</p>
+        </div>
+        
+        <div class="room-meta room-price">
+          <div class="price-box">
+            <p><strong>Price</strong></p>
+            <p class="price-detail">
+              1799<br>
+              <small class="per-night">per night</small>
+            </p>
+          </div>
+        
+          <div class="book-wrapper">
+            <button class="book-btn">Book</button>
+          </div>
         </div>
       </section>
     </main>
