@@ -11,7 +11,7 @@ class TopBar extends HTMLElement {
                     <button class="tab" onclick="redirect('#')">Staff Management</button>
                 </div>
                 <button class="profile" onclick="redirect('#')">
-                  <img src="solar_user-outline.png" alt="Profile" class="profile-img">
+                  <img src='../Picture/solar_user-outline.png'/>
                 </button>
 
 
@@ -23,4 +23,4 @@ class TopBar extends HTMLElement {
 }
 
 // ใช้ชื่อที่มี hyphen
-customElements.define('my-tabbar', TabBar);
+customElements.define('my-topbar', TopBar);

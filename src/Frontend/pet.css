@@ -1,0 +1,202 @@
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap);
+
+* {
+    font-family: 'Inter';
+}
+
+/* Main Content */
+/* Tab */
+
+.tab-inside {
+    display: flex;
+    width: 100%;
+    height: 60px;
+}
+  
+.choice {
+    flex: 1;
+    padding: 10px 20px;
+    border: none;
+    background-color: #f9f9f9;
+    border-right: 1px solid #ccc; /* เส้นคั่นระหว่างปุ่ม */
+    cursor: pointer;
+    font-size: 20px;
+    color: #939796;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.choice:first-child {
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+
+}
+  
+.choice:last-child {
+    border-right: none;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+  
+.choice:hover {
+    background-color: #eaeaea;
+    transform: translateY(-5px);
+
+}
+  
+.choice:focus {
+    outline: none;
+    background-color: #ddd;
+}
+
+.choice-pet {
+    color: #5C4538;
+}
+
+/* Name of page and Search box*/
+.headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* เว้นพื้นที่ให้ซ้าย-ขวาอยู่คนละด้าน */
+    margin-top: 25px;
+}
+
+h2 {
+    color: #000000;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.search-inputs {
+    width: 250px;
+    height: 40px;
+    border-radius: 40px;
+    border: none;
+    background-color: #F4F8F7;
+    
+}
+
+.search-inputs::placeholder {
+    font-size: 18px;
+    color: #aaa;
+}
+
+input {
+    padding-left: 20px;
+    font-size: 16px;
+    color: #000000;
+}
+
+.search-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #FFFAA2;
+    border-radius: 40px;
+    border: none;
+    transition:  none;
+    cursor: pointer;
+
+
+}
+
+/* Result Table */
+/*Table Headers*/
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 10px;
+  }
+
+.result-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.head-table {
+    width: 100%;
+    height: 50px;
+    background-color: #e0e2e4;
+    border-radius: 10px;
+}
+
+th {
+    text-align: center;
+    padding: 10px 20px;
+    border: 1px;
+    border-right: 1px solid #ccc; /* เส้นคั่นระหว่างปุ่ม */
+    font-size: 18px;
+    color: #000;
+    
+}
+
+thead tr:last-child th:last-child {
+    border-right: none;
+
+}
+
+/* Result Box */
+.result {
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+td {
+    text-align: center;
+    padding: 10px 20px;
+    border: 1px;
+    border-right: 1px solid #ccc; /*เส้นคั่น */
+    font-size: 18px;
+    color: #000;
+}
+
+td:first-child, th:first-child {
+    border-left: 1px solid #ccc; /* เส้นแบ่งด้านซ้าย */
+}
+
+tbody:last-child{
+    border-bottom: 1px solid #ccc ;
+}
+
+
+
+.view-btn {
+    color: #0073FF;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition:  background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.view-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px); 
+}
+
+.delete-btn {
+    color: #E41D1D;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition:  background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px); 
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+
