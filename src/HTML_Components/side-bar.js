@@ -7,7 +7,7 @@ class SideBar extends HTMLElement {
         this.innerHTML = `
             <div class="sidebar">
                 <div class="logo">
-                    <img src='image_3-removebg-preview.png'/>
+                    <img src='../Picture/image_3-removebg-preview.png'/>
                 </div>
                 <button class="menu" onclick="redirect('#')">Create Booking</button>                
                 <button class="menu" onclick="redirect('#')">Booking History</button>                
