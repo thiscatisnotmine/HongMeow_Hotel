@@ -40,30 +40,37 @@
       </header>
 
       <div class="filter-section">
-        <div class="date-range-box">
-          <img src="/asset/solar_calendar-linearSVG.svg" alt="calendar" class="calendar-icon">
-          <div class="date-group">
-            <input type="text" id="startDate" class="date-input" readonly>
-            <div id="startDay" class="day-label"></div>
+        <div class="filter-left">
+          <div class="date-range-box">
+            <!-- Calendar icon -->
+            <img src="/asset/solar_calendar-linearSVG.svg" alt="calendar" class="calendar-icon">
+            <!-- Start Date -->
+            <div class="date-group">
+              <input type="text" id="startDate" class="date-input" readonly>
+              <div id="startDay" class="day-label"></div>
+            </div>
+            <div class="divider"></div>
+            <!-- End Date -->
+            <div class="date-group">
+              <input type="text" id="endDate" class="date-input" readonly>
+              <div id="endDay" class="day-label"></div>
+            </div>
           </div>
-          <div class="divider"></div>
-          <div class="date-group">
-            <input type="text" id="endDate" class="date-input" readonly>
-            <div id="endDay" class="day-label"></div>
+      
+          <!-- Room Type Dropdown -->
+          <div class="filter-dropdown">
+            <img src="/asset/dogSVG.svg" alt="paw" class="paw-icon">
+            <select class="dropdown-select" id="roomTypeSelect">
+              <option value="dog">Room Type: Dog</option>
+              <option value="cat">Room Type: Cat</option>
+            </select>
+            <span class="dropdown-arrow"></span>
           </div>
         </div>
-
-        <div class="filter-dropdown">
-          <img src="asset/dogSVG.svg" alt="paw" class="paw-icon">
-          <select class="dropdown-select" id="roomTypeSelect">
-            <option value="dog">Room Type: Dog</option>
-            <option value="cat">Room Type: Cat</option>
-          </select>
-          <span class="dropdown-arrow"></span>
-        </div>
-
+      
+        <!-- Search Button อยู่ขวาสุด -->
         <button class="search-btn">
-          <img src="asset/material-symbols_searchSVG.svg" class="search-image">
+          <img src="/asset/material-symbols_searchSVG.svg" class="search-image" alt="Search" />
         </button>
       </div>
 

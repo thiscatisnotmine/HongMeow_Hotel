@@ -41,7 +41,6 @@ body {
   color: #000000;
 }
 
-/* Staff Management สีส้ม */
 .nav-staff {
   background-color: transparent;
   color: #000000;
@@ -92,7 +91,7 @@ nav li {
   color: #5C4538;
   cursor: pointer;
   font-size: 20px;
-  font-weight: medium;
+  font-weight: 500;
   border-radius: 20px;
   transition: background 0.2s;
   margin-left: 25px;
@@ -104,8 +103,7 @@ nav li:hover {
 
 nav li.active {
   background: white;
-  font-weight: 700;
-  box-shadow: inset 0 0 0 2px #5C4538;
+  font-weight: 600;
 }
 
 .main-content {
@@ -122,11 +120,18 @@ nav li.active {
 
 .filter-section {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
   margin: 20px 20px 40px 20px;
+}
+
+.filter-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .filter-box {
@@ -139,18 +144,26 @@ nav li.active {
 }
 
 .search-btn {
-  background: #FFFAA2;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
   width: 71px;
   height: 71px;
-  margin-left: auto;
-  flex-shrink: 0;
+  border: none;
+  background: #fff799;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.search-image {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  display: block;
 }
 
 .search-btn:hover {
-  background-color: #F4F8F7; 
+  background-color: #fdf16d; 
   cursor: pointer;          
 }
 
@@ -302,11 +315,6 @@ nav li.active {
   margin-top: 12px;
 }
 
-.search-image{
-  width: 50%;
-  height: 50%;
-}
-
 .filter-dropdown {
   background: #f0f7f2;
   border-radius: 30px;
@@ -420,6 +428,8 @@ nav li.active {
 }
 
 .user-button {
+  width: 71px;
+  height: 71px;
   background: none;
   border: none;
   padding: 8px;

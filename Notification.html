@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Notification - Hong Meow Hotel</title>
-  <link rel="stylesheet" href="/css/Notification.css">
+  <link rel="stylesheet" href="/css/Notification.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
   <div class="container">
@@ -23,38 +24,50 @@
         </ul>
       </nav>
     </aside>
-    
+
     <main class="main-content">
       <header class="header">
-        <nav>
-          <a href="#">Available Room</a>
-          <a href="#">Staff Management</a>
+        <nav class="top-nav">
+          <a href="#" class="nav-haed">Available Room</a>
+          <a href="#" class="nav-head">Staff Management</a>
         </nav>
-        <div class="user-icon">👤</div>
+        <button class="user-button">
+          <img src="/asset/solar_user-outline.svg" class="user-icon" alt="User Icon">
+        </button>        
       </header>
 
-      <section class="notification-section">
-        <h1>Notification</h1>
-        <div class="search-bar">
-          <input type="text" placeholder="Room search" />
-          <button>🔍</button>
+      <div class="section-header">
+        <h1 class="section-title">Notification</h1>
+        <div class="search-group">
+          <input type="text" class="search-input" placeholder="Room search" />
+          <button class="search-btn">
+            <img src="/asset/material-symbols_searchSVG.svg" alt="Search" class="search-image" />
+          </button>
         </div>
-        <table class="notification-table">
-          <tr>
-            <th>ID Card No.</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>View More & Edit</th>
-          </tr>
-          <tr>
-            <td>1234567890123</td>
-            <td>Smith Allan</td>
-            <td>0999999999</td>
-            <td>smith@gmail.com</td>
-            <td><a href="#">View</a></td>
-          </tr>
-        </table>
+      </div>
+
+        <div class="notification-table-wrapper">
+          <table class="notification-table">
+            <thead>
+              <tr>
+                <th>ID Card No.</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>View More & Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1234567890123</td>
+                <td>Smith Allan</td>
+                <td>0999999999</td>
+                <td>smith@gmail.com</td>
+                <td><a href="#">View</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </main>
   </div>
