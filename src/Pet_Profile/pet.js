@@ -51,7 +51,7 @@ function search() {
                   <td>${pet.PType}</td>
                   <td>
                     <button class="view-btn" onclick='viewMore(${pet.PID},${pet.CusCID})'>
-                      View more & Edit
+                      View more
                     </button>
                   </td> 
                   <td>
