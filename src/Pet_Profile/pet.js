@@ -1,28 +1,39 @@
 
 const api = 'https://b5b0fc7d-7be7-4d63-881a-8439438e9ccb.mock.pstmn.io';
 
+window.onload = loadSearchQuery;
+
+// กดไอคอน search แล้วจะ redirect พร้อมค่าค้นหา
+function handleSearch() {
+  const query = document.getElementById('searchInput').value.trim();
+  if (query) {
+    window.location.search = '?q=' + encodeURIComponent(query); 
+  } else {
+    alert('Please, Enter Customer Identification Card Number.'); 
+    return;
+  }
+  
+}
+
+// ไว้ดึงค่า q (ค่าที่ใช้ค้นหา) จาก URL
+function loadSearchQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+
+  if (q) {
+    document.getElementById('searchInput').value = q;
+    search(q);
+  }
+}
+
+
 
 // ค้นหาข้อมูลสัตว์เลี้ยง
-function search() {
-  console.log("Good");
-
-  const keyword = document.getElementById('searchInput').value.trim();
-  console.log("Keyword:", keyword); // ตรวจสอบค่าที่กรอก
- /*
-  if (keyword.length !== 13) {
-    alert('Please, Enter Customer Identification Card Number.');
-    return;
-  }
-  */
-
-
-  if (!keyword) {
-    alert('Please, Enter Customer Identification Card Number.');
-    return;
-  }
+function search(q) {
+ 
 
   // สามารถเปลี่ยน /pet เป็นชื่อ table อื่นได้ เช่นจะดึงข้อมูลลูกค้าก็ใช้ /customer
-  fetch(`${api}/pet/${keyword}`, {
+  fetch(`${api}/pet/${q}`, {
 
     // method 'GET': ใช้ดึงข้อมูลจากฐานข้อมูล
     // method 'POST': ใช้เพิ่มข้อมูลลงฐานข้อมูล
