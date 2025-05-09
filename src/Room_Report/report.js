@@ -1,16 +1,33 @@
 const api = 'https://b5b0fc7d-7be7-4d63-881a-8439438e9ccb.mock.pstmn.io';
+window.onload = loadSearchQuery;
+
+// กดไอคอน search แล้วจะ redirect พร้อมค่าค้นหา
+function handleSearch() {
+  const query = document.getElementById('searchInput').value.trim();
+  if (query) {
+    window.location.search = '?q=' + encodeURIComponent(query); 
+  } else {
+    alert('Please, Enter Room ID No.or Room Type');
+    return;
+  }
+}
+
+function loadSearchQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+
+  if (q) {
+    document.getElementById('searchInput').value = q;
+    search(q);
+  }
+}
+
+
 
 // ค้นหาห้องที่ต้องการรายงาน
-function search() {
-    const keyword = document.getElementById('searchInput').value.trim();
-    console.log("Keyword:", keyword); // ตรวจสอบค่าที่กรอก   
+function search(q) {
   
-    if (!keyword) {
-      alert('Please, Enter Room ID No.');
-      return;
-    }
-  
-    fetch(`${api}/report/${keyword}`, {
+    fetch(`${api}/report/${q}`, {
       method: 'GET', 
       headers: {
         'Content-Type': 'application/json'
@@ -80,6 +97,7 @@ function search() {
           // เปลี่ยนสถานะปุ่มหลังจาก repair
           document.getElementById(`repairBtn-${RID}`).disabled = true;
           document.getElementById(`reportBtn-${RID}`).disabled = false;
+
         } else {
           alert('Failed to repair room');
         }
@@ -112,6 +130,7 @@ function search() {
           // เปลี่ยนสถานะปุ่มหลังจาก report
           document.getElementById(`repairBtn-${RID}`).disabled = false;
           document.getElementById(`reportBtn-${RID}`).disabled = true;
+
         } else {
           alert('Failed to report room');
         }
