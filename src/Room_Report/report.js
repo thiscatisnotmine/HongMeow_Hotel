@@ -1,4 +1,4 @@
-const api = 'https://b5b0fc7d-7be7-4d63-881a-8439438e9ccb.mock.pstmn.io';
+const api = 'https://6ba789b3-3c09-4dd7-bb94-f9a8a5bf82fa.mock.pstmn.io';
 window.onload = loadSearchQuery;
 
 // กดไอคอน search แล้วจะ redirect พร้อมค่าค้นหา
@@ -38,6 +38,11 @@ function search(q) {
         console.log(data); 
         const resultBody = document.getElementById('resultBox');
         resultBody.innerHTML = ''; 
+
+        if (data.length === 0){
+            alert('Not Found.');
+            return;
+          }
   
         // วนลูปเพื่อสร้าง row ของห้อง
         data.forEach(room => {

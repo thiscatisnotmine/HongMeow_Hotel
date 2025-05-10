@@ -1,5 +1,5 @@
 
-const api = 'https://b5b0fc7d-7be7-4d63-881a-8439438e9ccb.mock.pstmn.io';
+const api = 'https://6ba789b3-3c09-4dd7-bb94-f9a8a5bf82fa.mock.pstmn.io';
 
 window.onload = loadSearchQuery;
 
@@ -46,9 +46,14 @@ function search(q) {
 })
       .then(response => response.json())
       .then(data => {
+          
           console.log(data); // ดูที่ console บนหน้าเว็บใน Developoer tool ว่าได้ข้อมูลอะไรมาบ้าง
           const resultBody = document.getElementById('resultBox');
           resultBody.innerHTML = ''; // clear หน้าเว็บ
+          if (data.length === 0){
+            alert('Not Found.');
+            return;
+          }
 
           // วนลูปเพื่อสร้าง row ของ pet แต่ละตัว
           data.forEach(pet => {
