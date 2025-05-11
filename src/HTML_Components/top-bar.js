@@ -11,7 +11,8 @@ class TopBar extends HTMLElement {
                     <button class="tab" onclick="redirect('#')">Staff Management</button>
                 </div>
                 <button class="profile" onclick="redirect('#')">
-                  <img src="../Picture/solar_user-outline.png"/>
+                  <img src='../Picture/solar_user-outline.png'/>
+
                 </button>
 
 

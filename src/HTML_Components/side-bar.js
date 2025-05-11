@@ -14,7 +14,7 @@ class SideBar extends HTMLElement {
                 <button class="menu" onclick="redirect('#')">Check-In / Check-Out</button>                
                 <button class="menu" onclick="redirect('#')">Payments & Receipts</button>
                 <button class="menu" onclick="redirect('#')">Customer & Pet Profiles</button>                
-                <button class="menu" onclick="redirect('#')">Room Report</button>                
+                <button class="menu room-report" onclick="redirect('../Room_Report/report.html')">Room Report</button>                
                 <button class="menu" onclick="redirect('#')">Notification</button>                
             </div>
         `;
