@@ -85,6 +85,11 @@ h2 {
     color: #aaa;
 }
 
+.search-inputs:hover {
+    background-color: #efefef;
+    transition: 0.5s ease;
+}
+
 input {
     padding-left: 20px;
     font-size: 16px;
@@ -97,10 +102,13 @@ input {
     background-color: #FFFAA2;
     border-radius: 40px;
     border: none;
-    transition:  none;
+    transition:  0.5s ease;
     cursor: pointer;
+}
 
-
+.search-icon:hover {
+    background-color: #a0d2f9;
+    transition: 0.5s ease;
 }
 
 /* Result Table */
@@ -153,13 +161,12 @@ tbody tr {
   }
   
   
-  tbody td {
+tbody td {
     padding: 15px;
     text-align: center;
     border-bottom: none;
-  }
+}
   
-
 
 .view-btn {
     color: #FFFFFF;
@@ -199,3 +206,21 @@ tbody tr {
     transition: opacity 0.3s ease;
   }
 
+
+/*confirm pays btn*/
+.makepay {
+    display: none;  /*Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    padding: 10px;
+    background-color: #7dd0fa;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition:  background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}

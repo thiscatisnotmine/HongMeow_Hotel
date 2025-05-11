@@ -19,8 +19,7 @@
   <!--Tab bar (Top)-->
   <my-topbar></my-topbar>
 
-
-  <!-- Main Cintent -->
+  <!-- Main Content -->
   <div class="main-content">
 
     <!--Tab-->
@@ -34,7 +33,7 @@
     <div class="headline">
         <h2>Unpaid Payments</h2>
         <div class="search-form" id="searchForm">
-            <input class="search-inputs" type="text" id="searchInput" placeholder="search" required>
+            <input class="search-inputs" type="text" id="searchInput" placeholder="search with ID Card" required>
             <button class="search-icon"  type="submit" onclick="handleSearch()">
                 <span class="material-symbols-outlined">
                     search
@@ -44,6 +43,9 @@
     </div>
 
    
+    <div>
+        <button class="makepay" type="button" onclick="confirmPay()" title="Confirm Payments">Make Payment</button>
+    </div>
   </div>
 
   <script src="..\HTML_Components\side-bar.js"></script>
