@@ -23,13 +23,13 @@
   <div class="main-content">
 
     <!--Tab-->
-    <div class="tab-inside">
-        <button class="choice" onclick="redirect('Waiting For Payment.html')">Waiting For Payment</button>
-        <button class="choice" onclick="redirect('Waiting to Check-In.html')">Waiting to Check-In</button>
-        <button class="choice" onclick="redirect('Checking-In.html')">Checking-In</button>
-        <button class="choice" onclick="redirect('Cancelled.html')">Cancelled</button>
-        <button class="choice" onclick="redirect('Succeeded.html')">Succeeded</button>
-    </div>
+        <div class="tab-inside">
+            <button class="choice" onclick="filter_payStatus()">Waiting For Payment</button>
+            <button class="choice" onclick="filter_BookedRoom_status('booked')">Waiting to Check-In</button>
+            <button class="choice" onclick="filter_BookedRoom_status('check-in')">Checking-In</button>
+            <button class="choice" onclick="filter_BookedRoom_status('cancel')">Cancelled</button>
+            <button class="choice" onclick="filter_BookedRoom_status('check-out')">Succeeded</button>
+        </div>
 
     <!--Name of page and Edit button-->
     <div class="headline">

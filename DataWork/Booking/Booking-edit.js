@@ -145,3 +145,86 @@ async function cancelBooking() {
         console.log("Cancellation not confirmed");
     }
 }
+function filter_payStatus() {
+    fetch(`${api}/payment`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(payments => {
+        const pendingPayments = payments.filter(payment => payment.PayStatus === 'Pending');
+        const resultBody = document.getElementById('resultBox');  // Make sure you have a table with id="resultBody"
+        resultBody.innerHTML = ''; // Clear previous results
+
+        pendingPayments.forEach(payment => {
+            // Assuming you want to display booking details associated with the payment
+            // You might need to fetch booking details based on payment.bookingId
+            const booking = {
+                bookingId: payment.bookingId,
+                bookingNumber: 'N/A', // You might need to fetch this
+                checkinDate: 'N/A',   // You might need to fetch this
+                checkoutDate: 'N/A'  // You might need to fetch this
+            };  // Replace with actual booking data
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${booking.bookingId}</td>
+                <td>${booking.bookingNumber}</td>
+                <td>${booking.checkinDate}</td>
+                <td>${booking.checkoutDate}</td>
+                <td>
+                    <button class="view-btn" onclick='viewMore(${booking.bookingId})'>View More</button>
+                </td>
+            `;
+            resultBody.appendChild(row);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching payments:', error);
+        alert('Failed to fetch payments.');
+    });
+}
+
+
+
+function filter_BookedRoom_status(status) {
+    fetch(`${api}/BookedRoom`, {  // ใช้ endpoint ที่ถูกต้องสำหรับ BookedRoom
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(bookedRooms => {
+        const filteredRooms = bookedRooms.filter(room => room.bookingStatus === status); // Use bookingStatus
+        const resultBody = document.getElementById('resultBox');
+        resultBody.innerHTML = '';
+
+        filteredRooms.forEach(room => {
+           const booking = {
+                bookingId: room.bookingId,
+                bookingNumber: 'N/A',  // You might need to fetch
+                checkinDate: 'N/A',    // You might need to fetch
+                checkoutDate: 'N/A'   // You might need to fetch
+            };
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${booking.bookingId}</td>
+                <td>${booking.bookingNumber}</td>
+                <td>${booking.checkinDate}</td>
+                <td>${booking.checkoutDate}</td>
+                <td>
+                    <button class="view-btn" onclick='viewMore(${booking.bookingId})'>View More</button>
+                </td>
+            `;
+            resultBody.appendChild(row);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching booked rooms:', error);
+        alert('Failed to fetch booked rooms.');
+    });
+}
+
