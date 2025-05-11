@@ -7,49 +7,57 @@ console.log(bookingID);
 window.onload = function () {
     if (bookingID) {
         // Fetch booking data
-        fetch(`${api}/booking/${bookingID}`)
-            .then(res => res.json())
-            .then(booking => {
-                console.log(booking);
+        const fetchBooking = fetch(`${api}/booking/${bookingID}`)
+            .then(res => res.json());
+
+        // Fetch customer data (assuming you have customer ID in booking data)
+        const fetchCustomer = fetchBooking.then(booking => {
+            if (booking && booking.customerId) { // Adjust 'customerId' as needed
+                return fetch(`${api}/customer/${booking.customerId}`).then(res => res.json());
+            } else {
+                return Promise.resolve(null); // Or handle the missing customer ID appropriately
+            }
+        });
+
+        // Fetch pet data (assuming you have pet ID in booking data)
+        const fetchPet = fetchBooking.then(booking => {
+            if (booking && booking.petId) { // Adjust 'petId' as needed
+                return fetch(`${api}/pet/${booking.petId}`).then(res => res.json());
+            } else {
+                 return Promise.resolve(null); // Or handle missing pet ID
+            }
+        });
+
+        // Combine all promises
+        Promise.all([fetchBooking, fetchCustomer, fetchPet])
+            .then(([booking, customer, pet]) => {
+                console.log(booking, customer, pet);
                 if (booking) {
                     document.getElementById('BookingID').textContent = booking.bookingId || "undefined";
-                    document.getElementById('CheckIn').textContent = booking.checkinDate || "undefined";
-                    document.getElementById('CheckOut').textContent = booking.checkoutDate || "undefined";
-
-                    // Populate customer info
-                    const customer = booking.customer; // Assuming customer data is nested
-                    if (customer) {
-                        document.getElementById('customerID').value = customer.CusCID || "";
-                        document.getElementById('customerName').value = customer.CusFname || "";
-                        document.getElementById('customerEmail').value = customer.CusEmail || "";
-                        document.getElementById('customerPhone').value = customer.CusTel || "";
-                    }
-
-                    // Populate emergency contact
-                    const emergency = booking.emergencyContact; // Assuming emergency data is nested
-                    if (emergency) {
-                        document.getElementById('UrgenName').value = emergency.name || "";
-                        document.getElementById('UrgenTel').value = emergency.phone || "";
-                        document.getElementById('Relationship').value = emergency.relationship || "";
-                    }
-
-                    // Populate pet info
-                    const pet = booking.pet; // Assuming pet data is nested
-                    if (pet) {
-                        document.getElementById('petName').value = pet.PName || "";
-                        document.getElementById('petType').value = pet.PType || "";
-                        document.getElementById('petBreeds').value = pet.PBreeds || "";
-                        document.getElementById('petAge').value = pet.PAge || "";
-                        document.getElementById('petDisease').value = pet.PDisease || "";
-                        // document.getElementById('petVaccine').value = pet.PVaccine || ""; // Handling file input is more complex
-                    }
-                } else {
-                    alert('Booking not found!');
+                    document.getElementById('CheckIn').value = booking.checkinDate || ""; // Set value for input
+                    document.getElementById('CheckOut').value = booking.checkoutDate || ""; // Set value for input
                 }
+
+                if (customer) {
+                    document.getElementById('customerID').value = customer.CusCID || "";
+                    document.getElementById('customerName').value = customer.CusFname || "";
+                    document.getElementById('customerEmail').value = customer.CusEmail || "";
+                    document.getElementById('customerPhone').value = customer.CusTel || "";
+                }
+
+                if (pet) {
+                    document.getElementById('petName').value = pet.PName || "";
+                    document.getElementById('petType').value = pet.PType || "";
+                    document.getElementById('petBreeds').value = pet.PBreeds || "";
+                    document.getElementById('petAge').value = pet.PAge || "";
+                    document.getElementById('petDisease').value = pet.PDisease || "";
+                }
+
+
             })
             .catch(error => {
-                console.error('Error fetching booking data:', error);
-                alert('Failed to fetch booking data!');
+                console.error('Error fetching data:', error);
+                alert('Failed to fetch data!');
             });
     } else {
         alert('No booking ID provided!');
@@ -57,71 +65,31 @@ window.onload = function () {
 };
 
 
-/* Enable Edit All Info */
+/* Enable Edit Only Checkin and Checkout */
 function enableEdit() {
-    // Customer info
-    document.getElementById('customerID').disabled = false;
-    document.getElementById('customerName').disabled = false;
-    document.getElementById('customerEmail').disabled = false;
-    document.getElementById('customerPhone').disabled = false;
-
-    // Emergency contact
-    document.getElementById('UrgenName').disabled = false;
-    document.getElementById('UrgenTel').disabled = false;
-    document.getElementById('Relationship').disabled = false;
-
-    // Pet info
-    document.getElementById('petName').disabled = false;
-    document.getElementById('petType').disabled = false;
-    document.getElementById('petBreeds').disabled = false;
-    document.getElementById('petAge').disabled = false;
-    document.getElementById('petDisease').disabled = false;
-    document.getElementById('petVaccine').disabled = false;
-
+    // Booking
+    document.getElementById('CheckIn').disabled = false;
+    document.getElementById('CheckOut').disabled = false;
     document.getElementById("buttonGroup").classList.remove("hidden-btn");
 }
 
-
-// แก้ไขข้อมูลทั้งหมด
+// แก้ไขข้อมูล Checkin และ Checkout
 async function confirmEdit() {
-    const customerData = {
-        CusCID: document.getElementById('customerID').value.trim(),
-        CusFname: document.getElementById('customerName').value.trim(),
-        CusEmail: document.getElementById('customerEmail').value.trim(),
-        CusTel: document.getElementById('customerPhone').value.trim()
+    const bookingData = {
+        checkinDate: document.getElementById('CheckIn').value.trim(),
+        checkoutDate: document.getElementById('CheckOut').value.trim(),
     };
 
-    const emergencyData = {
-        name: document.getElementById('UrgenName').value.trim(),
-        phone: document.getElementById('UrgenTel').value.trim(),
-        relationship: document.getElementById('Relationship').value.trim()
-    };
-
-    const petData = {
-        PName: document.getElementById('petName').value.trim(),
-        PType: document.getElementById('petType').value,
-        PBreeds: document.getElementById('petBreeds').value,
-        PAge: document.getElementById('petAge').value,
-        PDisease: document.getElementById('petDisease').value,
-        // PVaccine: document.getElementById('petVaccine').files[0] // Handling file upload requires more setup
-    };
-
-    const formData = new FormData();
-    formData.append('customer', JSON.stringify(customerData));
-    formData.append('emergencyContact', JSON.stringify(emergencyData));
-    formData.append('pet', JSON.stringify(petData));
-    // If you have a file, append it here
-    const vaccineFile = document.getElementById('petVaccine').files[0];
-    if (vaccineFile) {
-        formData.append('petVaccine', vaccineFile);
-    }
 
 
     if (confirm('Do you want to save the changes?')) {
         try {
             const response = await fetch(`${api}/booking/${bookingID}`, {
                 method: 'PUT',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(bookingData)
             });
 
             if (response.ok) {
