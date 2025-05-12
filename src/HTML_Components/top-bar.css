@@ -6,12 +6,11 @@
 
 
 .tab-container {
-    display: flex;
-    align-items: center;
     margin-top: 20px;
-    margin-left: 340px;
-    gap: 500px;
-    width: 100%;
+    margin-left: 310px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .tab_menu {
@@ -20,12 +19,10 @@
     cursor: pointer;
     background-color: transparent;
     border: none;
-    align-items: center;
-
   }
 
   .tab {
-    width: 260px;
+    width: 240px;
     background-color: transparent;
     font-size: 20px;
     font-weight: bold;
@@ -34,7 +31,7 @@
     padding: 10px 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition:  background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
   }
 
@@ -50,9 +47,9 @@
 
 
   .profile {
-    width: 50px;           
-    height: 50px;          
-    padding: 0;            
+    width: 65px;           
+    height: 65px;          
+    margin-right: 0px;            
     border: none;          
     cursor: pointer;      
     overflow: hidden; 

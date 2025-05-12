@@ -55,7 +55,8 @@ function search(q) {
               const row = document.createElement('tr'); 
 
               // เลือกข้อมูลที่จะเอามาแสดง
-        /*ใน figma มันจะมี CusCID, BID, CheckInDate, PaymentDue แต่ตอนนี้ข้อมูลใน mockup ไม่มี PaymentDue?*/
+        /* ใน figma มันจะมี CusCID, BID, CheckInDate, PaymentDue แต่ตอนนี้ข้อมูลใน mockup ไม่มี PaymentDue?
+          เลยใส่ PayDate (วันที่จ่าย) ไปก่อน อย่าลืมเปลี่ยน*/
               row.innerHTML = `
                   <td>
                     <input class="row-checkbox" type="checkbox" />
@@ -67,7 +68,7 @@ function search(q) {
                   <td>${payment.PayTotal}</td>
                   <td>
                     <button class="view-btn" onclick='viewMore("${payment.CusCID}", "${payment.BID}")'>
-                      View more
+                      view more
                     </button>
                   </td> 
               `;
@@ -81,41 +82,40 @@ function search(q) {
 }
 
 //Viewmore button
+// ไม่ค่อยแน่ใจว่าควรจะส่ง payment กับ booking ทั้งหมดไปเลยดีไหมหรือแค่ส่งไอดีแล้วค่อยไปดึงข้อมูลเอาอีกที
 function viewMore(cusCID, BID) {
     window.location.href = `paymentdetail.html?CusCID=${cusCID}&BID=${BID}`;
 }
 
-//CheckBox
-function toggleConfirmButton() {
-  const anyChecked = [...document.querySelectorAll('.row-checkbox')].some(cb => cb.checked);
-  const makepay = document.getElementById("makepay");
-  makepay.style.display = anyChecked ? 'block' : 'none';
+const confirmButton = document.querySelector('.makepay');
+const selectAll = document.getElementById('select-all');
+
+// Show/hide confirm button based on selection
+function updateConfirmButton() {
+  const selected = document.querySelectorAll('.row-checkbox:checked');
+  confirmButton.style.display = selected.length > 0 ? 'block' : 'none';
 }
 
-document.getElementById('select-all').addEventListener('change', function () {
+// Select/deselect all checkboxes
+selectAll.addEventListener('change', function () {
   const checkboxes = document.querySelectorAll('.row-checkbox');
-  checkboxes.forEach(cb => cb.checked = this.checked);
-  toggleConfirmButton();
+  checkboxes.forEach(cb => {
+    cb.checked = this.checked;
+  });
+  updateConfirmButton();
 });
 
+// Watch individual row checkboxes
 document.addEventListener('change', function (e) {
   if (e.target.classList.contains('row-checkbox')) {
-    toggleConfirmButton();
+    // If any checkbox is unchecked, uncheck "select all"
+    if (!e.target.checked) {
+      selectAll.checked = false;
+    }
+    updateConfirmButton();
   }
 });
 
-//Confirm button
-function confirmPay() {
-  const selectedRows = document.querySelectorAll('.row-checkbox:checked');
-  const selectedBIDs = [...selectedRows].map(cb => 
-    cb.closest('tr').querySelector('td:nth-child(3)').textContent.trim()
-  );
-
-  if (selectedBIDs.length === 0) {
-    alert("Please select at least one booking.");
-    return;
-  }
-}
 
 // Send POST/PUT request to update payment status to 'Paid'
 /* ****Unfinished*****
@@ -132,3 +132,31 @@ function confirmPay() {
   });
 }
 *****/
+
+/* For payment details page */
+
+fetch(`${api}/booking/${q}`, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+
+// ...
+
+const detailBody = document.getElementsByClassName("paysdetail")
+detailBody.innerHTML = '';
+const detailSection = document.createElement("div")
+detailSection.innerHTML= `
+    <div id="content">
+    <h2>Booking Details</h2>
+    <p>Customer ID: ${CusCID}<br>
+        Date: ${booking.CheckInDate} - ${booking.CheckOutDate} | ${booking.Duration} <br>
+        ${booking.RoomAmout}</p>
+    </div>
+
+    <div id="contentPrice">
+    <h2>Total Price</h2> ${PayTotal}
+    </div>
+`
+document.getElementById('pmethod').style.display = 'block';
