@@ -78,8 +78,9 @@ function search(q) {
       });
 }
 
-//Print button
 // ???
 function viewMore(cusCID, BID) {
     window.location.href = `receiptdetail.html?CusCID=${cusCID}&BID=${BID}`;
 }
+
+// receiptdetail.html --> rdetail.js
