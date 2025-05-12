@@ -25,10 +25,10 @@ function loadSearchQuery() {
   }
 }
 
-//maybe i can use this one for this page
+//maybe use this one for this page to filter?
 // fetch('/api/payment?paystatus=Pending')
 function search(q) {
-  fetch(`${api}/payment${q}`, {
+  fetch(`${api}/payment/${q}`, {
     // method 'GET': ใช้ดึงข้อมูลจากฐานข้อมูล
     // method 'POST': ใช้เพิ่มข้อมูลลงฐานข้อมูล
     // method 'PUT': ใช้อัปเดตข้อมูลลงฐานข้อมูล
@@ -47,21 +47,26 @@ function search(q) {
             alert('Not Found.');
             return;
           }
-
+          if (data.length > 0) {
+            document.getElementById('makepay').style.display = 'none'; // initially make pay button
+          }
           // วนลูปเพื่อสร้าง row
           data.forEach(payment => {
               const row = document.createElement('tr'); 
 
               // เลือกข้อมูลที่จะเอามาแสดง
-              /*ใน figma มันจะมี CusCID, BID, CheckInDate, PaymentDue แต่ตอนนี้ข้อมูลใน mockup ไม่มี PaymentDue?*/
+        /*ใน figma มันจะมี CusCID, BID, CheckInDate, PaymentDue แต่ตอนนี้ข้อมูลใน mockup ไม่มี PaymentDue?*/
               row.innerHTML = `
+                  <td>
+                    <input class="row-checkbox" type="checkbox" />
+                  </td>
                   <td>${payment.CusCID}</td>
                   <td>${payment.BID}</td>
-                  <td>${booking.CheckInDate}</td>
+                  <td>${payment.PayDate}</td>
                   <td>${payment.PayDate}</td> 
                   <td>${payment.PayTotal}</td>
                   <td>
-                    <button class="view-btn" onclick='viewMore(${payment},${booking})'>
+                    <button class="view-btn" onclick='viewMore("${payment.CusCID}", "${payment.BID}")'>
                       View more
                     </button>
                   </td> 
@@ -69,50 +74,61 @@ function search(q) {
 
               resultBody.appendChild(row);
           });
-
-          const makepay = document.getElementById("makepay");
-          makepay.style.display = "block";
       })
       .catch(error => {
           console.error('Error fetching pets:', error);
       });
 }
 
-// Viewmore button
-function viewMore(payment,booking) {
-    
-  // เปิดหน้าใหม่
-  window.location.href = `paymentdetail.html?PID=${encodeURIComponent(payment)}&BID=${encodeURIComponent(booking)}`;
+//Viewmore button
+function viewMore(cusCID, BID) {
+    window.location.href = `paymentdetail.html?CusCID=${cusCID}&BID=${BID}`;
 }
 
+//CheckBox
+function toggleConfirmButton() {
+  const anyChecked = [...document.querySelectorAll('.row-checkbox')].some(cb => cb.checked);
+  const makepay = document.getElementById("makepay");
+  makepay.style.display = anyChecked ? 'block' : 'none';
+}
+
+document.getElementById('select-all').addEventListener('change', function () {
+  const checkboxes = document.querySelectorAll('.row-checkbox');
+  checkboxes.forEach(cb => cb.checked = this.checked);
+  toggleConfirmButton();
+});
+
+document.addEventListener('change', function (e) {
+  if (e.target.classList.contains('row-checkbox')) {
+    toggleConfirmButton();
+  }
+});
+
+//Confirm button
 function confirmPay() {
-    //connfirm payment and redirect to payment detail? or receipts?
-}
+  const selectedRows = document.querySelectorAll('.row-checkbox:checked');
+  const selectedBIDs = [...selectedRows].map(cb => 
+    cb.closest('tr').querySelector('td:nth-child(3)').textContent.trim()
+  );
 
-// Delete button
-/*
-function deleteRow(button) {
-  if (confirm('Are you sure you want to delete this?')) {
-      const row = button.closest('tr');
-      const petID = row.querySelector('td:nth-child(2)').textContent.trim(); // ถ้าตัวข้อมูลที่จะดึงไม่ได้อยู่ช่องที่ 1 ให้ใช้ td:nth-child(x) แทน td และ x แทนด้วยช่องที่ข้อมูลนั้นอยู่
-
-      fetch(`${api}/employee/${petID}`, {
-        method: 'DELETE'
-    })
-    .then(() => {
-        // เพิ่มคลาสชื่อ fade-out เข้าไปใน <tr> แล้ว .fade-out ใน css จะทำงาน
-        row.classList.add('fade-out');
-
-        // ลบหลังแอนิเมชันจบ (400ms)
-        setTimeout(() => {
-          row.remove(); // ให้ลบแถวที่เลือกออกจากหน้าเว็บ
-      }, 400); 
-        console.log(`Pet: ${petID} deleted successfully!`);
-        
-    })
-    .catch(err => console.error('Failed to delete', err));
-
-    
+  if (selectedBIDs.length === 0) {
+    alert("Please select at least one booking.");
+    return;
   }
 }
-*/
+
+// Send POST/PUT request to update payment status to 'Paid'
+/* ****Unfinished*****
+  fetch('/api/payments/confirm', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ bids: selectedBIDs })
+  }).then(res => {
+    if (res.ok) {
+      alert('Payments confirmed!');
+    } else {
+      alert('Something went wrong.');
+    }
+  });
+}
+*****/

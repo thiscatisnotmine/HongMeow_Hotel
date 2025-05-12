@@ -33,7 +33,7 @@
     <div class="headline">
         <h2>Unpaid Payments</h2>
         <div class="search-form" id="searchForm">
-            <input class="search-inputs" type="text" id="searchInput" placeholder="search with ID Card" required>
+            <input class="search-inputs" type="text" id="searchInput" placeholder="search with CustomerID" required>
             <button class="search-icon"  type="submit" onclick="handleSearch()">
                 <span class="material-symbols-outlined">
                     search
@@ -42,9 +42,31 @@
           </div>
     </div>
 
-   
+    <!-- Table Headers-->
+    <table class="result-table" id="resultTable" >
+        <thead>
+          <tr class="head-table">
+            <th>
+                <input class="inp-cbx" id="select-all" type="checkbox"/>
+                <span><svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use>
+                </svg></span>
+                <svg class="inline-svg">
+                    <symbol id="check-4" viewbox="0 0 12 10"></symbol>
+                </svg></th>
+            <th>ID Card No.</th>
+            <th>Booking No.</th>
+            <th>Check-in Date</th>
+            <th>Payment Due</th>
+            <th>Total</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+    <!--Result-->
+        <tbody class="result" id="resultBox"></tbody>
+    </table>
     <div>
-        <button class="makepay" type="button" onclick="confirmPay()" title="Confirm Payments">Make Payment</button>
+        <button id="makepay" type="button" onclick="confirmPay()" title="Confirm Payments">Confirm Payment</button>
     </div>
   </div>
 
