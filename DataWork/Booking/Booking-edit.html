@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PET</title>
+  <title>Booking History Viewmore</title>
   <script src="..\HTML_Components\redirect.js"></script>
   <link rel="stylesheet" href="Booking-edit.css">
   <link rel="stylesheet" href="..\HTML_Components\side-bar.css">
@@ -24,31 +24,34 @@
 
     <!--Tab-->
         <div class="tab-inside">
-            <button class="choice" onclick="filter_payStatus()">Waiting For Payment</button>
-            <button class="choice" onclick="filter_BookedRoom_status('booked')">Waiting to Check-In</button>
-            <button class="choice" onclick="filter_BookedRoom_status('check-in')">Checking-In</button>
-            <button class="choice" onclick="filter_BookedRoom_status('cancel')">Cancelled</button>
-            <button class="choice" onclick="filter_BookedRoom_status('check-out')">Succeeded</button>
+            <button class="choice" disabled onclick="filterData_Payment(this,'Pending')">Waiting For Payment</button>
+            <button class="choice" disabled onclick="filterData_Booked(this,'Booked')">Waiting to Check-In</button>
+            <button class="choice" disabled onclick="filterData_Booked(this,'Check-in')">Checking-In</button>
+            <button class="choice" disabled onclick="filterData_Booked(this,'Cancel')">Cancelled</button>
+            <button class="choice" disabled onclick="filterData_Booked(this,'Check-out')">Succeeded</button>
         </div>
 
     <!--Name of page and Edit button-->
     <div class="headline">
-        <h2>Booking is confirm</h2>
-        <button class="edit" onclick="enableEdit()">
+        <h2>Booking is confirmed</h2>
+        <div class="group-btn-headline">
+          <button class="edit" onclick="enableEdit()">
             Edit Booking
-        </button>
-        <button class="cancel-booking-buttot" onclick="cancelBooking()">
-            Cancel Booking
-        </button>
+          </button>
+          <button class="cancel-booking-buttot" onclick="cancelBooking()">
+              Cancel Booking
+          </button>
+        </div>
+        
     </div>
 
     <!-- Content: Result after load 'view more & edit' page-->
-      <div class="customer-info">
+      <div class="booking-info">
         <h3>Booking Information</h3>
         <div class="edit-customer" id="editCustomer">
-          <div class="edit-row"><label for="BookingID">Booking ID: </label><input type="text" id="BookingID" name="BookingID" disabled></div>
-          <div class="edit-row"><label for="CheckIn">Check-In: </label><input type="text" id="CheckIn" name="CheckIn" disabled></div>
-          <div class="edit-row"><label for="CheckOut">Check-Out: </label><input type="text" id="CheckOut" name="CheckOut" disabled></div>
+          <div class="edit-row">Booking ID: <span id="bookingID"></span></div>
+          <div class="edit-row"><label for="CheckIn">Check-In: </label><input type="date" id="CheckIn" name="CheckIn" disabled></div>
+          <div class="edit-row"><label for="CheckOut">Check-Out: </label><input type="date" id="CheckOut" name="CheckOut" disabled></div>
         </div>
       </div>
 
@@ -62,7 +65,7 @@
         </div>
     </div>
 
-    <div class="customer-info">
+    <div class="urgent-info">
         <h3>Emergency contract</h3>
         <div class="edit-customer" id="editCustomer">
             <div class="edit-row"><label for="UrgenName">Name: </label><input type="text" id="UrgenName" name="UrgenName" disabled></div>
@@ -73,15 +76,12 @@
     </div>
 
      <!-- Pet info --> 
-      <div class="customer-info">
+      <div class="pet-info">
         <h3>Pet</h3>
         <div class="edit-pet" id="editPet">
+            <div class="edit-row"><label for="petID">Pet ID: </label><input type="text" id="petID" name="petID" disabled></div>
             <div class="edit-row"><label for="petName">Pet Name: </label><input type="text" id="petName" name="petName" disabled></div>
             <div class="edit-row"><label for="petType">Type: </label><input type="text" id="petType" name="petType"  disabled></div>
-            <div class="edit-row"><label for="petBreeds">Breeds: </label><input type="text" id="petBreeds" name="petBreeds" disabled></div>
-            <div class="edit-row"><label for="petAge">Age: </label><input type="number" id="petAge" name="petAge"disabled></div>
-            <div class="edit-row"><label for="petDisease">Disease: </label><input type="text" id="petDisease" name="petDisease"  disabled></div>
-            <div class="edit-row"><label for="petVaccine">Vaccine Book: </label><input type="file" id="petVaccine" name="petVaccine"  disabled></div>
             
             
         </div>

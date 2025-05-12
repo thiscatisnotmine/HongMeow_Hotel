@@ -1,18 +1,35 @@
-const api = 'https://b5b0fc7d-7be7-4d63-881a-8439438e9ccb.mock.pstmn.io';
+const api = 'https://6ba789b3-3c09-4dd7-bb94-f9a8a5bf82fa.mock.pstmn.io';
 
 const params = new URLSearchParams(window.location.search);
-const bookingID = params.get('bookingID');
+const bookingID = params.get('bookingId');
 console.log(bookingID);
 
 window.onload = function () {
     if (bookingID) {
         // Fetch booking data
-        const fetchBooking = fetch(`${api}/booking/${bookingID}`)
-            .then(res => res.json());
-
+       fetch(`${api}/booking-history/${bookingID}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById('bookingID').textContent = data.BID;
+            document.getElementById('CheckIn').value = data.CheckInDate;
+            document.getElementById('CheckOut').value = data.CheckOutDate;
+            document.getElementById('customerID').value = data.CusCID;
+            document.getElementById('customerName').value = data.CusFname + " " + data.CusLname;
+            document.getElementById('customerEmail').value = data.CusEmail;
+            document.getElementById('customerPhone').value = data.CusPhone;
+            document.getElementById('UrgenName').value = data.UrFname + " " + data.UrLname;
+            document.getElementById('UrgenTel').value = data.UrPhone;
+            document.getElementById('Relationship').value = data.UrRelationship;
+            document.getElementById('petID').value = data.PID;
+            document.getElementById('petName').value = data.PName;
+            document.getElementById('petType').value = data.PType;
+        
+    });
+/*
         // Fetch customer data (assuming you have customer ID in booking data)
         const fetchCustomer = fetchBooking.then(booking => {
-            if (booking && booking.customerId) { // Adjust 'customerId' as needed
+            if (booking && booking.CusCId) { // Adjust 'customerId' as needed
                 return fetch(`${api}/customer/${booking.customerId}`).then(res => res.json());
             } else {
                 return Promise.resolve(null); // Or handle the missing customer ID appropriately
@@ -59,6 +76,7 @@ window.onload = function () {
                 console.error('Error fetching data:', error);
                 alert('Failed to fetch data!');
             });
+*/
     } else {
         alert('No booking ID provided!');
     }
@@ -85,7 +103,7 @@ async function confirmEdit() {
     if (confirm('Do you want to save the changes?')) {
         try {
             const response = await fetch(`${api}/booking/${bookingID}`, {
-                method: 'PUT',
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -124,9 +142,14 @@ function cancelEdit() {
 async function cancelBooking() {
     if (confirm('Are you sure you want to cancel this booking?')) {
         try {
-            const response = await fetch(`${api}/booking/${bookingID}`, {
-                method: 'DELETE'
+            const response = await fetch(`${api}/booking-history/${bookingID}`, {
+                method: 'PATCH',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ RoomStatus: 'cancel' })
             });
+
 
             if (response.ok) {
                 alert('Booking cancelled successfully.');
@@ -144,87 +167,5 @@ async function cancelBooking() {
     } else {
         console.log("Cancellation not confirmed");
     }
-}
-function filter_payStatus() {
-    fetch(`${api}/payment`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(payments => {
-        const pendingPayments = payments.filter(payment => payment.PayStatus === 'Pending');
-        const resultBody = document.getElementById('resultBox');  // Make sure you have a table with id="resultBody"
-        resultBody.innerHTML = ''; // Clear previous results
-
-        pendingPayments.forEach(payment => {
-            // Assuming you want to display booking details associated with the payment
-            // You might need to fetch booking details based on payment.bookingId
-            const booking = {
-                bookingId: payment.bookingId,
-                bookingNumber: 'N/A', // You might need to fetch this
-                checkinDate: 'N/A',   // You might need to fetch this
-                checkoutDate: 'N/A'  // You might need to fetch this
-            };  // Replace with actual booking data
-
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${booking.bookingId}</td>
-                <td>${booking.bookingNumber}</td>
-                <td>${booking.checkinDate}</td>
-                <td>${booking.checkoutDate}</td>
-                <td>
-                    <button class="view-btn" onclick='viewMore(${booking.bookingId})'>View More</button>
-                </td>
-            `;
-            resultBody.appendChild(row);
-        });
-    })
-    .catch(error => {
-        console.error('Error fetching payments:', error);
-        alert('Failed to fetch payments.');
-    });
-}
-
-
-
-function filter_BookedRoom_status(status) {
-    fetch(`${api}/BookedRoom`, {  // ใช้ endpoint ที่ถูกต้องสำหรับ BookedRoom
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(bookedRooms => {
-        const filteredRooms = bookedRooms.filter(room => room.bookingStatus === status); // Use bookingStatus
-        const resultBody = document.getElementById('resultBox');
-        resultBody.innerHTML = '';
-
-        filteredRooms.forEach(room => {
-           const booking = {
-                bookingId: room.bookingId,
-                bookingNumber: 'N/A',  // You might need to fetch
-                checkinDate: 'N/A',    // You might need to fetch
-                checkoutDate: 'N/A'   // You might need to fetch
-            };
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${booking.bookingId}</td>
-                <td>${booking.bookingNumber}</td>
-                <td>${booking.checkinDate}</td>
-                <td>${booking.checkoutDate}</td>
-                <td>
-                    <button class="view-btn" onclick='viewMore(${booking.bookingId})'>View More</button>
-                </td>
-            `;
-            resultBody.appendChild(row);
-        });
-    })
-    .catch(error => {
-        console.error('Error fetching booked rooms:', error);
-        alert('Failed to fetch booked rooms.');
-    });
 }
 

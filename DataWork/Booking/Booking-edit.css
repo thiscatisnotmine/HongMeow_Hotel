@@ -11,10 +11,10 @@
     border: none;
     background-color: #f9f9f9;
     border-right: 1px solid #ccc; /* เส้นคั่นระหว่างปุ่ม */
-    cursor: pointer;
+    cursor: default;
     font-size: 20px;
     color: #939796;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: none;
 }
 
 .choice:first-child {
@@ -30,8 +30,8 @@
 }
   
 .choice:hover {
-    background-color: #eaeaea;
-    transform: translateY(-5px);
+    background-color: none;
+    transform: none;
 
 }
   
@@ -57,13 +57,19 @@ h2 {
     color: #000000;
 }
 
+.group-btn-headline {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .edit{
     border-radius: 40px;
     background-color: #FFFAA2;
     font-size: 20px;
     cursor: pointer;
     border:none ;
-    width: 10%;
+    width: 100%;
     height: 40px;
     color: #5C4538;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
@@ -75,14 +81,26 @@ h2 {
 
 }
 
-/*Customer Info*/
-.cus-info {
+/*Booking Info*/
+.booking-info {
     font-size: 18px;
     color: #5C4538;
     margin-bottom: 50px;
 }
 
+/*Customer Info*/
+.customer-info {
+    font-size: 18px;
+    color: #5C4538;
+    margin-bottom: 50px;
+}
 
+/*Urgent Info*/
+.urgent-info {
+    font-size: 18px;
+    color: #5C4538;
+    margin-bottom: 50px;
+}
 
 /* Pet Info */
 .pet-info {
@@ -173,7 +191,7 @@ input {
     font-size: 20px;
     cursor: pointer;
     border:none ;
-    width: 10%;
+    width: 100%;
     height: 40px;
     color: #f3eeeb;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
