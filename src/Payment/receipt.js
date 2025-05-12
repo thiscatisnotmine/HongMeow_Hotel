@@ -47,9 +47,6 @@ function search(q) {
             alert('Not Found.');
             return;
           }
-          if (data.length > 0) {
-            document.getElementById('makepay').style.display = 'none'; // initially make pay button
-          }
           // วนลูปเพื่อสร้าง row
           data.forEach(payment => {
               const row = document.createElement('tr'); 
@@ -68,7 +65,7 @@ function search(q) {
                   <td>${payment.PayTotal}</td>
                   <td>
                     <button class="view-btn" onclick='viewMore("${payment.CusCID}", "${payment.BID}")'>
-                      view more
+                      print receipt
                     </button>
                   </td> 
               `;
@@ -81,82 +78,8 @@ function search(q) {
       });
 }
 
-//Viewmore button
-// ไม่ค่อยแน่ใจว่าควรจะส่ง payment กับ booking ทั้งหมดไปเลยดีไหมหรือแค่ส่งไอดีแล้วค่อยไปดึงข้อมูลเอาอีกที
+//Print button
+// ???
 function viewMore(cusCID, BID) {
-    window.location.href = `paymentdetail.html?CusCID=${cusCID}&BID=${BID}`;
+    window.location.href = `receiptdetail.html?CusCID=${cusCID}&BID=${BID}`;
 }
-
-const confirmButton = document.querySelector('.makepay');
-const selectAll = document.getElementById('select-all');
-
-// Show/hide confirm button based on selection
-function updateConfirmButton() {
-  const selected = document.querySelectorAll('.row-checkbox:checked');
-  confirmButton.style.display = selected.length > 0 ? 'block' : 'none';
-}
-
-// Select/deselect all checkboxes
-selectAll.addEventListener('change', function () {
-  const checkboxes = document.querySelectorAll('.row-checkbox');
-  checkboxes.forEach(cb => {
-    cb.checked = this.checked;
-  });
-  updateConfirmButton();
-});
-
-// Watch individual row checkboxes
-document.addEventListener('change', function (e) {
-  if (e.target.classList.contains('row-checkbox')) {
-    // If any checkbox is unchecked, uncheck "select all"
-    if (!e.target.checked) {
-      selectAll.checked = false;
-    }
-    updateConfirmButton();
-  }
-});
-
-
-// Send POST/PUT request to update payment status to 'Paid'
-/* ****Unfinished*****
-  fetch('/api/payments/confirm', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ bids: selectedBIDs })
-  }).then(res => {
-    if (res.ok) {
-      alert('Payments confirmed!');
-    } else {
-      alert('Something went wrong.');
-    }
-  });
-}
-*****/
-
-/* For payment details page */
-
-fetch(`${api}/booking/${q}`, {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json'
-    }
-})
-
-// ...
-
-const detailBody = document.getElementsByClassName("paysdetail")
-detailBody.innerHTML = '';
-const detailSection = document.createElement("div")
-detailSection.innerHTML= `
-    <div id="content">
-    <h2>Booking Details</h2>
-    <p>Customer ID: ${CusCID}<br>
-        Date: ${booking.CheckInDate} - ${booking.CheckOutDate} | ${booking.Duration} <br>
-        ${booking.RoomAmout}</p>
-    </div>
-
-    <div id="contentPrice">
-    <h2>Total Price</h2> ${PayTotal}
-    </div>
-`
-document.getElementById('pmethod').style.display = 'block';

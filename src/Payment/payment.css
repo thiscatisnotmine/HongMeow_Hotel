@@ -179,7 +179,7 @@ table {
 }
 
 th {
-    text-align: center;
+    text-align: left;
     padding: 10px;
     border: 1px;
     border-right: 1px solid #ccc;
@@ -249,6 +249,15 @@ tbody td {
     transition:  background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+#makepay:disabled {
+    background-color: #7dd0fa;
+}
+
+#makepay:hover {
+    background-color: #016bec;
+    box-shadow: 0 2px 8px #0457bc9d;
+}
+
 .paysdetail {
     margin: 20px 0px 0px 0px;
 }
@@ -315,4 +324,46 @@ input[type="radio"]:checked + label:after {
     height: 12px;
     border-radius: 50%;
     background-color: #5e5e5e;
+}
+
+.file {
+    margin: 20px 0px 0px 0px;
+    padding: 100px;
+    height: 70vh;
+    background-color: #f0f0f0;
+    border: 2px solid;
+    border-image: linear-gradient(to bottom, #d3ebfc, #fff8b5) 1;
+}
+
+.print-btn {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    /*stick at bottom*/
+    position:sticky;
+    left: 10px;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    background: #fff;
+}
+.print-btn button {
+    background-color: #58bff3;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    /* Flex properties to nicely align the icon and text */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.print-btn button:hover {
+    background-color: #1c76e5;
+    box-shadow: 0 2px 8px #0457bc9d;
 }
