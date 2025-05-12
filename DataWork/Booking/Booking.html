@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PET</title>
+    <title>Booking History</title>
     <script src="Booking.js"></script>
     <script src="..\HTML_Components\redirect.js"></script>
     <link rel="stylesheet" href="Booking.css">
@@ -21,11 +21,11 @@
     <div class="main-content">
 
         <div class="tab-inside">
-            <button class="choice" onclick="filter_payStatus()">Waiting For Payment</button>
-            <button class="choice" onclick="filter_BookedRoom_status('booked')">Waiting to Check-In</button>
-            <button class="choice" onclick="filter_BookedRoom_status('check-in')">Checking-In</button>
-            <button class="choice" onclick="filter_BookedRoom_status('cancel')">Cancelled</button>
-            <button class="choice" onclick="filter_BookedRoom_status('check-out')">Succeeded</button>
+            <button class="choice" onclick="filterData_Payment(this,'Pending')">Waiting For Payment</button>
+            <button class="choice" onclick="filterData_Booked(this,'Booked')">Waiting to Check-In</button>
+            <button class="choice" onclick="filterData_Booked(this,'Check-in')">Checking-In</button>
+            <button class="choice" onclick="filterData_Booked(this,'Cancel')">Cancelled</button>
+            <button class="choice" onclick="filterData_Booked(this,'Check-out')">Succeeded</button>
         </div>
 
         <div class="headline">
@@ -45,7 +45,7 @@
         <table class="result-table" id="resultTable" >
             <thead>
             <tr class="head-table">
-                <th>ID</th>
+                <th>ID Card NO.</th>
                 <th>Booking No.</th>
                 <th>Check-In</th>
                 <th>Check-Out</th>
