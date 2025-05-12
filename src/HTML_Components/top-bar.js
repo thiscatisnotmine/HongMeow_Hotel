@@ -12,6 +12,7 @@ class TopBar extends HTMLElement {
                 </div>
                 <button class="profile" onclick="redirect('#')">
                   <img src='../Picture/solar_user-outline.png'/>
+
                 </button>
 
 
