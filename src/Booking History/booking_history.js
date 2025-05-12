@@ -75,7 +75,7 @@ function displayData(data) {
 // Viewmore button
 function viewMore(BID) {
     // เปิดหน้าใหม่
-    window.location.href = `Booking-edit.html?bookingId=${encodeURIComponent(BID)}`;
+    window.location.href = `bookhis_viewmore.html?bookingId=${encodeURIComponent(BID)}`;
 }
 
 function getAllBookings() {
