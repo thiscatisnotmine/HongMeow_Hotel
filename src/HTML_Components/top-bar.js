@@ -10,7 +10,7 @@ class TopBar extends HTMLElement {
                     <button class="tab" onclick="redirect('#')">Available Room</button>
                     <button class="tab" onclick="redirect('../Staff/staff.html')">Staff Management</button>
                 </div>
-                <button class="profile" onclick="redirect('../Staff_Profile/'profilestaff.html)">
+                <button class="profile" onclick="redirect('../Staff_Profile/profilestaff.html)">
                   <img src='../Picture/solar_user-outline.png'/>
 
                 </button>
