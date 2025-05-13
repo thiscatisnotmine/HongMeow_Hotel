@@ -60,8 +60,8 @@ function search(q) {
                   </td>
                   <td>${payment.CusCID}</td>
                   <td>${payment.BID}</td>
-                  <td>${payment.PayDate}</td>
-                  <td>${payment.PayDate}</td> 
+                  <td>${booking.CheckInDate}</td>
+                  <td>${payment.PayDue}</td> 
                   <td>${payment.PayTotal}</td>
                   <td>
                     <button class="view-btn" onclick='viewMore("${payment.CusCID}", "${payment.BID}")'>

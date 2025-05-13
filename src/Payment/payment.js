@@ -25,7 +25,7 @@ function loadSearchQuery() {
   }
 }
 
-//maybe use this one for this page to filter?
+// maybe use this one for this page to filter?
 // fetch('/api/payment?paystatus=Pending')
 function search(q) {
   fetch(`${api}/payment/${q}`, {
@@ -63,8 +63,8 @@ function search(q) {
                   </td>
                   <td>${payment.CusCID}</td>
                   <td>${payment.BID}</td>
-                  <td>${payment.PayDate}</td>
-                  <td>${payment.PayDate}</td> 
+                  <td>${booking.CheckInDate}</td>
+                  <td>${payment.PayDue}</td> 
                   <td>${payment.PayTotal}</td>
                   <td>
                     <button class="view-btn" onclick='viewMore("${payment.CusCID}", "${payment.BID}")'>
@@ -86,6 +86,7 @@ function search(q) {
 function viewMore(cusCID, BID) {
     window.location.href = `paymentdetail.html?CusCID=${cusCID}&BID=${BID}`;
 }
+// paymentdetail.html --> pdetail.js
 
 const confirmButton = document.querySelector('.makepay');
 const selectAll = document.getElementById('select-all');
@@ -118,7 +119,7 @@ document.addEventListener('change', function (e) {
 
 
 // Send POST/PUT request to update payment status to 'Paid'
-/* ****Unfinished*****
+/* ****Unfinished***** 
   fetch('/api/payments/confirm', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -132,31 +133,3 @@ document.addEventListener('change', function (e) {
   });
 }
 *****/
-
-/* For payment details page */
-
-fetch(`${api}/booking/${q}`, {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json'
-    }
-})
-
-// ...
-
-const detailBody = document.getElementsByClassName("paysdetail")
-detailBody.innerHTML = '';
-const detailSection = document.createElement("div")
-detailSection.innerHTML= `
-    <div id="content">
-    <h2>Booking Details</h2>
-    <p>Customer ID: ${CusCID}<br>
-        Date: ${booking.CheckInDate} - ${booking.CheckOutDate} | ${booking.Duration} <br>
-        ${booking.RoomAmout}</p>
-    </div>
-
-    <div id="contentPrice">
-    <h2>Total Price</h2> ${PayTotal}
-    </div>
-`
-document.getElementById('pmethod').style.display = 'block';
