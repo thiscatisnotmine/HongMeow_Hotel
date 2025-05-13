@@ -1,0 +1,186 @@
+/* Tab inside */
+.tab-inside {
+    display: flex;
+    width: 100%;
+    height: 60px;
+}
+  
+.choice {
+    flex: 1;
+    padding: 10px 20px;
+    border: none;
+    background-color: #f9f9f9;
+    border-right: 1px solid #ccc; /* เส้นคั่นระหว่างปุ่ม */
+    cursor: pointer;
+    font-size: 20px;
+    color: #939796;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.choice:first-child {
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+
+}
+  
+.choice:last-child {
+    border-right: none;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+  
+.choice:hover {
+    background-color: #eaeaea;
+    transform: translateY(-5px);
+
+}
+  
+.choice:focus {
+    outline: none;
+    background-color: #ddd;
+}
+
+.choice-pet {
+    color: #5C4538;
+}
+
+
+/* Head line and Edit button*/
+.headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* เว้นพื้นที่ให้ซ้าย-ขวาอยู่คนละด้าน */
+    margin-top: 25px;
+}
+
+h2 {
+    color: #000000;
+}
+
+.edit{
+    border-radius: 40px;
+    background-color: #FFFAA2;
+    font-size: 20px;
+    cursor: pointer;
+    border:none ;
+    width: 10%;
+    height: 40px;
+    color: #5C4538;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit:hover {
+    background-color:rgb(255, 240, 128) ;
+    transform: translateY(-5px);
+
+}
+
+/*Customer Info*/
+.cus-info {
+    font-size: 18px;
+    color: #5C4538;
+    margin-bottom: 50px;
+}
+
+
+
+/* Pet Info */
+.pet-info {
+    font-size: 18px;
+    color: #5C4538;
+}
+
+.edit-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+
+.edit-row label {
+    margin-right: 10px;
+    width: 100px; /* หรือปรับขนาดตามต้องการ */
+}
+
+input {
+    height: 20px;
+}
+
+/* Hidden button */
+.hidden-space {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* เว้นพื้นที่ให้ซ้าย-ขวาอยู่คนละด้าน */
+    margin-top: 25px;
+}
+
+.button-group {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: flex-end;
+  }
+
+.hidden-btn {
+    display: none;
+}
+
+.confirm {
+    width: 80%;
+    height: 5vh;
+    font-size: 20px;
+    background-color: #89D3FF;
+    color: #FFFFFF;
+    border-radius: 40px;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+
+
+}
+
+.confirm:hover {
+    background-color:#6ecaff ;
+    transform: translateY(-5px);
+
+}
+
+.cancel {
+    width: 80%;
+    height: 5vh;
+    font-size: 20px;
+    background-color: #E41D1D;
+    color: #FFFFFF;
+    border-radius: 40px;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+
+
+}
+
+.cancel:hover {
+    background-color:#d80202 ;
+    transform: translateY(-5px);
+
+}
+
+
+.cancel-booking-buttot{
+    border-radius: 40px;
+    background-color: #e34e4e;
+    font-size: 20px;
+    cursor: pointer;
+    border:none ;
+    width: 10%;
+    height: 40px;
+    color: #f3eeeb;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cancel-booking-buttot:hover {
+    background-color:rgb(255, 36, 11) ;
+    transform: translateY(-5px);
+
+}
