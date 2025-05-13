@@ -3,7 +3,7 @@ const api = '#';
 // ถ้าไม่ใช่ admin ให้ไปหน้า restrict 
 const token = localStorage.getItem('userToken');
   if (!token) {
-    window.location.href = '/restrict.html';
+    window.location.href = './restrict.html';
 }
 
 // ข้อมูลพนักงานทั้งหมด
@@ -11,7 +11,8 @@ window.onload = function () {
   fetch(`${api}/employee`, {
     method: 'GET', 
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
     }
 })
       .then(response => response.json())
@@ -60,7 +61,8 @@ function search() {
   fetch(`${api}/employee/${q}`, {
     method: 'GET', 
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
     }
 })
       .then(response => response.json())
