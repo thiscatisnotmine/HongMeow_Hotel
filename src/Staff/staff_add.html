@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Staff</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../HTML_Components/top-bar.css" />
+  <link rel="stylesheet" href="../HTML_Components/side-bar.css" />
+  <link rel="stylesheet" href="staff_add.css" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <my-topbar></my-topbar>
+
+  <!-- Side Bar -->
+  <my-sidebar></my-sidebar>
+
+  <!-- Main Container -->
+  <div class="main-content">
+
+    <!--Name of page and Search box-->
+    <div class="headline">
+        <h2>Add New Staff</h2>
+        <button class="add-btn"  type="submit" onclick="submitEmployee()">
+            Add
+        </button>
+    </div>
+
+    <form id="employeeForm">
+      <!-- ID Card -->
+      <label for="idCard">ID Card Number:</label>
+      <input type="text" id="idCard">
+      <small id="idCardError" class="error"></small>
+
+      <!-- First Name -->
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName">
+      <small id="firstNameError" class="error"></small>
+
+      <!-- Last Name -->
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName">
+      <small id="lastNameError" class="error"></small>
+
+      <!-- Phone -->
+      <label for="phone">Phone Number:</label>
+      <input type="text" id="phone">
+      <small id="phoneError" class="error"></small>
+
+      <!-- Email -->
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <small id="emailError" class="error"></small>
+
+      <!-- Birth Date -->
+      <label for="birthDate">Birth Date:</label>
+      <input type="date" id="birthDate">
+      <small id="birthDateError" class="error"></small>
+
+      <!-- Address -->
+      <label for="address">Address:</label>
+      <input type="text" id="address">
+      <small id="addressError" class="error"></small>
+
+  </form>
+
+
+  </div>
+
+  <!-- JS Components -->
+  <script src="../HTML_Components/top-bar.js"></script>
+  <script src="../HTML_Components/side-bar.js"></script>
+  <script src="staff_add.js"></script>
+  
+</body>
+</html> 
