@@ -1,86 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Available Room - Hong Meow Hotel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/Avaiable_Room_(Admin).css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../HTML_Components/side-bar.css" />
+  <link rel="stylesheet" href="../HTML_Components/top-bar.css" />
+  <link rel="stylesheet" href="css/Avaiable_Room_(Admin).css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
+
 <body>
-  <div class="container">
-    <aside class="sidebar">
-      <div class="logo">
-        <img src="image/logorm.png" alt="Hong Meow Logo" />
-      </div>
-      <nav>
-        <ul>
-          <li>Create Booking</li>
-          <li>Booking History</li>
-          <li>Check-In / Check-Out</li>
-          <li>Payments & Receipts</li>
-          <li>Customer & Pet Profiles</li>
-          <li>Room Report</li>
-          <li>Notification</li>
-        </ul>
-      </nav>
-    </aside>
 
-    <main class="main-content">
-      <header class="header">
-        <nav class="top-nav">
-          <a href="#" class="nav-available active">Available Room</a>
-          <a href="#" class="nav-staff">Staff Management</a>
-        </nav>
-        <button class="user-button">
-          <img src="/asset/solar_user-outline.svg" class="user-icon" alt="User Icon">
-        </button>        
-      </header>
+  <!--Side bar-->
+  <my-sidebar></my-sidebar>
 
-      <div class="filter-section">
-        <div class="filter-left">
-          <div class="date-range-box">
-            <!-- Calendar icon -->
-            <img src="/asset/solar_calendar-linearSVG.svg" alt="calendar" class="calendar-icon">
-            <!-- Start Date -->
-            <div class="date-group">
-              <input type="text" id="startDate" class="date-input" readonly>
-              <div id="startDay" class="day-label"></div>
-            </div>
-            <div class="divider"></div>
-            <!-- End Date -->
-            <div class="date-group">
-              <input type="text" id="endDate" class="date-input" readonly>
-              <div id="endDay" class="day-label"></div>
-            </div>
+  <!--Tab bar (Top)-->
+  <my-topbar></my-topbar>
+
+
+  <!-- Main Cintent -->
+  <div class="main-content">
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <div class="filter-left">
+
+        <!-- Date Range -->
+        <div class="date-range-box">
+          <img src="asset/solar_calendar-linearSVG.svg" class="calendar-icon" alt="calendar" />
+          <div class="date-group">
+            <input type="text" class="date-input" id="startDate" readonly />
+            <div class="day-label" id="startDay"></div>
           </div>
-      
-          <!-- Room Type Dropdown -->
-          <div class="filter-dropdown">
-            <img src="/asset/dogSVG.svg" alt="paw" class="paw-icon">
-            <select class="dropdown-select" id="roomTypeSelect">
-              <option value="dog">Room Type: Dog</option>
-              <option value="cat">Room Type: Cat</option>
-            </select>
-            <span class="dropdown-arrow"></span>
+          <div class="divider"></div>
+          <div class="date-group">
+            <input type="text" class="date-input" id="endDate" readonly />
+            <div class="day-label" id="endDay"></div>
           </div>
         </div>
-      
-        <!-- Search Button อยู่ขวาสุด -->
-        <button class="search-btn">
-          <img src="/asset/material-symbols_searchSVG.svg" class="search-image" alt="Search" />
-        </button>
+
+        <!-- Room Type Dropdown -->
+        <div class="filter-dropdown">
+          <img src="asset/dogSVG.svg" class="paw-icon" alt="paw" />
+          <select id="roomTypeSelect" class="dropdown-select">
+            <option value="dog">Room Type: Dog</option>
+            <option value="cat">Room Type: Cat</option>
+          </select>
+          <span class="dropdown-arrow"></span>
+        </div>
+
       </div>
 
-      <!-- ที่วางข้อมูลห้องแบบ dynamic -->
-      <div class="room-container"></div>
-    </main>
+      <!-- Search Button -->
+      <button class="search-btn">
+        <img src="asset/material-symbols_searchSVG.svg" class="search-image" alt="Search" />
+      </button>
+    </div>
+    
+    <!-- Room Cards Container -->
+    <div class="room-container">
+      <!-- room-card elements will be generated dynamically via JavaScript -->
+    </div>
+
   </div>
 
-  <!-- JS -->
-  <script src="/javascript/date.js"></script>
-  <script src="/javascript/room-type.js"></script>
+  <!-- JavaScript -->
+  <script src="../HTML_Components/side-bar.js"></script>
+  <script src="../HTML_Components/top-bar.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
+  <script src="javascript/date.js"></script>
+  <script src="javascript/room-type.js"></script>
+  <script src="javascript/btn.js"></script>
+
 </body>
 </html>

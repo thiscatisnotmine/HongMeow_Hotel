@@ -1,75 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notification - Hong Meow Hotel</title>
-  <link rel="stylesheet" href="/css/Notification.css" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../HTML_Components/side-bar.css" />
+  <link rel="stylesheet" href="../HTML_Components/top-bar.css" />
+  <link rel="stylesheet" href="css/Notification.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
+
 <body>
-  <div class="container">
-    <aside class="sidebar">
-      <div class="logo">
-        <img src="/image/logorm.png" alt="Hong Meow Hotel Logo" />
+
+  <!-- Sidebar -->
+  <my-sidebar></my-sidebar>
+
+  <!-- Topbar -->
+  <my-topbar></my-topbar>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <div class="section-header">
+      <h1 class="section-title">Notification</h1>
+      <div class="search-group">
+        <input type="text" class="search-input" placeholder="Room search" />
+        <button class="search-btn">
+          <img src="asset/material-symbols_searchSVG.svg" class="search-image" alt="Search" />
+        </button>
       </div>
-      <nav>
-        <ul>
-          <li>Create Booking</li>
-          <li>Booking History</li>
-          <li>Check-In / Check-Out</li>
-          <li>Payments & Receipts</li>
-          <li>Customer & Pet Profiles</li>
-          <li>Room Report</li>
-          <li class="active">Notification</li>
-        </ul>
-      </nav>
-    </aside>
+    </div>
 
-    <main class="main-content">
-      <header class="header">
-        <nav class="top-nav">
-          <a href="#" class="nav-haed">Available Room</a>
-          <a href="#" class="nav-head">Staff Management</a>
-        </nav>
-        <button class="user-button">
-          <img src="/asset/solar_user-outline.svg" class="user-icon" alt="User Icon">
-        </button>        
-      </header>
+    <div class="notification-table-wrapper">
+      <table class="notification-table">
+        <thead>
+          <tr>
+            <th>ID Card No.</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>View More & Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1234567890123</td>
+            <td>Smith Allan</td>
+            <td>0999999999</td>
+            <td>smith@gmail.com</td>
+            <td><a href="#" class="view-link">View</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <div class="section-header">
-        <h1 class="section-title">Notification</h1>
-        <div class="search-group">
-          <input type="text" class="search-input" placeholder="Room search" />
-          <button class="search-btn">
-            <img src="/asset/material-symbols_searchSVG.svg" alt="Search" class="search-image" />
-          </button>
-        </div>
-      </div>
-
-        <div class="notification-table-wrapper">
-          <table class="notification-table">
-            <thead>
-              <tr>
-                <th>ID Card No.</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>View More & Edit</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1234567890123</td>
-                <td>Smith Allan</td>
-                <td>0999999999</td>
-                <td>smith@gmail.com</td>
-                <td><a href="#">View</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </main>
   </div>
+
+  <!-- JavaScript -->
+  <script src="../HTML_Components/side-bar.js"></script>
+  <script src="../HTML_Components/top-bar.js"></script>
+  <script src="javascript/btn.js"></script>
 </body>
 </html>
