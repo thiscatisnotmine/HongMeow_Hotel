@@ -34,7 +34,7 @@
     <div class="headline">
         <h2></h2>
         <div class="search-form" id="searchForm">
-            <input class="search-inputs" type="text" id="searchInput" placeholder="search with ID Card" required>
+            <input class="search-inputs" type="text" id="searchInput" placeholder="search with CustomerID" required>
             <button class="search-icon"  type="submit" onclick="handleSearch()">
                 <span class="material-symbols-outlined">
                     search
@@ -43,25 +43,25 @@
           </div>
     </div>
 
-    <!-- Table Headers--> <!--
+    <!-- Table Headers-->
     <table class="result-table" id="resultTable" >
         <thead>
           <tr class="head-table">
-            <th>ID Card NO.</th>
-            <th>Pet ID</th>
-            <th>Pet Name</th>
-            <th>Pet Type</th>
-            <th>View more & Edit</th>
-            <th>Delete</th>
+            <th>ID Card No.</th>
+            <th>Booking No.</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Payment status</th>
+            <th></th>
           </tr>
         </thead>
-
-        Result
+      <button class="view-btn">Check-In</button>
+      <!--Result-->
         <tbody class="result" id="resultBox"></tbody>
     </table>
-    -->
-   
   </div>
+
+    <button id="confirm-btn" onclick="checkin()"></button>
 
   <script src="..\HTML_Components\side-bar.js"></script>
   <script src="..\HTML_Components\top-bar.js"></script>

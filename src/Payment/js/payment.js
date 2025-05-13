@@ -1,4 +1,4 @@
-const api = 'https://6ba789b3-3c09-4dd7-bb94-f9a8a5bf82fa.mock.pstmn.io';
+const api = 'https://5364cfed-1e99-411c-bf1c-9aa4eafeecd1.mock.pstmn.io';
 
 window.onload = loadSearchQuery;
 
@@ -28,7 +28,7 @@ function loadSearchQuery() {
 // maybe use this one for this page to filter?
 // fetch('/api/payment?paystatus=Pending')
 function search(q) {
-  fetch(`${api}/payment/${q}`, {
+  fetch(`${api}/bill/${q}`, {
     // method 'GET': ใช้ดึงข้อมูลจากฐานข้อมูล
     // method 'POST': ใช้เพิ่มข้อมูลลงฐานข้อมูล
     // method 'PUT': ใช้อัปเดตข้อมูลลงฐานข้อมูล
@@ -51,23 +51,19 @@ function search(q) {
             document.getElementById('makepay').style.display = 'none'; // initially make pay button
           }
           // วนลูปเพื่อสร้าง row
-          data.forEach(payment => {
+          data.forEach(bill => {
               const row = document.createElement('tr'); 
-
-              // เลือกข้อมูลที่จะเอามาแสดง
-        /* ใน figma มันจะมี CusCID, BID, CheckInDate, PaymentDue แต่ตอนนี้ข้อมูลใน mockup ไม่มี PaymentDue?
-          เลยใส่ PayDate (วันที่จ่าย) ไปก่อน อย่าลืมเปลี่ยน*/
               row.innerHTML = `
                   <td>
                     <input class="row-checkbox" type="checkbox" />
                   </td>
-                  <td>${payment.CusCID}</td>
-                  <td>${payment.BID}</td>
-                  <td>${booking.CheckInDate}</td>
-                  <td>${payment.PayDue}</td> 
-                  <td>${payment.PayTotal}</td>
+                  <td>${bill.CusCID}</td>
+                  <td>${bill.BID}</td>
+                  <td>${bill.CheckInDate}</td>
+                  <td>${bill.DueDate}</td> 
+                  <td>${bill.PayTotal}</td>
                   <td>
-                    <button class="view-btn" onclick='viewMore("${payment.CusCID}", "${payment.BID}")'>
+                    <button class="view-btn" onclick='viewMore("${bill.CusCID}", "${bill.BID}")'>
                       view more
                     </button>
                   </td> 
@@ -88,6 +84,8 @@ function viewMore(cusCID, BID) {
 }
 // paymentdetail.html --> pdetail.js
 
+
+//จัดการปุ่มยืนยันให้ขึ้นเฉพาะตอนที่มีการเลือกแถวอย่างน้อยแถวนึง
 const confirmButton = document.querySelector('.makepay');
 const selectAll = document.getElementById('select-all');
 
