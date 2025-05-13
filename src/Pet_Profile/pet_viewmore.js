@@ -59,10 +59,10 @@ async function confirmEdit() {
   formData.append('PBreeds', breeds);
   formData.append('PAge', age);
   formData.append('PDisease', disease);
-  /*if (file) {
+  if (file) {
     formData.append('file', file);
   }
-  */
+  
 
   if (confirm('Do you want to save the data?')) {
     // ผู้ใช้กด OK
