@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Check-In / Check-Out</title>
-  <script src="cincout.js"></script>
+  <script src="checkout.js"></script>
   <script src="..\HTML_Components\redirect.js"></script>
   <link rel="stylesheet" href="cincout.css">
   <link rel="stylesheet" href="..\HTML_Components\side-bar.css">
@@ -34,7 +34,7 @@
     <div class="headline">
         <h2></h2>
         <div class="search-form" id="searchForm">
-            <input class="search-inputs" type="text" id="searchInput" placeholder="search with ID Card" required>
+            <input class="search-inputs" type="text" id="searchInput" placeholder="search with CustomerID" required>
             <button class="search-icon"  type="submit" onclick="handleSearch()">
                 <span class="material-symbols-outlined">
                     search
@@ -43,7 +43,23 @@
           </div>
     </div>
 
-   
+    <table class="table" id="checkout-table"></table>
+    <!--
+        <thead>
+          <tr>
+            <th>ID Card No.</th>
+            <th>Booking No.</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="checkin-tbody">
+        </tbody>
+      </table>
+    -->
+
   </div>
 
   <script src="..\HTML_Components\side-bar.js"></script>

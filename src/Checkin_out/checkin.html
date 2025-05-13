@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Check-In / Check-Out</title>
-  <script src="cincout.js"></script>
+  <script src="checkin.js"></script>
   <script src="..\HTML_Components\redirect.js"></script>
   <link rel="stylesheet" href="cincout.css">
   <link rel="stylesheet" href="..\HTML_Components\side-bar.css">
@@ -43,25 +43,25 @@
           </div>
     </div>
 
-    <!-- Table Headers-->
-    <table class="result-table" id="resultTable" >
+    <table class="table" id="checkin-table"></table> 
+    <!--
         <thead>
-          <tr class="head-table">
+          <tr>
             <th>ID Card No.</th>
             <th>Booking No.</th>
             <th>Check-in</th>
             <th>Check-out</th>
-            <th>Payment status</th>
+            <th>Status</th>
             <th></th>
           </tr>
         </thead>
-      <button class="view-btn">Check-In</button>
-      <!--Result-->
-        <tbody class="result" id="resultBox"></tbody>
-    </table>
-  </div>
+        <tbody id="checkin-tbody">
+        </tbody>
+      </table>
+    -->
 
-    <button id="confirm-btn" onclick="checkin()"></button>
+  </div>
+  
 
   <script src="..\HTML_Components\side-bar.js"></script>
   <script src="..\HTML_Components\top-bar.js"></script>
