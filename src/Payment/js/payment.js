@@ -47,15 +47,13 @@ function search(q) {
             alert('Not Found.');
             return;
           }
-          if (data.length > 0) {
-            document.getElementById('makepay').style.display = 'none'; // initially make pay button
-          }
+
           // วนลูปเพื่อสร้าง row
           data.forEach(bill => {
               const row = document.createElement('tr'); 
               row.innerHTML = `
                   <td>
-                    <input class="row-checkbox" type="checkbox" />
+                    <input class="row-checkbox" id="row-checkbox" type="checkbox" />
                   </td>
                   <td>${bill.CusCID}</td>
                   <td>${bill.BID}</td>
@@ -70,6 +68,7 @@ function search(q) {
               `;
 
               resultBody.appendChild(row);
+              checkBoxbtn();
           });
       })
       .catch(error => {
@@ -77,57 +76,66 @@ function search(q) {
       });
 }
 
-//Viewmore button
+// Viewmore button
 // ไม่ค่อยแน่ใจว่าควรจะส่ง payment กับ booking ทั้งหมดไปเลยดีไหมหรือแค่ส่งไอดีแล้วค่อยไปดึงข้อมูลเอาอีกที
-function viewMore(cusCID, BID) {
-    window.location.href = `paymentdetail.html?CusCID=${cusCID}&BID=${BID}`;
+function viewMore(bill) {
+    window.location.href = `paymentdetail.html?CusCID=${bill.cusCID}&BID=${bill.BID}`;
 }
 // paymentdetail.html --> pdetail.js
 
+//For checkbox
+function checkBoxbtn() {
+  const confirmButton = document.getElementById('makepay');
+  const selectAll = document.getElementById('select-all');
+  const rowCheckboxes = document.querySelectorAll('.row-checkbox');
 
-//จัดการปุ่มยืนยันให้ขึ้นเฉพาะตอนที่มีการเลือกแถวอย่างน้อยแถวนึง
-const confirmButton = document.querySelector('.makepay');
-const selectAll = document.getElementById('select-all');
+  // Show/hide confirm button based on selection
+  function updateConfirmButton() {
+    const selected = document.querySelectorAll('.row-checkbox:checked');
+    confirmButton.style.display = selected.length > 0 ? 'block' : 'none';
+  }
 
-// Show/hide confirm button based on selection
-function updateConfirmButton() {
-  const selected = document.querySelectorAll('.row-checkbox:checked');
-  confirmButton.style.display = selected.length > 0 ? 'block' : 'none';
+  // Select/deselect all checkboxes
+  selectAll.addEventListener('change', function () {
+    rowCheckboxes.forEach(cb => {
+      cb.checked = this.checked;
+    });
+    updateConfirmButton();
+  });
+
+  // Watch individual row checkboxes
+  rowCheckboxes.forEach(cb => {
+    cb.addEventListener('change', function () {
+      if (!this.checked) {
+        selectAll.checked = false;
+      }
+      updateConfirmButton();
+    });
+  });
 }
 
-// Select/deselect all checkboxes
-selectAll.addEventListener('change', function () {
-  const checkboxes = document.querySelectorAll('.row-checkbox');
-  checkboxes.forEach(cb => {
-    cb.checked = this.checked;
-  });
-  updateConfirmButton();
-});
-
-// Watch individual row checkboxes
-document.addEventListener('change', function (e) {
-  if (e.target.classList.contains('row-checkbox')) {
-    // If any checkbox is unchecked, uncheck "select all"
-    if (!e.target.checked) {
-      selectAll.checked = false;
-    }
-    updateConfirmButton();
-  }
-});
-
-
+//Confirm Payment
 // Send POST/PUT request to update payment status to 'Paid'
-/* ****Unfinished***** 
-  fetch('/api/payments/confirm', {
+/* ****Unfinished*****
+function confirmPay() {
+  const selectedRows = document.querySelectorAll('.row-checkbox:checked');
+  const selectedBIDs = Array.from(selectedRows).map(row => {
+    return row.closest('tr').children[2].textContent; // Get BID (3rd column)
+  });
+ 
+  fetch(`${api}/confirm-payment`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ bids: selectedBIDs })
-  }).then(res => {
+  })
+  .then(res => {
     if (res.ok) {
       alert('Payments confirmed!');
+      window.location.reload(); // reload page if you want
     } else {
-      alert('Something went wrong.');
+      alert('Failed to confirm payments');
     }
-  });
+  })
+  .catch(err => console.error('Payment error:', err));
 }
 *****/

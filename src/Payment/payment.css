@@ -97,50 +97,42 @@ input {
     color: #000000;
 }
 
+/* Base styling for the custom checkbox */
 input[type="checkbox"] {
-    width: 15px;
-    height: 15px;
-    align-content: center;
-    cursor: pointer;
-    transform: scale(1.2);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  transform: scale(1.3);
+  background-color: #000000;
+  border: none;
+  vertical-align: middle;
+  transition: background-color 0.5s ease, transform 0.5s ease;
 }
 
 input[type="checkbox"]:checked {
-    animation: wave-4 0.4s ease;
-    stroke-dashoffset: 0;
+  background-color: #5e5e5e;
+  animation: wave-check 0.5s ease;
 }
-.inline-svg {
-    position: absolute;
-    width: 0;
-    height: 0;
-    pointer-events: none;
-    user-select: none;
+
+@keyframes wave-check {
+  0% {
+    transform: scale(1.5);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1.3);
+  }
 }
+
+/* Adjustments for smaller screens */
 @media screen and (max-width: 640px) {
-input[type="checkbox"] {
-    width: 100%;
-    display: inline-block;
-}
-}
-@-moz-keyframes wave-4 {
-50% {
-    transform: scale(0.9);
-}
-}
-@-webkit-keyframes wave-4 {
-50% {
-    transform: scale(0.9);
-}
-}
-@-o-keyframes wave-4 {
-50% {
-    transform: scale(0.9);
-}
-}
-@keyframes wave-4 {
-50% {
-    transform: scale(0.9);
-}
+  input[type="checkbox"] {
+    /* Keep the same dimensions or tweak them if desired */
+    width: 10px;
+    height: 10px;
+  }
 }
 
 .search-icon {
@@ -165,7 +157,7 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
     margin-top: 10px;
-  }
+}
 
 .result-table {
     table-layout: fixed;
@@ -180,12 +172,14 @@ table {
 }
 
 th {
-    text-align: left;
+    text-align: center;
     padding: 10px;
     border: 1px;
     border-right: 1px solid #ccc;
     font-size: 18px;
+    font-weight: 600;
     color: #000;
+    
 }
 
 thead tr:last-child th:last-child {
@@ -226,10 +220,10 @@ tbody td {
 .view-btn:hover {
     color: #016bec;
     /*background-color: #b3b3b3;*/
+    font-weight: 500;
     text-decoration: underline;
     transform: translateY(-5px);
     text-shadow: 0 2px 8px #002d9d54;
-    box-shadow: 0 2px 8px #0e5aff4a;
 }
 
 /*confirm pays btn*/
@@ -240,23 +234,25 @@ tbody td {
     right: 30px; /* Place the button 30px from the right */
     z-index: 99; /* Make sure it does not overlap */
     padding: 10px;
-    background-color: #7dd0fa;
+    background-color: #016bec;
     color: #ffffff;
     border: none;
     border-radius: 10px;
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+    box-shadow: 0 2px 8px #003677da;
     transition:  background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #makepay:disabled {
-    background-color: #7dd0fa;
+    background-color: #93a3ab;
 }
 
 #makepay:hover {
-    background-color: #016bec;
-    box-shadow: 0 2px 8px #0457bc9d;
+    background-color: #7dd0fa;
+    text-shadow: 0 2px 8px #001958c9;
+    box-shadow: 0 2px 8px #003677da;
 }
 
 .paysdetail {
