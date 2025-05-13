@@ -1,0 +1,38 @@
+* {
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  box-sizing: content-box;
+}
+
+/* ส่วน container หลัก ที่อยู่ข้าง ๆ sidebar และใต้ topbar */
+.home-container {
+  margin-left: 390px; /* หลบจาก sidebar */
+  padding: 20px;
+  height: calc(100vh - 60px); /* ลบความสูงของ top bar (ประมาณ 60px) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center แนวตั้ง */
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* โลโก้ */
+.home-logo {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 30px;
+}
+
+/* ข้อความต้อนรับ */
+.welcome-text {
+  font-size: 20px;
+  font-weight: normal;
+  color: #5c4538;
+  line-height: 1.5;
+  max-width: 800px;
+}
