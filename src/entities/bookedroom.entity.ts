@@ -1,4 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Booking } from './booking.entity';
+import { RoomType } from './roomtype.entity';
+import { Room } from './room.entity';
+import { Pet } from './pet.entity';
 
 @Entity()
 export class BookedRoom {
@@ -8,4 +18,20 @@ export class BookedRoom {
   @Column() RID: number;
   @Column() PID: string;
   @Column() RoomStatus: string;
+
+  @ManyToOne(() => Booking, (booking) => booking.bookedRooms)
+  @JoinColumn({ name: 'BID' })
+  booking: Booking;
+
+  @ManyToOne(() => RoomType, (roomType) => roomType.bookedRooms)
+  @JoinColumn({ name: 'RTID' })
+  roomType: RoomType;
+
+  @ManyToOne(() => Room, (room) => room.RID)
+  @JoinColumn({ name: 'RID' })
+  room: Room;
+
+  @ManyToOne(() => Pet)
+  @JoinColumn({ name: 'PID' })
+  pet: Pet;
 }

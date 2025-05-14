@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Customer } from './customer.entity';
 
 @Entity()
 export class Pet {
@@ -10,4 +11,8 @@ export class Pet {
   @Column() PAge: number;
   @Column() PVaccine: string;
   @Column() PDisease: string;
+
+  @ManyToOne(() => Customer, (customer) => customer.pets)
+  @JoinColumn({ name: 'CusCID' })
+  customer: Customer;
 }

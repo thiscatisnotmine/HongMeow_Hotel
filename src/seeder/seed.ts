@@ -1,3 +1,4 @@
+// src/seeder/seed.ts
 import { DataSource } from 'typeorm';
 import { Employee } from '../entities/employee.entity';
 import { Customer } from '../entities/customer.entity';
@@ -21,162 +22,171 @@ export async function seedData(dataSource: DataSource) {
   const paymentRepo = dataSource.getRepository(Payment);
 
   // Seed Employee
-  if ((await empRepo.count()) === 0) {
-    await empRepo.insert([
-      {
-        EmpCID: '1111111111111',
-        EmpFname: 'Admin',
-        EmpLname: 'User',
-        EmpRole: 'admin',
-        EmpBirth: '1990-01-01',
-        EmpAge: 34,
-        EmpPhone: '0999999999',
-        EmpEmail: 'admin@hongmeow.com',
-        EmpAddress: '123 Admin St',
-        EmpUsername: 'admin',
-        EmpPassword: 'password123',
-      },
-    ]);
-    console.log('✅ Seeded Employee');
-  }
+  const admin = empRepo.create({
+    EmpCID: '1111111111111',
+    EmpFname: 'Admin',
+    EmpLname: 'User',
+    EmpRole: 'admin',
+    EmpBirth: '1990-01-01',
+    EmpAge: 34,
+    EmpPhone: '0999999999',
+    EmpEmail: 'admin@hongmeow.com',
+    EmpAddress: '123 Admin St',
+    EmpUsername: 'admin',
+    EmpPassword: 'password123',
+  });
+  await empRepo.save(admin);
 
   // Seed Customer
-  if ((await customerRepo.count()) === 0) {
-    await customerRepo.insert([
-      {
-        CusCID: '2222222222222',
-        CusFname: 'Jane',
-        CusLname: 'Doe',
-        CusPhone: '0888888888',
-        CusEmail: 'jane@customer.com',
-      },
-    ]);
-    console.log('✅ Seeded Customer');
-  }
+  const customer = customerRepo.create({
+    CusCID: '2222222222222',
+    CusFname: 'Jane',
+    CusLname: 'Doe',
+    CusPhone: '0888888888',
+    CusEmail: 'jane@customer.com',
+  });
+  await customerRepo.save(customer);
 
   // Seed Urgent Contact
-  if ((await urgentRepo.count()) === 0) {
-    await urgentRepo.insert([
-      {
-        CusCID: '2222222222222',
-        UrFname: 'Alice',
-        UrLname: 'Smith',
-        UrRelationship: 'Friend',
-        UrPhone: '0777777777',
-      },
-    ]);
-    console.log('✅ Seeded Urgent Contact');
-  }
+  const urgent = urgentRepo.create({
+    CusCID: customer.CusCID,
+    UrFname: 'Alice',
+    UrLname: 'Smith',
+    UrRelationship: 'Friend',
+    UrPhone: '0777777777',
+    customer: customer,
+  });
+  await urgentRepo.save(urgent);
 
   // Seed Pets
-  if ((await petRepo.count()) === 0) {
-    await petRepo.insert([
-      {
-        PID: 'P001',
-        CusCID: '2222222222222',
-        PName: 'Fluffy',
-        PType: 'cat',
-        PBreeds: 'Persian',
-        PAge: 24,
-        PVaccine: 'vaccine-fluffy.pdf',
-        PDisease: 'None',
-      },
-      {
-        PID: 'P002',
-        CusCID: '2222222222222',
-        PName: 'Barky',
-        PType: 'dog',
-        PBreeds: 'Beagle',
-        PAge: 12,
-        PVaccine: 'vaccine-barky.pdf',
-        PDisease: 'Skin allergy',
-      },
-    ]);
-    console.log('✅ Seeded Pets');
-  }
+  const pet1 = petRepo.create({
+    PID: 'P001',
+    CusCID: customer.CusCID,
+    PName: 'Fluffy',
+    PType: 'cat',
+    PBreeds: 'Persian',
+    PAge: 24,
+    PVaccine: 'vaccine-fluffy.pdf',
+    PDisease: 'None',
+    customer: customer,
+  });
+
+  const pet2 = petRepo.create({
+    PID: 'P002',
+    CusCID: customer.CusCID,
+    PName: 'Barky',
+    PType: 'dog',
+    PBreeds: 'Beagle',
+    PAge: 12,
+    PVaccine: 'vaccine-barky.pdf',
+    PDisease: 'Skin allergy',
+    customer: customer,
+  });
+
+  await petRepo.save([pet1, pet2]);
 
   // Seed Room Types
-  if ((await roomTypeRepo.count()) === 0) {
-    await roomTypeRepo.insert([
-      {
-        RTID: 'CAD',
-        RTName: 'Cat Deluxe',
-        RTDescription: 'Deluxe room for cats',
-        RTMax: 2,
-        RTPrice: 300,
-        RTAmount: 2,
-      },
-      {
-        RTID: 'DAD',
-        RTName: 'Dog Deluxe',
-        RTDescription: 'Deluxe room for dogs',
-        RTMax: 2,
-        RTPrice: 350,
-        RTAmount: 2,
-      },
-    ]);
-    console.log('✅ Seeded RoomTypes');
-  }
+  const catRoomType = roomTypeRepo.create({
+    RTID: 'CAD',
+    RTName: 'Cat Deluxe',
+    RTDescription: 'Deluxe room for cats',
+    RTMax: 2,
+    RTPrice: 300,
+    RTAmount: 2,
+  });
+
+  const dogRoomType = roomTypeRepo.create({
+    RTID: 'DAD',
+    RTName: 'Dog Deluxe',
+    RTDescription: 'Deluxe room for dogs',
+    RTMax: 2,
+    RTPrice: 350,
+    RTAmount: 2,
+  });
+
+  await roomTypeRepo.save([catRoomType, dogRoomType]);
 
   // Seed Rooms
-  if ((await roomRepo.count()) === 0) {
-    await roomRepo.insert([
-      { RID: 1, RTID: 'CAD', RState: 'Available' },
-      { RID: 2, RTID: 'CAD', RState: 'Available' },
-      { RID: 3, RTID: 'DAD', RState: 'Available' },
-      { RID: 4, RTID: 'DAD', RState: 'Available' },
-    ]);
-    console.log('✅ Seeded Rooms');
-  }
+  const rooms = roomRepo.create([
+    {
+      RID: 1,
+      RTID: catRoomType.RTID,
+      RState: 'Available',
+      roomType: catRoomType,
+    },
+    {
+      RID: 2,
+      RTID: catRoomType.RTID,
+      RState: 'Available',
+      roomType: catRoomType,
+    },
+    {
+      RID: 3,
+      RTID: dogRoomType.RTID,
+      RState: 'Available',
+      roomType: dogRoomType,
+    },
+    {
+      RID: 4,
+      RTID: dogRoomType.RTID,
+      RState: 'Available',
+      roomType: dogRoomType,
+    },
+  ]);
+
+  await roomRepo.save(rooms);
 
   // Seed Booking
-  if ((await bookingRepo.count()) === 0) {
-    await bookingRepo.insert([
-      {
-        BID: 'B001',
-        CusCID: '2222222222222',
-        CheckInDate: '2025-05-15',
-        CheckOutDate: '2025-05-18',
-        Duration: 3,
-        RoomAmount: 2,
-      },
-    ]);
-    console.log('✅ Seeded Booking');
-  }
+  const booking = bookingRepo.create({
+    BID: 'B001',
+    CusCID: customer.CusCID,
+    CheckInDate: '2025-05-15',
+    CheckOutDate: '2025-05-18',
+    Duration: 3,
+    RoomAmount: 2,
+    customer: customer,
+  });
+  await bookingRepo.save(booking);
 
-  // Seed BookedRoom
-  if ((await bookedRoomRepo.count()) === 0) {
-    await bookedRoomRepo.insert([
-      {
-        BID: 'B001',
-        RTID: 'CAD',
-        RID: 1,
-        PID: 'P001',
-        RoomStatus: 'booked',
-      },
-      {
-        BID: 'B001',
-        RTID: 'DAD',
-        RID: 3,
-        PID: 'P002',
-        RoomStatus: 'booked',
-      },
-    ]);
-    console.log('✅ Seeded Booked Rooms');
-  }
+  // Seed Booked Rooms
+  const bookedRooms = bookedRoomRepo.create([
+    {
+      BID: booking.BID,
+      RTID: catRoomType.RTID,
+      RID: 1,
+      PID: pet1.PID,
+      RoomStatus: 'booked',
+      booking: booking,
+      roomType: catRoomType,
+      room: rooms[0],
+      pet: pet1,
+    },
+    {
+      BID: booking.BID,
+      RTID: dogRoomType.RTID,
+      RID: 3,
+      PID: pet2.PID,
+      RoomStatus: 'booked',
+      booking: booking,
+      roomType: dogRoomType,
+      room: rooms[2],
+      pet: pet2,
+    },
+  ]);
+  await bookedRoomRepo.save(bookedRooms);
 
   // Seed Payment
-  if ((await paymentRepo.count()) === 0) {
-    await paymentRepo.insert([
-      {
-        BID: 'B001',
-        CusCID: '2222222222222',
-        PayTotal: 1950,
-        PayMethod: 'Cash',
-        PayDate: '2025-05-14',
-        PayStatus: 'Paid',
-      },
-    ]);
-    console.log('✅ Seeded Payment');
-  }
+  const payment = paymentRepo.create({
+    BID: booking.BID,
+    CusCID: customer.CusCID,
+    PayTotal: 1950,
+    PayMethod: 'Cash',
+    PayDate: '2025-05-14',
+    PayStatus: 'Paid',
+    booking: booking,
+    customer: customer,
+  });
+  await paymentRepo.save(payment);
+
+  console.log('✅ All data seeded successfully');
 }
