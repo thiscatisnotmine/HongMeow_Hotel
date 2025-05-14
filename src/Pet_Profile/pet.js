@@ -30,16 +30,8 @@ function loadSearchQuery() {
 
 // ค้นหาข้อมูลสัตว์เลี้ยง
 function search(q) {
- 
-
-  // สามารถเปลี่ยน /pet เป็นชื่อ table อื่นได้ เช่นจะดึงข้อมูลลูกค้าก็ใช้ /customer
   fetch(`${api}/pet/${q}`, {
-
-    // method 'GET': ใช้ดึงข้อมูลจากฐานข้อมูล
-    // method 'POST': ใช้เพิ่มข้อมูลลงฐานข้อมูล
-    // method 'PUT': ใช้อัปเดตข้อมูลลงฐานข้อมูล
-    // method 'DELETE': ใช้ลบข้อมูลออกฐานข้อมูล
-    method: 'GET', // หรือ 'POST', 'PUT', 'DELETE' ตามที่ต้องการ ปล.ตอนนี้ใช้ได้แค่ GET เนื่องจากมันเป็นแค่ mock api ไม่ได้มีฐานข้อมูลจริงๆเลยแก้ไข เพิ่ม ลบจริงๆยังไม่ได้
+    method: 'GET', 
     headers: {
         'Content-Type': 'application/json'
     }
@@ -66,12 +58,12 @@ function search(q) {
                   <td>${pet.PName}</td>
                   <td>${pet.PType}</td>
                   <td>
-                    <button class="view-btn" onclick='viewMore(${pet.PID},${pet.CusCID})'>
+                    <button class="blue-btn" onclick='viewMore(${pet.PID},${pet.CusCID})'>
                       View more
                     </button>
                   </td> 
                   <td>
-                    <button class="delete-btn" onclick="deleteRow(this)">
+                    <button class="red-btn" onclick="deleteRow(this)">
                       Delete
                     </button>
                   </td>

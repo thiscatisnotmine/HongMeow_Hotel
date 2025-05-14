@@ -11,7 +11,7 @@
     margin-top: 20px;
     margin-left: 340px;
     gap: 500px;
-    width: 100%;
+    width: 75%;
   }
 
   .tab_menu {
@@ -32,7 +32,7 @@
     color: #5C4538;
     border: none;
     padding: 10px 10px;
-    border-radius: 30px;
+    border-radius: 5px;
     cursor: pointer;
     transition:  background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
@@ -44,29 +44,26 @@
   }
 
   .tab.active {
-    background-color: #89D3FF;
-    color: rgb(255, 255, 255);
-
+    background-color: white;
+    color: black;
   }
 
-.profile {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 50%;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
 
-.profile img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  transition: filter 0.3s ease;
-}
+  .profile {
+    width: 50px;           
+    height: 50px;          
+    padding: 0;            
+    border: none;          
+    cursor: pointer;      
+    overflow: hidden; 
+    background-color: transparent;
+    transition:  background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+     
+  }
+  
+  .profile-img {
+    width: 100%;           
+    height: 100%;          
+    /*object-fit: cover;   */ 
+  }
 
-/* Hover effect */
-.profile:hover {
-  background-color: #F4F8F7;
-  transform: scale(1.05);
-}

@@ -130,28 +130,54 @@
   pointer-events: none;
 }
 
-/* Search Button */
-.search-btn {
-  width:48px;
-  height: 48px;
-  border: none;
-  background: #fff799;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+/* Name of page and Search box*/
+.headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* เว้นพื้นที่ให้ซ้าย-ขวาอยู่คนละด้าน */
+    margin-top: 25px;
 }
 
-.search-image {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
+
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
-.search-btn:hover {
-  background-color: #fdf16d;
+.search-inputs {
+    width: 250px;
+    height: 40px;
+    border-radius: 40px;
+    border: none;
+    background-color: #F4F8F7;
+    
 }
+
+.search-inputs::placeholder {
+    font-size: 18px;
+    color: #aaa;
+}
+
+input {
+    padding-left: 20px;
+    font-size: 16px;
+    color: #000000;
+}
+
+.search-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #FFFAA2;
+    border-radius: 40px;
+    border: none;
+    transition:  none;
+    cursor: pointer;
+
+
+}
+
 
 .room-card {
   display: grid;

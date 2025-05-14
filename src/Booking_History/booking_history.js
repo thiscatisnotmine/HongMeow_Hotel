@@ -62,7 +62,7 @@ function displayData(data) {
             <td>${booking.CheckInDate}</td>
             <td>${booking.CheckOutDate}</td>
             <td>
-            <button class="view-btn" onclick='viewMore(${booking.BID})'>
+            <button class="blue-btn" onclick='viewMore(${booking.BID})'>
                 View more
             </button>
             </td>

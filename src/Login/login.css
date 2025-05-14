@@ -28,17 +28,16 @@ body {
 }
 
 .logo {
-  width: 142px;
-  height: 138px;
-  background-image: url('../Picture/image_3-removebg-preview.png');
+  
+  background-image: url('../../image/image_3-removebg-preview.png');
   background-size: cover;
   background-position: center;
   margin: 0 auto;
   position: absolute;
   top: 141px; /* ปรับตำแหน่งจาก Figma */
   left: 203px; /* ปรับตำแหน่งจาก Figma */
-  width: 142px; /* ขนาดจาก Figma */
-  height: 138px; /* ขนาดจาก Figma */
+  width: 200px; /* ขนาดจาก Figma */
+  height: 200px; /* ขนาดจาก Figma */
 }
 
 .welcome-text {

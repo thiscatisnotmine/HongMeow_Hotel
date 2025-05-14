@@ -59,14 +59,14 @@ function search(q) {
             <td>${room.RTName}</td>
             <td>${room.RStatus}</td>
             <td>
-              <button class="repair-btn" id="repairBtn-${room.RID}" 
+              <button class="blue-btn" id="repairBtn-${room.RID}" 
                 onclick='repair("${room.RTID}", ${room.RID})' 
                 ${repairButtonDisabled ? 'disabled' : ''}>
                 Repair
               </button>
             </td> 
             <td>
-              <button class="report-btn" id="reportBtn-${room.RID}" 
+              <button class="red-btn" id="reportBtn-${room.RID}" 
                 onclick='reportRow("${room.RTID}", ${room.RID})' 
                 ${reportButtonDisabled ? 'disabled' : ''}>
                 Report

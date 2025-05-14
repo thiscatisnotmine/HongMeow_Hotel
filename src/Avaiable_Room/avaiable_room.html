@@ -6,11 +6,13 @@
   <title>Available Room - Hong Meow Hotel</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../HTML_Components/side-bar.css" />
-  <link rel="stylesheet" href="../HTML_Components/top-bar.css" />
-  <link rel="stylesheet" href="css/Avaiable_Room_(Admin).css" />
+  <link rel="stylesheet" href="../../HTML_Components/side-bar.css" />
+  <link rel="stylesheet" href="../../HTML_Components/top-bar.css" />
+  <link rel="stylesheet" href="avaiable_room.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+
 </head>
 
 <body>
@@ -31,7 +33,7 @@
 
         <!-- Date Range -->
         <div class="date-range-box">
-          <img src="asset/solar_calendar-linearSVG.svg" class="calendar-icon" alt="calendar" />
+          <img src="../../asset/solar_calendar-linearSVG.svg" class="calendar-icon" alt="calendar" />
           <div class="date-group">
             <input type="text" class="date-input" id="startDate" readonly />
             <div class="day-label" id="startDay"></div>
@@ -45,7 +47,7 @@
 
         <!-- Room Type Dropdown -->
         <div class="filter-dropdown">
-          <img src="asset/dogSVG.svg" class="paw-icon" alt="paw" />
+          <img src="../../asset/dogSVG.svg" class="paw-icon" alt="paw" />
           <select id="roomTypeSelect" class="dropdown-select">
             <option value="dog">Room Type: Dog</option>
             <option value="cat">Room Type: Cat</option>
@@ -56,9 +58,14 @@
       </div>
 
       <!-- Search Button -->
-      <button class="search-btn">
-        <img src="asset/material-symbols_searchSVG.svg" class="search-image" alt="Search" />
-      </button>
+       <div class="search-form" id="searchForm">
+            <input class="search-inputs" type="text" id="searchInput" placeholder="search" required>
+            <button class="search-icon"  type="submit" onclick="handleSearch()">
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+            </button>
+          </div>
     </div>
     
     <!-- Room Cards Container -->
@@ -69,13 +76,13 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="../HTML_Components/side-bar.js"></script>
-  <script src="../HTML_Components/top-bar.js"></script>
+  <script src="../../HTML_Components/side-bar.js"></script>
+  <script src="../../HTML_Components/top-bar.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
-  <script src="javascript/date.js"></script>
-  <script src="javascript/room-type.js"></script>
-  <script src="javascript/btn.js"></script>
+  <script src="../../javascript/date.js"></script>
+  <script src="../../javascript/room-type.js"></script>
+  <script src="../../javascript/btn.js"></script>
 
 </body>
 </html>

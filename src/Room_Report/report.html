@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Room Report</title>
   <script src="report.js"></script>
-  <script src="..\HTML_Components\redirect.js"></script>
+  <script src="..\..\HTML_Components\redirect.js"></script>
   <link rel="stylesheet" href="report.css">
-  <link rel="stylesheet" href="..\HTML_Components\side-bar.css">
-  <link rel="stylesheet" href="..\HTML_Components\top-bar.css">
+  <link rel="stylesheet" href="..\..\HTML_Components\table.css">
+  <link rel="stylesheet" href="..\..\HTML_Components\title_search.css" />
+  <link rel="stylesheet" href="..\..\HTML_Components\side-bar.css">
+  <link rel="stylesheet" href="..\..\HTML_Components\top-bar.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
 </head>
 <body>
@@ -37,9 +39,10 @@
     </div>
 
     <!-- Table Headers-->
-    <table class="result-table" id="resultTable" >
+     <div class="table-wrapper">
+      <table class="table" id="resultTable" >
         <thead>
-          <tr class="head-table">
+          <tr>
             <th>Room NO.</th>
             <th>Room Name</th>
             <th>Status</th>
@@ -49,14 +52,17 @@
         </thead>
 
          <!--Result-->
-         <tbody class="result" id="resultBox"></tbody>
+         <tbody id="resultBox"></tbody>
       </table>
+
+     </div>
+    
     
    
   </div>
 
-  <script src="..\HTML_Components\side-bar.js"></script>
-  <script src="..\HTML_Components\top-bar.js"></script>
+  <script src="..\..\HTML_Components\side-bar.js"></script>
+  <script src="..\..\HTML_Components\top-bar.js"></script>
 
 </body>
 </html>

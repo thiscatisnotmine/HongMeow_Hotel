@@ -1,37 +1,25 @@
 class SideBar extends HTMLElement {
-  constructor() {
-    super();
-  }
+    constructor() {
+        super();
+    }
 
-  connectedCallback() {
-    const currentPage = location.pathname.split("/").pop();
-
-    this.innerHTML = `
-      <div class="sidebar">
-        <div class="logo">
-          <img src='../src/Picture/image_3-removebg-preview.png'/>
-        </div>
-        <button class="menu" data-pages="Booking_Customer.html,Booking_Urgent.html,Booking_Room.html,Booking_Pet.html,Booking_Summary.html" onclick="redirect('Booking_Customer.html')">Create Booking</button> 
-        <button class="menu" data-page="#########" onclick="redirect('#########')">Booking History</button>
-        <button class="menu" data-page="#########" onclick="redirect('#########')">Check-In / Check-Out</button>
-        <button class="menu" data-page="#########" onclick="redirect('#########')">Payments & Receipts</button>
-        <button class="menu" data-page="#########" onclick="redirect('#########')">Customer & Pet Profiles</button>
-        <button class="menu" data-page="#########" onclick="redirect('#########')">Room Report</button>
-        <button class="menu" data-page="Notification.html" onclick="redirect('Notification.html')">Notification</button>
-      </div>
-    `;
-
-     // รองรับหลายหน้าใน 1 ปุ่ม
-    const buttons = this.querySelectorAll('.menu');
-    buttons.forEach(btn => {
-      const pages = btn.getAttribute('data-pages');
-      const page = btn.getAttribute('data-page');
-      const match = (pages && pages.split(',').includes(currentPage)) || page === currentPage;
-      if (match) {
-        btn.classList.add('active');
-      }
-    });
-  }
+    connectedCallback() {
+        this.innerHTML = `
+            <div class="sidebar">
+                <div class="logo">
+                    <img src='../../image/image_3-removebg-preview.png'/>
+                </div>
+                <button class="menu" onclick="redirect('../../src/Booking/booking_customer.html')">Create Booking</button>                
+                <button class="menu" onclick="redirect('../../src/Booking_History/booking_history.html')">Booking History</button>                
+                <button class="menu" onclick="redirect('#')">Check-In / Check-Out</button>                
+                <button class="menu" onclick="redirect('#')">Payments & Receipts</button>
+                <button class="menu" onclick="redirect('../../src/Customer_Profile/customer.html')">Customer & Pet Profiles</button>                
+                <button class="menu room-report" onclick="redirect('../../src/Room_Report/report.html')">Room Report</button>                
+                <button class="menu" onclick="redirect('../../src/Notification/notification.html')">Notification</button>                
+            </div>
+        `;
+    }
 }
 
+// ใช้ชื่อที่มี hyphen
 customElements.define('my-sidebar', SideBar);

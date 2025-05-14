@@ -35,12 +35,12 @@ window.onload = function () {
                   <td>${emp.EmpCID}</td>
                   <td>${emp.EmpFname} ${emp.EmpLname}</td>
                   <td>
-                    <button class="view-btn" onclick='viewMore(${emp.EmpCID})'>
+                    <button class="blue-btn" onclick='viewMore(${emp.EmpCID})'>
                       View more
                     </button>
                   </td> 
                   <td>
-                    <button class="delete-btn" onclick="deleteRow(this)">
+                    <button class="red-btn" onclick="deleteRow(this)">
                       Delete
                     </button>
                   </td>
@@ -85,12 +85,12 @@ function search() {
                   <td>${emp.EmpCID}</td>
                   <td>${emp.EmpFname} ${emp.EmpLname}</td>
                   <td>
-                    <button class="view-btn" onclick='viewMore(${emp.EmpCID})'>
+                    <button class="blue-btn" onclick='viewMore(${emp.EmpCID})'>
                       View more
                     </button>
                   </td> 
                   <td>
-                    <button class="delete-btn" onclick="deleteRow(this)">
+                    <button class="red-btn" onclick="deleteRow(this)">
                       Delete
                     </button>
                   </td>

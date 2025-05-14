@@ -21,19 +21,19 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="room-info">
             <h3>Fan Capsule for dog</h3>
             <div class="room-images">
-              <img src="image/image 11.png" class="main-image">
+              <img src="../../image/image 11.png" class="main-image">
               <div class="thumbnail-row">
-                <img src="image/image 5.png">
-                <img src="image/image 7.png">
+                <img src="../../image/image 5.png">
+                <img src="../../image/image 7.png">
               </div>
             </div>
             <div class="room-detail">
               <div class="room-info-item">
-                <img src="/asset/fluent-mdl2_room.svg" class="info-icon">
+                <img src="../../asset/fluent-mdl2_room.svg" class="info-icon">
                 <span>ขนาดห้อง: 10 ตารางเมตร</span>
               </div>
               <div class="room-info-item">
-                <img src="/asset/ei_plus.svg" class="info-icon">
+                <img src="../../asset/ei_plus.svg" class="info-icon">
                 <span>ดูบริการและสิ่งอำนวยความสะดวกทั้งหมด</span>
               </div>
             </div>
@@ -50,19 +50,19 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="room-info">
             <h3>Air-conditioned Capsule for dog</h3>
             <div class="room-images">
-              <img src="image/image 11.png" class="main-image">
+              <img src="../../image/image 11.png" class="main-image">
               <div class="thumbnail-row">
-                <img src="image/image 5.png">
-                <img src="image/image 7.png">
+                <img src="../../image/image 5.png">
+                <img src="../../image/image 7.png">
               </div>
             </div>
             <div class="room-detail">
               <div class="room-info-item">
-                <img src="/asset/fluent-mdl2_room.svg" class="info-icon">
+                <img src="../../asset/fluent-mdl2_room.svg" class="info-icon">
                 <span>ขนาดห้อง: 10 ตารางเมตร</span>
               </div>
               <div class="room-info-item">
-                <img src="/asset/ei_plus.svg" class="info-icon">
+                <img src="../../asset/ei_plus.svg" class="info-icon">
                 <span>ดูบริการและสิ่งอำนวยความสะดวกทั้งหมด</span>
               </div>
             </div>
@@ -79,19 +79,19 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="room-info">
             <h3>Air-conditioned Deluxe for dog</h3>
             <div class="room-images">
-              <img src="image/image 11.png" class="main-image">
+              <img src="../../image/image 11.png" class="main-image">
               <div class="thumbnail-row">
-                <img src="image/image 5.png">
-                <img src="image/image 7.png">
+                <img src="../../image/image 5.png">
+                <img src="../../image/image 7.png">
               </div>
             </div>
             <div class="room-detail">
               <div class="room-info-item">
-                <img src="/asset/fluent-mdl2_room.svg" class="info-icon">
+                <img src="../../asset/fluent-mdl2_room.svg" class="info-icon">
                 <span>ขนาดห้อง: 20 ตารางเมตร</span>
               </div>
               <div class="room-info-item">
-                <img src="/asset/ei_plus.svg" class="info-icon">
+                <img src="../../asset/ei_plus.svg" class="info-icon">
                 <span>ดูบริการและสิ่งอำนวยความสะดวกทั้งหมด</span>
               </div>
             </div>
@@ -109,19 +109,19 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="room-info">
             <h3>Fan Capsule for cat</h3>
             <div class="room-images">
-              <img src="image/image 11.png" class="main-image">
+              <img src="../../image/image 11.png" class="main-image">
               <div class="thumbnail-row">
-                <img src="image/image 5.png">
-                <img src="image/image 7.png">
+                <img src="../../image/image 5.png">
+                <img src="../../image/image 7.png">
               </div>
             </div>
             <div class="room-detail">
               <div class="room-info-item">
-                <img src="/asset/fluent-mdl2_room.svg" class="info-icon">
+                <img src="../../asset/fluent-mdl2_room.svg" class="info-icon">
                 <span>ขนาดห้อง: 8 ตารางเมตร</span>
               </div>
               <div class="room-info-item">
-                <img src="/asset/ei_plus.svg" class="info-icon">
+                <img src="../../asset/ei_plus.svg" class="info-icon">
                 <span>ดูบริการและสิ่งอำนวยความสะดวกทั้งหมด</span>
               </div>
             </div>
@@ -141,19 +141,19 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="room-info">
           <h3>Air-conditioned Capsule for cat</h3>
           <div class="room-images">
-            <img src="image/image 11.png" class="main-image" alt="Main Image">
+            <img src="../../image/image 11.png" class="main-image" alt="Main Image">
             <div class="thumbnail-row">
-              <img src="image/image 5.png" alt="Thumbnail 1">
-              <img src="image/image 7.png" alt="Thumbnail 2">
+              <img src="../../image/image 5.png" alt="Thumbnail 1">
+              <img src="../../image/image 7.png" alt="Thumbnail 2">
             </div>
           </div>
           <div class="room-detail">
             <div class="room-info-item">
-              <img src="/asset/fluent-mdl2_room.svg" alt="Room Size Icon" class="info-icon">
+              <img src="../../asset/fluent-mdl2_room.svg" alt="Room Size Icon" class="info-icon">
               <span>ขนาดห้อง: 8 ตารางเมตร</span>
             </div>
             <div class="room-info-item">
-              <img src="/asset/ei_plus.svg" alt="Facilities Icon" class="info-icon">
+              <img src="../../asset/ei_plus.svg" alt="Facilities Icon" class="info-icon">
               <span>ดูบริการและสิ่งอำนวยความสะดวกทั้งหมด</span>
             </div>
           </div>               
@@ -186,19 +186,19 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="room-info">
           <h3>Air-conditioned Deluxe for cat</h3>
           <div class="room-images">
-            <img src="image/image 11.png" class="main-image" alt="Main Image">
+            <img src="../../image/image 11.png" class="main-image" alt="Main Image">
             <div class="thumbnail-row">
-              <img src="image/image 5.png" alt="Thumbnail 1">
-              <img src="image/image 7.png" alt="Thumbnail 2">
+              <img src="../../image/image 5.png" alt="Thumbnail 1">
+              <img src="../../image/image 7.png" alt="Thumbnail 2">
             </div>
           </div>
           <div class="room-detail">
             <div class="room-info-item">
-              <img src="/asset/fluent-mdl2_room.svg" alt="Room Size Icon" class="info-icon">
+              <img src="../../asset/fluent-mdl2_room.svg" alt="Room Size Icon" class="info-icon">
               <span>ขนาดห้อง: 15 ตารางเมตร</span>
             </div>
             <div class="room-info-item">
-              <img src="/asset/ei_plus.svg" alt="Facilities Icon" class="info-icon">
+              <img src="../../asset/ei_plus.svg" alt="Facilities Icon" class="info-icon">
               <span>ดูบริการและสิ่งอำนวยความสะดวกทั้งหมด</span>
             </div>
           </div>               

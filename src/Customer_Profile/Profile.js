@@ -54,12 +54,12 @@ function search(q) {
                   <td>${customer.CusCID}</td>
                   <td>${customer.CusFname}</td>
                   <td>
-                    <button class="view-btn" onclick='viewMore(${customer.CusCID})'>
+                    <button class="blue-btn" onclick='viewMore(${customer.CusCID})'>
                       View more
                     </button>
                   </td> 
                   <td>
-                    <button class="delete-btn" onclick="deleteRow(this)">
+                    <button class="red-btn" onclick="deleteRow(this)">
                       Delete
                     </button>
                   </td>

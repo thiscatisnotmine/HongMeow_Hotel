@@ -1,32 +1,27 @@
 class TopBar extends HTMLElement {
-  constructor() {
-    super();
-  }
+    constructor() {
+        super();
+    }
 
-  connectedCallback() {
-    const currentPage = location.pathname.split("/").pop();
+    connectedCallback() {
+        this.innerHTML = `
+            <div class="tab-container">
+                <div class="tab_menu">
+                    <button class="tab" onclick="redirect('../../src/Avaiable_Room/avaiable_room.html')">Available Room</button>
+                    <button class="tab" onclick="redirect('../../src/Staff/staff.html')">Staff Management</button>
+                </div>
+                <button class="profile" onclick="redirect('../src/Staff_Profile/profilestaff.html)">
+                  <img src='../../image/solar_user-outline.png'/>
 
-    this.innerHTML = `
-      <div class="tab-container">
-        <div class="tab_menu">
-          <button class="tab" data-page="Avaiable_Room_(Admin).html" onclick="redirect('Avaiable_Room_(Admin).html')">Available Room</button>
-          <button class="tab" data-page="############" onclick="redirect('##############')">Staff Management</button>
-        </div>
-        <button class="profile" onclick="redirect('#')">
-          <img src='../src/Picture/solar_user-outline.png'/>
-        </button>
-      </div>
-    `;
+                </button>
 
-    // ใส่ .active ให้ปุ่มที่ตรงกับหน้า
-    const tabs = this.querySelectorAll(".tab");
-    tabs.forEach(tab => {
-      const page = tab.getAttribute("data-page");
-      if (page === currentPage) {
-        tab.classList.add("active");
-      }
-    });
-  }
+
+            </div>
+                
+
+        `;
+    }
 }
 
+// ใช้ชื่อที่มี hyphen
 customElements.define('my-topbar', TopBar);

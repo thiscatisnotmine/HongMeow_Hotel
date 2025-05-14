@@ -29,15 +29,15 @@
         <form id="login-form">
           <!-- Username Field -->
           <div class="input-field username-box">
-            <img src="../Picture/username-icon.png" alt="User Icon" width="24" height="24" />
+            <img src="../../image/username-icon.png" alt="User Icon" width="24" height="24" />
             <input type="text" id="username" placeholder="Username" required />
       </div>
 
       <!-- Password Field -->
       <div class="input-field password-box">
-        <img src="../Picture/lock-icon.png" alt="Lock Icon" width="24" height="24" />
+        <img src="../../image/lock-icon.png" alt="Lock Icon" width="24" height="24" />
         <input type="password" id="password" placeholder="Password" required />
-        <img src="../Picture/eye-closed.png" alt="Eye Icon" width="24" height="24" onclick="togglePasswordVisibility()" class="eye-icon" />
+        <img src="../../image/eye-closed.png" alt="Eye Icon" width="24" height="24" onclick="togglePasswordVisibility()" class="eye-icon" />
     </div>
 
   <!-- Login Button -->
@@ -79,10 +79,10 @@
       const eyeIcon = document.querySelector(".eye-icon");
       if (passwordField.type === "password") {
         passwordField.type = "text";
-        eyeIcon.src = "../Picture/eye-open.png"; // เปลี่ยนเป็นไอคอนเปิดตา
+        eyeIcon.src = "../../image/eye-open.png"; // เปลี่ยนเป็นไอคอนเปิดตา
       } else {
         passwordField.type = "password";
-        eyeIcon.src = "../Picture/eye-closed.png"; // เปลี่ยนเป็นไอคอนปิดตา
+        eyeIcon.src = "../../image/eye-closed.png"; // เปลี่ยนเป็นไอคอนปิดตา
       }
     }
   </script>
