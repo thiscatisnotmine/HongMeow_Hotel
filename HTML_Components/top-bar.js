@@ -14,7 +14,7 @@ class TopBar extends HTMLElement {
                   <img src='../../image/solar_user-outline.png'/>
 
                 </button>
-
+                </div>
 
             </div>
                 

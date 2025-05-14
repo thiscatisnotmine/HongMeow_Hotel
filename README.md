@@ -39,22 +39,26 @@ This project is developed as part of a learning project in database CS251.
 ## How to Run  & Contribute as a Developer
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/hongmoew-hotel.git
+   git clone https://github.com/thiscatisnotmine/HongMeow_Hotel.git
    cd hongmeow-hotel
+   ```
    
 2. Create your own branch:
     > Developers should create a separate branch for their work to keep development clean and organized.
     ```bash
     git checkout -b develop/your-name
+    ```
     
 3. Make changes and commit:
     ```bash
     git add .
     git commit -m "Add: Description of your change"
+    ```
     
 4. Push to remote branch:
     ```bash
     git push origin develop/your-name
+    ```
     
 
 ## How to install this web application
