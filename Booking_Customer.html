@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Form - Hong Meow Hotel</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../HTML_Components/side-bar.css" />
+  <link rel="stylesheet" href="../HTML_Components/top-bar.css" />
+  <link rel="stylesheet" href="css/Booking_Customer.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <my-sidebar></my-sidebar>
+
+  <!-- Topbar -->
+  <my-topbar></my-topbar>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    
+    <!--Tab-->
+    <div class="filter-section">
+    <div class="tab-inside">
+      <button class="choice active" data-target="Booking_Customer.html">Customer</button>
+        <button class="choice " data-target="Booking_Urgent.html">Emergency<br>Contact</button>
+        <button class="choice" data-target="Booking_Room.html">Room</button>
+        <button class="choice" data-target="Booking_Pet.html">Pet</button>
+    </div>
+    </div>
+
+    <div class="section-header">
+      <h1 class="section-title">Customer</h1>
+      <div class="search-group">
+        <input type="text" class="search-input" placeholder="ID card No. search" />
+        <button class="search-btn">
+          <img src="asset/material-symbols_searchSVG.svg" class="search-image" alt="Search" />
+        </button>
+      </div>
+    </div>
+
+    <form id="bookingCustomerForm">
+      <div class="form-section">
+        <div class="form-group">
+          <label>ID Card Number:</label>
+          <input type="text" name="idcard" required />
+        </div>
+        <div class="form-group">
+          <label>First Name:</label>
+          <input type="text" name="firstname" required />
+        </div>
+        <div class="form-group">
+          <label>Last Name:</label>
+          <input type="text" name="lastname" required />
+        </div>
+        <div class="form-group">
+          <label>Tel.:</label>
+          <input type="text" name="tel" required />
+        </div>
+        <div class="form-group">
+          <label>Email:</label>
+          <input type="email" name="email" required />
+        </div>
+
+        <!-- NEXT -->
+        <div class="next-wrapper">
+          <button class="next-btn" type="submit">Next</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="../HTML_Components/side-bar.js"></script>
+  <script src="../HTML_Components/top-bar.js"></script>
+  <script src="javascript/data-form.js"></script>
+  <script src="javascript/summary.js"></script>
+  <script src="javascript/btn.js"></script>
+  <script src="javascript/check.js"></script>
+  <script src="javascript/autofill.js"></script>
+  <script src="javascript/add_remove.js"></script>
+
+  <!-- JS: บันทึกและโหลดข้อมูล -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("bookingCustomerForm");
+
+      // โหลดข้อมูลเดิมกลับมาแสดง
+      const saved = localStorage.getItem("booking_customer_data");
+      if (saved) {
+        const data = JSON.parse(saved);
+        Object.entries(data).forEach(([key, value]) => {
+          const input = form.elements[key];
+          if (input) input.value = value;
+        });
+      }
+
+      // เมื่อกด Next ให้บันทึกแล้วไปหน้าใหม่
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const data = {};
+        form.querySelectorAll("input, select").forEach(el => {
+          if (el.name) data[el.name] = el.value;
+        });
+
+        localStorage.setItem("booking_customer_data", JSON.stringify(data));
+        window.location.href = "Booking_Urgent.html";
+      });
+    });
+  </script>
+  
+
+</body>
+</html>

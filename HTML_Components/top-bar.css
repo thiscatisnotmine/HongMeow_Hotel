@@ -1,0 +1,72 @@
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap);
+
+* {
+    font-family: 'Inter';
+}
+
+
+.tab-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 340px;
+    gap: 500px;
+    width: 100%;
+  }
+
+  .tab_menu {
+    padding: 10px 20px;
+    gap: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    align-items: center;
+
+  }
+
+  .tab {
+    width: 260px;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: bold;
+    color: #5C4538;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition:  background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+  }
+
+  .tab:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px); 
+  }
+
+  .tab.active {
+    background-color: #89D3FF;
+    color: rgb(255, 255, 255);
+
+  }
+
+.profile {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.profile img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
+
+/* Hover effect */
+.profile:hover {
+  background-color: #F4F8F7;
+  transform: scale(1.05);
+}
