@@ -4,13 +4,6 @@
     font-family: 'Inter';
 }
 
-.main-content {
-  padding: 10px;
-  margin-left: 320px;
-  width: calc(100% - 320px);
-  box-sizing: border-box;
-  padding-top: 30px;
-}
 
 .tab-inside {
   display: flex;

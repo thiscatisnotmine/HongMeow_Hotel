@@ -9,12 +9,7 @@ body {
   padding: 0;
 }
 
-.main-content {
-  padding: 10px;
-  margin-left: 320px;
-  width: calc(100% - 320px);
-  padding-top: 30px;
-}
+
 
 /* Header */
 .summary-title {

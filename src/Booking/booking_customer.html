@@ -8,7 +8,9 @@
   <!-- CSS -->
   <link rel="stylesheet" href="../../HTML_Components/side-bar.css" />
   <link rel="stylesheet" href="../../HTML_Components/top-bar.css" />
+  <link rel="stylesheet" href="../../HTML_Components/title_search.css" />
   <link rel="stylesheet" href="css/Booking_Customer.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 
@@ -33,14 +35,17 @@
     </div>
     </div>
 
-    <div class="section-header">
-      <h1 class="section-title">Customer</h1>
-      <div class="search-group">
-        <input type="text" class="search-input" placeholder="ID card No. search" />
-        <button class="search-btn">
-          <img src="../asset/material-symbols_searchSVG.svg" class="search-image" alt="Search" />
-        </button>
-      </div>
+    <!--Name of page and Search box-->
+    <div class="headline">
+        <h2>Customer</h2>
+        <div class="search-form" id="searchForm">
+            <input class="search-inputs" type="text" id="searchInput" placeholder="search" required>
+            <button class="search-icon"  type="submit" onclick="handleSearch()">
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+            </button>
+          </div>
     </div>
 
     <form id="bookingCustomerForm">
@@ -78,12 +83,12 @@
   <script src="../../HTML_Components/side-bar.js"></script>
   <script src="../../HTML_Components/redirect.js"></script>
   <script src="../../HTML_Components/top-bar.js"></script>
-  <script src="../javascript/data-form.js"></script>
-  <script src="../javascript/summary.js"></script>
-  <script src="../javascript/btn.js"></script>
-  <script src="../javascript/check.js"></script>
-  <script src="../javascript/autofill.js"></script>
-  <script src="../javascript/add_remove.js"></script>
+  <script src="../../javascript/data-form.js"></script>
+  <script src="../../javascript/summary.js"></script>
+  <script src="../../javascript/btn.js"></script>
+  <script src="../../javascript/check.js"></script>
+  <script src="../../javascript/autofill.js"></script>
+  <script src="../../javascript/add_remove.js"></script>
 
   <!-- JS: บันทึกและโหลดข้อมูล -->
   <script>

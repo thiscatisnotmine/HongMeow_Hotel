@@ -1,4 +1,4 @@
-const api = 'https://5364cfed-1e99-411c-bf1c-9aa4eafeecd1.mock.pstmn.io';
+const api = '#';
 
 window.onload = loadSearchQuery;
 
@@ -26,7 +26,7 @@ function loadSearchQuery() {
 }
 
 function search(q) {
-  fetch(`${api}/check-in-out/${q}`, {
+  fetch(`${api}/check-in/${q}`, {
     // method 'GET': ใช้ดึงข้อมูลจากฐานข้อมูล
     // method 'POST': ใช้เพิ่มข้อมูลลงฐานข้อมูล
     // method 'PUT': ใช้อัปเดตข้อมูลลงฐานข้อมูล
@@ -45,8 +45,8 @@ function search(q) {
             alert('Not Found.');
             return;
           }
-          const check = '/check-in-out/'
-          data.forEach(booking => {
+          //const check = '/check-in-out/'
+          data.forEach(check => {
               const row = document.createElement('tr'); 
               row.innerHTML = `
                   <td>${check.CusCID}</td>
@@ -55,7 +55,7 @@ function search(q) {
                   <td>${check.CheckOutDate}</td>
                   <td>${check.PayStatus}</td>
                   <td>
-                    <button class="view-btn" onclick='viewMore("${check.CusCID}", "${check.BID}")'>
+                    <button class="blue-btn" onclick='checkin("${check.BID}","${check.RTID}",${check.RID})'>
                         Check-In
                     </button>
                   </td> 
@@ -69,7 +69,33 @@ function search(q) {
       });
 }
 
-// to the Detail page
-function viewMore(cusCID, BID) {
-    window.location.href = `checkindetail.html?CusCID=${cusCID}&BID=${BID}`;
+// check-in
+async function checkin(bookingId, roomCode, roomNumber) {
+  try {
+    const response = await fetch(`${api}/bookedroom/update-status`, { // อัปเดตสถานะห้องเป็น check-in ในตาราง bookedroom
+      method: 'PUT', 
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        BID: bookingId,
+        RTID: roomCode,
+        RID: roomNumber,
+        RoomStatus: "check-in"
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to update. Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log('Update success:', result);
+
+    // รีเฟรชตารางหลังอัปเดต
+    checkin();
+
+  } catch (error) {
+    console.error('Update failed:', error);
+  }
 }
