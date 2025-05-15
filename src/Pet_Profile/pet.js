@@ -90,7 +90,7 @@ function deleteRow(button) {
       const row = button.closest('tr');
       const petID = row.querySelector('td:nth-child(2)').textContent.trim(); // ถ้าตัวข้อมูลที่จะดึงไม่ได้อยู่ช่องที่ 1 ให้ใช้ td:nth-child(x) แทน td และ x แทนด้วยช่องที่ข้อมูลนั้นอยู่
 
-      fetch(`${api}/employee/${petID}`, {
+      fetch(`${api}/pet/${petID}`, {
         method: 'DELETE'
     })
     .then(() => {
