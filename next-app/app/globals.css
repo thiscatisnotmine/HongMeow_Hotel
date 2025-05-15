@@ -1,66 +1,65 @@
-/* --- next-app/app/globals.css --- */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
-
-/* Reset all margin/padding & set base font */
-html,
-body {
+/* next-app/app/globals.css */
+/* 1) reset + full bleed */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+html,
+body,
+#__next {
+  width: 100%;
   height: 100%;
   font-family: "Inter", sans-serif;
 }
 
-/* 1) The outer flex container: sidebar + main wrapper */
-.root {
-  display: flex;
-  min-height: 100vh;
+/* 2) the fixed sidebar */
+:root {
+  --sidebar-width: 300px; /* <-- your real sidebar width */
 }
 
-/* 2) Inside the right-hand side: TopBar above, page content below */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  overflow-y: auto;
+  /* background is handled in your side-bar.css */
+}
+
+/* 3) everything to the right of sidebar */
 .main-wrapper {
+  margin-left: var(--sidebar-width);
   display: flex;
   flex-direction: column;
-  flex: 1; /* fill the remaining width */
+  min-height: 100vh;
+  overflow: hidden;
 }
 
-/* 3) Your actual page content */
+/* 4) top bar sits at top */
+.topbar {
+  flex-shrink: 0;
+}
+
+/* 5) page content fills below top bar */
 .main-content {
-  flex: 1; /* fill vertical space under TopBar */
-  padding: 24px; /* your desired padding */
-  box-sizing: border-box;
-  background: white;
+  flex: 1;
+  overflow: auto;
+  padding: 24px; /* your gutter */
+  background: #fff; /* or your page bg */
 }
 
-/* (Optional) if you have overwritten .main-content elsewhere, force it here: */
-.main-content {
-  margin: 0 !important;
-}
-
-/* TopBar / Sidebar button styles (unchanged) */
-
+/* For example: */
 .tab-btn {
   width: 240px;
-  background: transparent;
-  font-size: 20px;
-  font-weight: bold;
-  color: #5c4538;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition:
-    background-color 0.3s,
-    transform 0.3s,
-    box-shadow 0.3s;
+  background-color: transparent;
+  /* … */
 }
-.tab-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-5px);
-}
-
 .menu-btn {
   width: 100%;
-  background: transparent;
+  background-color: transparent;
+
   font-size: 20px;
   font-weight: bold;
   color: #5c4538;
