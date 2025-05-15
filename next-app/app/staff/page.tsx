@@ -1,7 +1,8 @@
 // next-app/app/staff/page.tsx
-import "@/styles/HTML_Components/staff.css";
-import "@/styles/HTML_Components/title_search.css";
-import "@/styles/HTML_Components/table.css";
+"use client";
+import "../../styles/HTML_Components/staff.css";
+import "../../styles/HTML_Components/title_search.css";
+import "../../styles/HTML_Components/table.css";
 import { useEffect, useState } from "react";
 
 interface Employee {

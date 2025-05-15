@@ -1,111 +1,150 @@
+// next-app/app/pet/page.tsx
+"use client";
 
-const api = 'https://6ba789b3-3c09-4dd7-bb94-f9a8a5bf82fa.mock.pstmn.io';
+import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import SideBar from "../../components/SideBar";
+import TopBar from "../../components/TopBar";
+// global resets + .main-content override
+import "@/app/globals.css";
+// shared component CSS
+import "@/styles/HTML_Components/title_search.css";
+import "@/styles/HTML_Components/table.css";
+// pet-specific CSS (move your pet.css into /styles/)
+import "@/styles/pet.css";
 
-window.onload = loadSearchQuery;
-
-// กดไอคอน search แล้วจะ redirect พร้อมค่าค้นหา
-function handleSearch() {
-  const query = document.getElementById('searchInput').value.trim();
-  if (query) {
-    window.location.search = '?q=' + encodeURIComponent(query); 
-  } else {
-    alert('Please, Enter Customer Identification Card Number.'); 
-    return;
-  }
-  
+interface Pet {
+  CusCID: string;
+  PID: string;
+  PName: string;
+  PType: string;
 }
 
-// ไว้ดึงค่า q (ค่าที่ใช้ค้นหา) จาก URL
-function loadSearchQuery() {
-  const params = new URLSearchParams(window.location.search);
-  const q = params.get('q');
+export default function PetListPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialQ = searchParams.get("q") || "";
 
-  if (q) {
-    document.getElementById('searchInput').value = q;
-    search(q);
-  }
-}
+  const [q, setQ] = useState(initialQ);
+  const [pets, setPets] = useState<Pet[]>([]);
 
+  useEffect(() => {
+    if (!q) return;
+    fetch(`https://6ba789b3-3c09-4dd7-bb94-f9a8a5bf82fa.mock.pstmn.io/pet/${encodeURIComponent(q)}`)
+      .then((res) => res.json())
+      .then((data: Pet[]) => setPets(data))
+      .catch(console.error);
+  }, [q]);
 
-
-// ค้นหาข้อมูลสัตว์เลี้ยง
-function search(q) {
-  fetch(`${api}/pet/${q}`, {
-    method: 'GET', 
-    headers: {
-        'Content-Type': 'application/json'
+  const handleSearch = () => {
+    if (!q.trim()) {
+      alert("Please enter a Customer ID to search.");
+      return;
     }
-})
-      .then(response => response.json())
-      .then(data => {
-          
-          console.log(data); // ดูที่ console บนหน้าเว็บใน Developoer tool ว่าได้ข้อมูลอะไรมาบ้าง
-          const resultBody = document.getElementById('resultBox');
-          resultBody.innerHTML = ''; // clear หน้าเว็บ
-          if (data.length === 0){
-            alert('Not Found.');
-            return;
-          }
+    // update URL param, which also triggers the useEffect
+    router.push(`/pet?q=${encodeURIComponent(q.trim())}`);
+  };
 
-          // วนลูปเพื่อสร้าง row ของ pet แต่ละตัว
-          data.forEach(pet => {
-              const row = document.createElement('tr'); 
+  const goToViewMore = (pid: string, cusCID: string) => {
+    router.push(`/pet/${encodeURIComponent(pid)}?customerID=${encodeURIComponent(cusCID)}`);
+  };
 
-              // เลือกข้อมูลที่จะเอามาแสดง
-              row.innerHTML = `
-                  <td>${pet.CusCID}</td>
-                  <td>${pet.PID}</td>
-                  <td>${pet.PName}</td>
-                  <td>${pet.PType}</td>
-                  <td>
-                    <button class="blue-btn" onclick='viewMore(${pet.PID},${pet.CusCID})'>
-                      View more
-                    </button>
-                  </td> 
-                  <td>
-                    <button class="red-btn" onclick="deleteRow(this)">
-                      Delete
-                    </button>
-                  </td>
-              `;
-
-              resultBody.appendChild(row);
-          });
+  const deletePet = (pid: string) => {
+    if (!confirm("Are you sure you want to delete this pet?")) return;
+    fetch(`https://6ba789b3-3c09-4dd7-bb94-f9a8a5bf82fa.mock.pstmn.io/pet/${pid}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        setPets((prev) => prev.filter((p) => p.PID !== pid));
       })
-      .catch(error => {
-          console.error('Error fetching pets:', error);
-      });
-}
+      .catch(console.error);
+  };
 
-// Viewmore button
-function viewMore(pet,customerID) {
-    
-  // เปิดหน้าใหม่
-  window.location.href = `pet_viewmore.html?petID=${encodeURIComponent(pet)}&customerID=${encodeURIComponent(customerID)}`;
-}
+  return (
+    <div className="flex">
+      <SideBar />
+      <div className="flex-1">
+        <TopBar />
+        <div className="main-content">
+          {/* Tabs */}
+          <div className="tab-inside">
+            <button
+              className="choice"
+              onClick={() => router.push("/customer")}
+            >
+              Customer
+            </button>
+            <button className="choice choice-pet">Pet</button>
+          </div>
 
-// Delete button
-function deleteRow(button) {
-  if (confirm('Are you sure you want to delete this?')) {
-      const row = button.closest('tr');
-      const petID = row.querySelector('td:nth-child(2)').textContent.trim(); // ถ้าตัวข้อมูลที่จะดึงไม่ได้อยู่ช่องที่ 1 ให้ใช้ td:nth-child(x) แทน td และ x แทนด้วยช่องที่ข้อมูลนั้นอยู่
+          {/* Header + Search */}
+          <div className="headline">
+            <h2>Pet Profiles</h2>
+            <div className="search-form">
+              <input
+                className="search-inputs"
+                type="text"
+                placeholder="search by Customer ID"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+              />
+              <button className="search-icon" onClick={handleSearch}>
+                <span className="material-symbols-outlined">search</span>
+              </button>
+            </div>
+          </div>
 
-      fetch(`${api}/pet/${petID}`, {
-        method: 'DELETE'
-    })
-    .then(() => {
-        // เพิ่มคลาสชื่อ fade-out เข้าไปใน <tr> แล้ว .fade-out ใน css จะทำงาน
-        row.classList.add('fade-out');
-
-        // ลบหลังแอนิเมชันจบ (400ms)
-        setTimeout(() => {
-          row.remove(); // ให้ลบแถวที่เลือกออกจากหน้าเว็บ
-      }, 400); 
-        console.log(`Pet: ${petID} deleted successfully!`);
-        
-    })
-    .catch(err => console.error('Failed to delete', err));
-
-    
-  }
+          {/* Pet Table */}
+          <div className="table-wrapper">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>ID Card No.</th>
+                  <th>Pet ID</th>
+                  <th>Pet Name</th>
+                  <th>Pet Type</th>
+                  <th>View more & Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pets.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} style={{ textAlign: "center" }}>
+                      No pets found.
+                    </td>
+                  </tr>
+                ) : (
+                  pets.map((pet) => (
+                    <tr key={pet.PID}>
+                      <td>{pet.CusCID}</td>
+                      <td>{pet.PID}</td>
+                      <td>{pet.PName}</td>
+                      <td>{pet.PType}</td>
+                      <td>
+                        <button
+                          className="blue-btn"
+                          onClick={() => goToViewMore(pet.PID, pet.CusCID)}
+                        >
+                          View more
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          className="red-btn"
+                          onClick={() => deletePet(pet.PID)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

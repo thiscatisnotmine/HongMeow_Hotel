@@ -1,4 +1,5 @@
-// app/layout.tsx
+// next-app/app/layout.tsx
+import "./globals.css"; // must import your new globals
 import "../styles/HTML_Components/side-bar.css";
 import "../styles/HTML_Components/top-bar.css";
 import TopBar from "../components/TopBar";
@@ -11,21 +12,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="relative">
-        <div className="flex">
-          {/* Left fixed sidebar */}
+      <body>
+        {/* 1) outer flex wrapper */}
+        <div className="root">
+          {/* 2) fixed sidebar */}
           <SideBar />
 
-          {/* Right side: topbar + page content */}
-          <div className="flex-1">
+          {/* 3) right side: TopBar + content */}
+          <div className="main-wrapper">
             <TopBar />
-            {/* 
-                Legacy CSS defines .main-content as:
-                
-                margin-left: 340px; 
-                margin-top: 20px; 
-                padding: 20px;
-              */}
             <div className="main-content">{children}</div>
           </div>
         </div>

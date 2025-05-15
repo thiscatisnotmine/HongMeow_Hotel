@@ -9,9 +9,10 @@ export default function SideBar() {
   const items = [
     ["Create Booking", "/booking"],
     ["Booking History", "/booking-history"],
-    ["Check-In / Check-Out", "/checkin-out"],
+    ["Check-In ", "/checkin"],
+    ["Check-Out", "/checkout"],
     ["Payments & Receipts", "/payment"],
-    ["Customer & Pet Profiles", "/customer"],
+    ["Customer & Pet Profiles", "/customer/profile"],
     ["Room Report", "/report"],
     ["Notification", "/notification"],
   ] as const;

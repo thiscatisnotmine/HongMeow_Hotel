@@ -1,13 +1,46 @@
+/* --- next-app/app/globals.css --- */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 
+/* Reset all margin/padding & set base font */
+html,
 body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
   font-family: "Inter", sans-serif;
 }
 
-/* TopBar tab button */
+/* 1) The outer flex container: sidebar + main wrapper */
+.root {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* 2) Inside the right-hand side: TopBar above, page content below */
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* fill the remaining width */
+}
+
+/* 3) Your actual page content */
+.main-content {
+  flex: 1; /* fill vertical space under TopBar */
+  padding: 24px; /* your desired padding */
+  box-sizing: border-box;
+  background: white;
+}
+
+/* (Optional) if you have overwritten .main-content elsewhere, force it here: */
+.main-content {
+  margin: 0 !important;
+}
+
+/* TopBar / Sidebar button styles (unchanged) */
+
 .tab-btn {
   width: 240px;
-  background-color: transparent;
+  background: transparent;
   font-size: 20px;
   font-weight: bold;
   color: #5c4538;
@@ -16,20 +49,18 @@ body {
   border-radius: 5px;
   cursor: pointer;
   transition:
-    background-color 0.3s ease,
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    background-color 0.3s,
+    transform 0.3s,
+    box-shadow 0.3s;
 }
-
 .tab-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2);
   transform: translateY(-5px);
 }
 
-/* Sidebar button */
 .menu-btn {
   width: 100%;
-  background-color: transparent;
+  background: transparent;
   font-size: 20px;
   font-weight: bold;
   color: #5c4538;
@@ -37,13 +68,10 @@ body {
   padding: 10px;
   margin-bottom: 12px;
   border-radius: 5px;
-  cursor: pointer;
   text-align: left;
-  transition:
-    background-color 0.3s ease,
-    transform 0.3s ease;
+  cursor: pointer;
+  transition: transform 0.3s;
 }
-
 .menu-btn:hover {
   transform: translateY(-5px);
 }

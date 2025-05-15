@@ -3,9 +3,11 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import Sidebar from "@/components/ui/Sidebar";
-import Topbar from "@/components/ui/Topbar";
-import "@/app/globals.css";
+import SideBar from "../../components/SideBar";
+
+import TopBar from "../../components/TopBar";
+import "../../styles/HTML_Components/cincout.css";
+import "../globals.css";
 
 interface BookingData {
   CusCID: string;
@@ -73,8 +75,6 @@ export default function CheckoutPage() {
 
   return (
     <div>
-      <Sidebar />
-      <Topbar />
       <div className="main-content">
         <div className="tab-inside">
           <button

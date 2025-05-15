@@ -68,7 +68,7 @@ export default function PetPage() {
       <div className="tab-inside">
         <button
           className="choice"
-          onClick={() => (window.location.href = "/customer")}
+          onClick={() => (window.location.href = "/customer/profile")}
         >
           Customer
         </button>

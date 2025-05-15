@@ -1,4 +1,7 @@
+"use client";
 import { useEffect, useState } from "react";
+import "../../styles/HTML_Components/cincout.css";
+import "../globals.css";
 
 export default function CheckinPage() {
   const [query, setQuery] = useState("");

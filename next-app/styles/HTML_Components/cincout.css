@@ -1,216 +1,172 @@
-@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap);
+/* next-app/styles/HTML_Components/cincout.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 
 * {
-    font-family: 'Inter';
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
-/* Main Content */
-/* Tab */
+.main-content {
+  background-color: #ffffff; /* ensure the content area is always white */
+}
 
+/* Tab switcher at top of page */
 .tab-inside {
-    display: flex;
-    width: 100%;
-    height: 60px;
+  display: flex;
+  width: 100%;
+  height: 60px;
+  margin-top: 24px;
 }
-  
+
 .choice {
-    flex: 1;
-    padding: 10px 20px;
-    border: none;
-    background-color: #f9f9f9;
-    border-right: 1px solid #ccc; /* เส้นคั่นระหว่างปุ่ม */
-    cursor: pointer;
-    font-size: 20px;
-    color: #939796;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 1;
+  padding: 12px 24px;
+  border: none;
+  background-color: #f9f9f9;
+  border-right: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 20px;
+  color: #939796;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .choice:first-child {
-    border-top-left-radius: 40px;
-    border-bottom-left-radius: 40px;
-
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
 }
-  
+
 .choice:last-child {
-    border-right: none;
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
+  border-right: none;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
 }
-  
+
 .choice:hover {
-    background-color: #eaeaea;
-    transform: translateY(-5px);
-
+  background-color: #eaeaea;
+  transform: translateY(-3px);
 }
-  
+
 .choice:focus {
-    outline: none;
-    background-color: #ddd;
+  outline: none;
+  background-color: #ddd;
 }
 
+/* Active tab */
 .choice-curr {
-    color: #5C4538;
-    font-weight: 500;
+  background-color: #ffffff;
+  color: #5c4538;
+  font-weight: 500;
 }
 
-/* Name of page and Search box*/
+/* Page title + search */
 .headline {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* เว้นพื้นที่ให้ซ้าย-ขวาอยู่คนละด้าน */
-    margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
 }
 
-h2 {
-    color: #000000;
+.headline h2 {
+  color: #000;
+  font-size: 24px;
 }
 
+/* Search form */
 .search-form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .search-inputs {
-    width: 250px;
-    height: 40px;
-    border-radius: 40px;
-    border: none;
-    background-color: #F4F8F7;
+  width: 250px;
+  height: 40px;
+  border-radius: 40px;
+  border: none;
+  background-color: #f4f8f7;
+  padding-left: 20px;
+  font-size: 16px;
+  color: #000;
 }
 
 .search-inputs::placeholder {
-    font-size: 18px;
-    color: #aaa;
+  color: #aaa;
+  font-size: 16px;
 }
 
 .search-inputs:hover {
-    background-color: #efefef;
-    transition: 0.5s ease;
-}
-
-input {
-    padding-left: 20px;
-    font-size: 16px;
-    color: #000000;
+  background-color: #efefef;
 }
 
 .search-icon {
-    width: 40px;
-    height: 40px;
-    background-color: #FFFAA2;
-    border-radius: 40px;
-    border: none;
-    transition:  none;
-    cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background-color: #fffaa2;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
 }
 
 .search-icon:hover {
-    background-color: #a0d2f9;
-    transition: 0.5s ease;
+  background-color: #a0d2f9;
 }
 
-/* Result Table */
-/*Table Headers*/
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin-top: 10px;
-  }
-
-.result-table {
-    table-layout: fixed;
-    width: 100%;
+/* Table container */
+.table-wrapper {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.head-table {
-    width: 100%;
-    height: 50px;
-    background-color: #e0e2e4;
-    border-radius: 10px;
+/* Actual table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-th {
-    text-align: center;
-    padding: 10px 20px;
-    border: 1px;
-    border-right: 1px solid #ccc; /* เส้นคั่นระหว่างปุ่ม */
-    font-size: 18px;
-    color: #000;
-    
+.table thead tr {
+  background-color: #f4f8f7;
 }
 
-thead tr:last-child th:last-child {
-    border-right: none;
-
+.table th,
+.table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 16px;
+  color: #000;
 }
 
-/* Result Box */
-.result {
-    width: 100%;
-    height: 50px;
-    background-color: transparent;
-    border-radius: 10px;
+.table th {
+  font-weight: 600;
 }
 
-tbody tr {
-    background-color: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  
-tbody td {
-    padding: 15px;
-    text-align: center;
-    border-bottom: none;
+/* Buttons */
+.blue-btn {
+  background-color: #016bec;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
-.view-btn {
-    color: #016bec;
-    background-color: #ffffff;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition:  background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.view-btn:hover {
-    color: #fff;
-    background-color: #016bec;
-    font-weight: 500;
-    transform: translateY(-3px);
-    text-shadow: 0 3px 10px #011750bb;
-    box-shadow: 0 5px 10px #0e5aff4a;
-    transition:  background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#confirm-btn {
-    display: block;  /*Hidden by default */
-    position: fixed; /* Fixed/sticky position */
-    bottom: 20px; /* Place the button at the bottom of the page */
-    right: 30px; /* Place the button 30px from the right */
-    z-index: 99; /* Make sure it does not overlap */
-    padding: 10px;
-    background-color: #016bec;
-    color: #ffffff;
-    border: none;
-    border-radius: 20px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition:  background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#confirm:disabled {
-    background-color: #7dd0fa;
-}
-
-#confirm:hover {
-    background-color: #7dd0fa;
-    box-shadow: 0 2px 8px #0457bc9d;
+.blue-btn:hover {
+  background-color: #005bb5;
+  transform: translateY(-2px);
 }

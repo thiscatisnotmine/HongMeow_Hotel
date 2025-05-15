@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import "../../styles/HTML_Components/notification.css";
+import "../../styles/HTML_Components/Notification.css";
 
 type Notification = {
   CusCID: string;

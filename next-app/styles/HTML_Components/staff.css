@@ -1,0 +1,55 @@
+* {
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  box-sizing: content-box;
+}
+
+/* ขยับจาก sidebar และ topbar 
+.main-content {
+  margin-left: 390px;
+  margin-top: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+  */
+
+/* แถวบน: Add + Search */
+.top-row {
+  display: flex;
+  justify-content: space-between; /* ซ้าย-ขวา */
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* ปุ่ม Add Employee */
+.add-employee-button {
+  background-color: #FFFAA2;
+  color: black;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-employee-button:hover {
+  background-color: #fff68a;
+  transform: translateY(-5px)
+}
+
+.table-wrapper {
+  margin-top: 20px;
+}
+
+/* สำหรับการลบแถว*/
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
