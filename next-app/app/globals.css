@@ -1,0 +1,76 @@
+/* next-app/app/globals.css */
+/* 1) reset + full bleed */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body,
+#__next {
+  width: 100%;
+  height: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+/* 2) the fixed sidebar */
+:root {
+  --sidebar-width: 300px; /* <-- your real sidebar width */
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  overflow-y: auto;
+  /* background is handled in your side-bar.css */
+}
+
+/* 3) everything to the right of sidebar */
+.main-wrapper {
+  margin-left: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* 4) top bar sits at top */
+.topbar {
+  flex-shrink: 0;
+}
+
+/* 5) page content fills below top bar */
+.main-content {
+  flex: 1;
+  overflow: auto;
+  padding: 24px; /* your gutter */
+  background: #fff; /* or your page bg */
+}
+
+/* For example: */
+.tab-btn {
+  width: 240px;
+  background-color: transparent;
+  /* … */
+}
+.menu-btn {
+  width: 100%;
+  background-color: transparent;
+
+  font-size: 20px;
+  font-weight: bold;
+  color: #5c4538;
+  border: none;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.menu-btn:hover {
+  transform: translateY(-5px);
+}
