@@ -1,120 +1,127 @@
-// next-app/app/receipt/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import "../../styles/HTML_Components/title_search.css";
-import "../../styles/HTML_Components/table.css";
-import "../../styles/HTML_Components/side-bar.css";
-import "../../styles/HTML_Components/top-bar.css";
-import "../../styles/HTML_Components/payment.css";
-
-interface Payment {
-  CusCID: string;
-  BID: string;
-  CheckInDate: string;
-  PayDue: string;
-  PayTotal: string;
-}
+import { useState } from "react";
 
 export default function ReceiptPage() {
-  const [payments, setPayments] = useState<Payment[]>([]);
-  const [search, setSearch] = useState("");
-  const searchParams = useSearchParams();
+  const [citizenId, setCitizenId] = useState("");
+  const [bookings, setBookings] = useState<any[]>([]);
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    const q = searchParams.get("q");
-    if (q) {
-      setSearch(q);
-      searchPayments(q);
-    }
-  }, [searchParams]);
-
-  const searchPayments = async (query: string) => {
-    try {
-      const response = await fetch(
-        `https://6ba789b3-3c09-4dd7-bb94-f9a8a5bf82fa.mock.pstmn.io/payment/${query}`
-      );
-      const data = await response.json();
-      setPayments(data);
-    } catch (error) {
-      console.error("Error fetching payment data:", error);
-      alert("Failed to fetch payments");
-    }
-  };
-
-  const handleSearch = () => {
-    if (search.trim() === "") {
-      alert("Please enter customer ID Card Number");
+  const handleSearch = async () => {
+    if (citizenId.length !== 13 || isNaN(Number(citizenId))) {
+      setError("Please enter a valid 13-digit Citizen ID");
       return;
     }
-    const params = new URLSearchParams({ q: search });
-    window.location.search = params.toString();
+    setError("");
+    const res = await fetch(`/api/reciept?citizenId=${citizenId}`);
+    const data = await res.json();
+    setBookings(data);
   };
 
-  const viewMore = (CusCID: string, BID: string) => {
-    window.location.href = `/receipt/${BID}?CusCID=${CusCID}`;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const selected = bookings
+      .filter(
+        (b) =>
+          (document.getElementById(`checkbox-${b.BID}`) as HTMLInputElement)
+            ?.checked
+      )
+      .map((b) => b.BID);
+
+    if (selected.length === 0) {
+      alert("Please select at least one booking.");
+      return;
+    }
+
+    const res = await fetch("/api/receipt", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ bookingIds: selected }),
+    });
+
+    const html = await res.text();
+    const receiptWindow = window.open("", "_blank");
+    if (receiptWindow) {
+      receiptWindow.document.write(html);
+      receiptWindow.document.close();
+    }
   };
 
   return (
-    <div className="main-content">
-      <div className="tab-inside">
+    <div className="main-content p-8">
+      <h2 className="text-2xl font-semibold mb-4">Receipt Generator</h2>
+
+      <div className="mb-4 flex items-center gap-2">
+        <input
+          type="text"
+          className="border border-gray-300 rounded px-4 py-2 w-64"
+          placeholder="Enter 13-digit Citizen ID"
+          value={citizenId}
+          onChange={(e) => setCitizenId(e.target.value)}
+        />
         <button
-          className="choice"
-          onClick={() => (window.location.href = "/payment")}
+          onClick={handleSearch}
+          className="bg-yellow-300 text-black px-4 py-2 rounded"
         >
-          Payments
+          Search
         </button>
-        <button className="choice choice-curr">Receipts</button>
       </div>
+      {error && <div className="text-red-500 mb-2">{error}</div>}
 
-      <div className="headline">
-        <h2>Paid Payments</h2>
-        <div className="search-form">
-          <input
-            className="search-inputs"
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="search with CustomerID"
-          />
-          <button className="search-icon" onClick={handleSearch}>
-            <span className="material-symbols-outlined">search</span>
-          </button>
-        </div>
-      </div>
-
-      <table className="result-table">
-        <thead>
-          <tr className="head-table">
-            <th>ID Card No.</th>
-            <th>Booking No.</th>
-            <th>Check-in Date</th>
-            <th>Payment Due</th>
-            <th>Total</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody className="result">
-          {payments.map((payment) => (
-            <tr key={payment.BID}>
-              <td>{payment.CusCID}</td>
-              <td>{payment.BID}</td>
-              <td>{payment.CheckInDate}</td>
-              <td>{payment.PayDue}</td>
-              <td>{payment.PayTotal}</td>
-              <td>
-                <button
-                  className="view-btn"
-                  onClick={() => viewMore(payment.CusCID, payment.BID)}
-                >
-                  print receipt
-                </button>
-              </td>
+      <form onSubmit={handleSubmit} id="bookingForm">
+        <table className="table-auto w-full border mt-4" id="resultTable">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="border p-2">Select</th>
+              <th className="border p-2">Booking No.</th>
+              <th className="border p-2">Room Type</th>
+              <th className="border p-2">Check-in</th>
+              <th className="border p-2">Room Amount</th>
+              <th className="border p-2">Price/Room</th>
+              <th className="border p-2">Total</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {bookings.length === 0 ? (
+              <tr>
+                <td className="text-center p-4" colSpan={7}>
+                  No bookings found.
+                </td>
+              </tr>
+            ) : (
+              bookings.map((b) => (
+                <tr key={b.BID}>
+                  <td className="border p-2 text-center">
+                    <input
+                      type="checkbox"
+                      name="booking"
+                      id={`checkbox-${b.BID}`}
+                      value={b.BID}
+                    />
+                  </td>
+                  <td className="border p-2 text-center">{b.BID}</td>
+                  <td className="border p-2 text-center">{b.RTName}</td>
+                  <td className="border p-2 text-center">{b.CheckInDate}</td>
+                  <td className="border p-2 text-center">{b.RoomAmount}</td>
+                  <td className="border p-2 text-center">{b.RTPrice}</td>
+                  <td className="border p-2 text-center">{b.Total}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+
+        {bookings.length > 0 && (
+          <div className="mt-6 text-right">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition"
+            >
+              Generate Receipt
+            </button>
+          </div>
+        )}
+      </form>
     </div>
   );
 }
