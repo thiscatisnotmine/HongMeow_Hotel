@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* TopBar tab button */
+.tab-btn {
+  width: 240px;
+  background-color: transparent;
+  font-size: 20px;
+  font-weight: bold;
+  color: #5c4538;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.tab-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Sidebar button */
+.menu-btn {
+  width: 100%;
+  background-color: transparent;
+  font-size: 20px;
+  font-weight: bold;
+  color: #5c4538;
+  border: none;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.menu-btn:hover {
+  transform: translateY(-5px);
+}
