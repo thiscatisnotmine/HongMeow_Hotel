@@ -152,7 +152,7 @@ input[type="checkbox"]:checked {
 
 /* Result Table */
 /*Table Headers*/
-
+/*
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -186,8 +186,7 @@ thead tr:last-child th:last-child {
     border-right: none;
 }
 
-/* Result Box */
-/* Payment Tables */
+
 .result {
     width: 100%;
     height: 50px;
@@ -219,13 +218,13 @@ tbody td {
 
 .view-btn:hover {
     color: #016bec;
-    /*background-color: #b3b3b3;*/
+    
     font-weight: 500;
     text-decoration: underline;
     transform: translateY(-5px);
     text-shadow: 0 2px 8px #002d9d54;
 }
-
+*/
 /*confirm pays btn*/
 #makepay {
     display: none;  /*Hidden by default */
@@ -363,4 +362,25 @@ input[type="radio"]:checked + label:after {
 .print-btn button:hover {
     background-color: #1c76e5;
     box-shadow: 0 2px 8px #0457bc9d;
+}
+
+.table-wrapper {
+    flex-direction: column;
+}
+.generate {
+    color: white;
+    width: 150px;
+    height: 40px;
+    background-color: #1c76e5;
+    font-size: 16px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.generate:hover {
+    background-color: #176bd1;
+    transform: translateY(-5px);
+
 }
