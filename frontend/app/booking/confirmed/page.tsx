@@ -1,8 +1,9 @@
+"use client";
 import { useEffect } from "react";
 
 export default function BookingConfirmedPage() {
   useEffect(() => {
-    const fillConfirmedData = (id, key) => {
+    const fillConfirmedData = (id: string, key: string) => {
       const container = document.getElementById(id);
       if (!container) return;
 
@@ -16,7 +17,9 @@ export default function BookingConfirmedPage() {
 
       if (Array.isArray(data)) {
         data.forEach((entry, index) => {
-          html += `<div class="summary-entry"><strong>${key.replace("booking_", "").replace("_data", "")} ${index + 1}</strong><br/>`;
+          html += `<div class="summary-entry"><strong>${key
+            .replace("booking_", "")
+            .replace("_data", "")} ${index + 1}</strong><br/>`;
           for (const [k, v] of Object.entries(entry)) {
             html += `<div><strong>${k}:</strong> ${v}</div>`;
           }
