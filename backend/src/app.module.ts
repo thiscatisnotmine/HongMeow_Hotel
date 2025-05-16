@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
-// Import all entities
+// Entity imports
 import { Employee } from './entities/employee.entity';
 import { Customer } from './entities/customer.entity';
 import { Urgent } from './entities/urgent.entity';
@@ -13,9 +13,21 @@ import { Booking } from './entities/booking.entity';
 import { BookedRoom } from './entities/bookedroom.entity';
 import { Payment } from './entities/payment.entity';
 
+// Module imports
+import { CustomerModule } from './customer/customer.module';
+import { EmployeeModule } from './employee/employee.module';
+import { PetModule } from './pet/pet.module';
+import { BookingModule } from './booking/booking.module';
+import { BookedroomModule } from './bookedroom/bookedroom.module';
+import { PaymentModule } from './payment/payment.module';
+import { RoomModule } from './room/room.module';
+import { RoomtypeModule } from './roomtype/roomtype.module';
+import { UrgentModule } from './urgent/urgent.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+
     TypeOrmModule.forRoot({
       type: 'mariadb',
       host: process.env.DB_HOST || 'mysql-db',
@@ -34,19 +46,19 @@ import { Payment } from './entities/payment.entity';
         BookedRoom,
         Payment,
       ],
-      synchronize: true, // Auto-create tables - disable in production
+      synchronize: true, // set false on production
     }),
-    TypeOrmModule.forFeature([
-      Employee,
-      Customer,
-      Urgent,
-      Pet,
-      Room,
-      RoomType,
-      Booking,
-      BookedRoom,
-      Payment,
-    ]),
+
+    // Feature modules
+    CustomerModule,
+    EmployeeModule,
+    PetModule,
+    BookingModule,
+    BookedroomModule,
+    PaymentModule,
+    RoomModule,
+    RoomtypeModule,
+    UrgentModule,
   ],
   controllers: [],
   providers: [],
