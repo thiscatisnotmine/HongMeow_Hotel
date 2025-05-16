@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Urgent } from './entities/urgent.entity';
+import { Urgent } from '../entities/urgent.entity';
 import { CreateUrgentDto } from './dto/create-urgent.dto';
 import { UpdateUrgentDto } from './dto/update-urgent.dto';
 
@@ -13,6 +13,7 @@ export class UrgentService {
   ) {}
 
   create(dto: CreateUrgentDto) {
+    // dto does NOT need UrgentID; TypeORM will generate it
     return this.urgentRepo.save(dto);
   }
 

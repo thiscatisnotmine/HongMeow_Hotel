@@ -18,6 +18,7 @@ export class BookingController {
 
   @Put('update-status')
   updateBookingStatus(@Body() body: { BID: string; status: string }) {
+    // BID already a string – don’t cast to Number
     return this.bookingService.updateStatus(body.BID, body.status);
   }
 
@@ -28,7 +29,8 @@ export class BookingController {
 
   @Post('receipt')
   generateReceipt(@Body() body: { bookingIds: string[] }) {
-    return this.bookingService.generateReceipt(body.bookingIds);
+    // ensure the array is string[]
+    return this.bookingService.generateReceipt(body.bookingIds.map(String));
   }
 
   @Get('bookinghistory')

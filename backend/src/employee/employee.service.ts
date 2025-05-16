@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Employee } from './entities/employee.entity';
+import { Employee } from '../entities/employee.entity';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 
@@ -34,7 +34,7 @@ export class EmployeeService {
   }
 
   findByUsername(username: string) {
-    return this.employeeRepo.findOne({ where: { username } });
+    return this.employeeRepo.findOne({ where: { EmpUsername: username } });
   }
 }
 /* --- End hong-meow-hotel/backend/src/employee/employee.service.ts --- */

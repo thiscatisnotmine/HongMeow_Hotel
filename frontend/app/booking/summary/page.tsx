@@ -1,126 +1,76 @@
-// next-app/app/booking/summary/page.tsx
 "use client";
-
 import "../../../styles/HTML_Components/Booking_Summary.css";
-
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { createBookingFromDraft } from "../../../lib/booking";
 
 export default function BookingSummaryPage() {
+  const router = useRouter();
+  const [drafts, setDrafts] = useState<Record<string, any>>({});
+
+  /* load drafts for display */
   useEffect(() => {
-    const fillSummary = (containerId: string, storageKey: string) => {
-      const container = document.getElementById(containerId);
-      if (!container) return;
-
-      const saved = localStorage.getItem(storageKey);
-      if (!saved) {
-        container.innerHTML = "<p>No data available.</p>";
-        return;
-      }
-
-      const data = JSON.parse(saved);
-      if (Array.isArray(data)) {
-        // Multi-entry summary (Emergency / Pet)
-        container.innerHTML = data
-          .map(
-            (item: any, index: number) => `
-            <div class='summary-entry'>
-              <strong>#${index + 1}</strong>
-              ${Object.entries(item)
-                .map(([k, v]) => `<div>${k}: ${v}</div>`)
-                .join("")}
-            </div>
-          `
-          )
-          .join("");
-      } else {
-        // Single-entry summary (Customer / Room)
-        container.innerHTML = `
-          <div class='summary-entry'>
-            ${Object.entries(data)
-              .map(([k, v]) => `<div>${k}: ${v}</div>`)
-              .join("")}
-          </div>
-        `;
-      }
-    };
-
-    fillSummary("summary-customer", "booking_customer_data");
-    fillSummary("summary-urgent", "booking_urgent_data");
-    fillSummary("summary-room", "booking_room_data");
-    fillSummary("summary-pet", "booking_pet_data");
+    const keys = [
+      "booking_customer_data",
+      "booking_urgent_data",
+      "booking_room_data",
+      "booking_pet_data",
+    ];
+    const d: Record<string, any> = {};
+    keys.forEach((k) => {
+      const v = localStorage.getItem(k);
+      if (v) d[k] = JSON.parse(v);
+    });
+    setDrafts(d);
   }, []);
 
-  const handleConfirm = () => {
-    alert("Booking Confirmed!");
-    // Optional: Clear localStorage or navigate
+  const Confirm = async () => {
+    try {
+      const bid = await createBookingFromDraft();
+      router.push(`/booking/confirmed?bid=${bid}`);
+    } catch (err) {
+      alert((err as Error).message);
+    }
   };
+
+  /* helper to render */
+  const render = (data: any) =>
+    Array.isArray(data) ? (
+      data.map((o: any, i: number) => <div key={i}>{JSON.stringify(o)}</div>)
+    ) : (
+      <div>{JSON.stringify(data)}</div>
+    );
 
   return (
     <div className="main-content">
-      {/* Tabs */}
       <div className="filter-section">
         <div className="tab-inside">
-          <button
-            className="choice"
-            onClick={() => (window.location.href = "/booking/customer")}
-          >
-            Customer
-          </button>
-          <button
-            className="choice"
-            onClick={() => (window.location.href = "/booking/urgent")}
-          >
-            Emergency <br /> Contact
-          </button>
-          <button
-            className="choice"
-            onClick={() => (window.location.href = "/booking/room")}
-          >
-            Room
-          </button>
-          <button
-            className="choice"
-            onClick={() => (window.location.href = "/booking/pet")}
-          >
-            Pet
-          </button>
+          {["customer", "emergency", "room", "pet"].map((t) => (
+            <button
+              key={t}
+              className="choice"
+              onClick={() => router.push(`/booking/${t}`)}
+            >
+              {t[0].toUpperCase() + t.slice(1)}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Summary Title */}
       <div className="summary-title">
         <h2 className="summary-heading">Booking Summary</h2>
-        <div className="room-code">
-          Booking No.: <span className="room-number">DAD0001</span>
-        </div>
       </div>
-
-      {/* Summary Section */}
       <div className="booking-summary">
-        <div className="summary-block">
-          <h3>Customer</h3>
-          <div id="summary-customer"></div>
-        </div>
-
-        <div className="summary-block">
-          <h3>Emergency Contact</h3>
-          <div id="summary-urgent"></div>
-        </div>
-
-        <div className="summary-block">
-          <h3>Room</h3>
-          <div id="summary-room"></div>
-        </div>
-
-        <div className="summary-block">
-          <h3>Pet</h3>
-          <div id="summary-pet"></div>
-        </div>
+        {Object.entries(drafts).map(([k, v]) => (
+          <div className="summary-block" key={k}>
+            <h3>{k.replace("booking_", "").replace("_data", "")}</h3>
+            {render(v)}
+          </div>
+        ))}
       </div>
 
-      {/* Confirm Button */}
       <div className="confirm-wrapper">
-        <button className="confirm-btn" onClick={handleConfirm}>
+        <button className="confirm-btn" onClick={Confirm}>
           Confirm
         </button>
       </div>

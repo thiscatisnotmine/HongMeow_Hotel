@@ -1,14 +1,15 @@
+/* PATCH begins */
 import {
-  Entity,
   Column,
+  Entity,
   PrimaryColumn,
-  ManyToOne,
   OneToMany,
+  ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Customer } from './customer.entity';
 import { BookedRoom } from './bookedroom.entity';
 import { Payment } from './payment.entity';
+import { Customer } from './customer.entity';
 
 @Entity()
 export class Booking {
@@ -19,13 +20,15 @@ export class Booking {
   @Column() Duration: number;
   @Column() RoomAmount: number;
 
-  @ManyToOne(() => Customer, (customer) => customer.bookings)
+  /* NEW ↓ */
+  @Column() BookingStatus: string; // waiting | check-in | check-out
+  @Column('float', { default: 0 }) Total: number;
+
+  @ManyToOne(() => Customer, (c) => c.bookings)
   @JoinColumn({ name: 'CusCID' })
   customer: Customer;
 
-  @OneToMany(() => BookedRoom, (bookedRoom) => bookedRoom.booking)
-  bookedRooms: BookedRoom[];
-
-  @OneToMany(() => Payment, (payment) => payment.booking)
-  payments: Payment[];
+  @OneToMany(() => BookedRoom, (br) => br.booking) bookedRooms: BookedRoom[];
+  @OneToMany(() => Payment, (p) => p.booking) payments: Payment[];
 }
+/* PATCH ends */

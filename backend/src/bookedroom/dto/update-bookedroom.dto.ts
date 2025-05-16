@@ -1,4 +1,4 @@
-import { IsString, IsNumber } from 'class-validator';
+import { IsString, IsNumber, IsIn } from 'class-validator';
 
 export class UpdateBookedRoomDto {
   @IsNumber()
@@ -11,5 +11,6 @@ export class UpdateBookedRoomDto {
   RID: number;
 
   @IsString()
-  RoomStatus: 'check-in' | 'check-out';
+  @IsIn(['check-in', 'check-out'])
+  RoomStatus: string;
 }

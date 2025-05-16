@@ -1,8 +1,7 @@
-/* --- Begin hong-meow-hotel/backend/src/payment/payment.service.ts --- */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
-import { Payment } from './entities/payment.entity';
+import { Payment } from '../entities/payment.entity';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
 
@@ -22,16 +21,17 @@ export class PaymentService {
     return this.paymentRepo.find();
   }
 
+  /* 🔹 FIXED: search by BID (primary key) */
   findOne(id: string) {
-    return this.paymentRepo.findOneBy({ PayID: id });
+    return this.paymentRepo.findOne({ where: { BID: id } });
   }
 
   update(id: string, dto: UpdatePaymentDto) {
-    return this.paymentRepo.update(id, dto);
+    return this.paymentRepo.update({ BID: id }, dto);
   }
 
   remove(id: string) {
-    return this.paymentRepo.delete(id);
+    return this.paymentRepo.delete({ BID: id });
   }
 
   async getBillInfo() {

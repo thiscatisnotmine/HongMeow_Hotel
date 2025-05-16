@@ -1,103 +1,63 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { api } from "../../../lib/api";
+import "../../../styles/HTML_Components/Booking_Summary.css";
 
 export default function BookingConfirmedPage() {
+  const params = useSearchParams();
+  const bid = params.get("bid");
+
+  const [booking, setBooking] = useState<any>(null);
+  const [payment, setPayment] = useState<any>(null);
+
   useEffect(() => {
-    const fillConfirmedData = (id: string, key: string) => {
-      const container = document.getElementById(id);
-      if (!container) return;
+    if (!bid) return;
+    (async () => {
+      const b = await api(`/booking/${bid}`);
+      const p = await api(`/payment/${bid}`);
+      setBooking(b);
+      setPayment(p);
+    })();
+  }, [bid]);
 
-      const allData = JSON.parse(
-        localStorage.getItem("booking_confirmed_data") || "{}"
-      );
-      const data = allData[key];
-      if (!data) return;
-
-      let html = "";
-
-      if (Array.isArray(data)) {
-        data.forEach((entry, index) => {
-          html += `<div class="summary-entry"><strong>${key
-            .replace("booking_", "")
-            .replace("_data", "")} ${index + 1}</strong><br/>`;
-          for (const [k, v] of Object.entries(entry)) {
-            html += `<div><strong>${k}:</strong> ${v}</div>`;
-          }
-          html += `</div>`;
-        });
-      } else {
-        html += `<div class="summary-entry">`;
-        for (const [k, v] of Object.entries(data)) {
-          html += `<div><strong>${k}:</strong> ${v}</div>`;
-        }
-        html += `</div>`;
-      }
-
-      container.innerHTML = html;
-    };
-
-    fillConfirmedData("summary-customer", "booking_customer_data");
-    fillConfirmedData("summary-urgent", "booking_urgent_data");
-    fillConfirmedData("summary-room", "booking_room_data");
-    fillConfirmedData("summary-pet", "booking_pet_data");
-
-    localStorage.removeItem("booking_customer_data");
-    localStorage.removeItem("booking_urgent_data");
-    localStorage.removeItem("booking_room_data");
-    localStorage.removeItem("booking_pet_data");
-  }, []);
+  if (!bid) return <p>Missing booking id</p>;
+  if (!booking) return <p>Loading…</p>;
 
   return (
     <div className="main-content">
       <div className="summary-title">
-        <div className="title-left">
-          <h2 className="summary-heading">Booking is confirmed</h2>
-          <img
-            src="/asset/lets-icons_check-fill.svg"
-            className="check-icon"
-            alt="Confirmed"
-          />
-        </div>
+        <h2 className="summary-heading">Booking is confirmed</h2>
         <div className="room-code">
-          Booking No.:{" "}
-          <span className="room-number" id="booking-number">
-            DAD0000
-          </span>
+          Booking No.: <span className="room-number">{bid}</span>
         </div>
       </div>
 
       <div className="booking-summary">
         <div className="summary-block">
           <h3>Customer</h3>
-          <div id="summary-customer"></div>
+          {JSON.stringify(booking.customer)}
         </div>
-
-        <div className="summary-block">
-          <h3>Emergency Contact</h3>
-          <div id="summary-urgent"></div>
-        </div>
-
         <div className="summary-block">
           <h3>Room</h3>
-          <div id="summary-room"></div>
+          {JSON.stringify(booking.room)}
         </div>
-
         <div className="summary-block">
-          <h3>Pet</h3>
-          <div id="summary-pet"></div>
+          <h3>Payment</h3>
+          {JSON.stringify(payment)}
         </div>
       </div>
 
       <div className="confirm-wrapper">
         <button
           className="wait-btn"
-          onClick={() => (window.location.href = "/payment")}
+          onClick={() => alert("Waiting for payment")}
         >
           Wait for Payment
         </button>
         <button
           className="confirm-btn"
-          onClick={() => (window.location.href = "/payment")}
+          onClick={() => alert("Navigate to payment page")}
         >
           Payment
         </button>

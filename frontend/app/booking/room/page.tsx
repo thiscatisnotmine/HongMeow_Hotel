@@ -1,4 +1,3 @@
-// next-app/app/booking/room/page.tsx
 "use client";
 
 import "../../../styles/HTML_Components/Booking_Room.css";
@@ -6,57 +5,91 @@ import { useEffect, useState } from "react";
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import { Thai } from "flatpickr/dist/l10n/th.js";
+import { api } from "../../../lib/api";
+import { useRouter } from "next/navigation";
+
+interface RoomTypeAvail {
+  RTID: string;
+  AvailableRooms: number;
+}
+
+interface Room {
+  RTID: string;
+  RID: number;
+  RStatus: string;
+}
 
 export default function BookingRoomPage() {
+  const router = useRouter();
+
+  /* date-range + choice state */
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [roomType, setRoomType] = useState("dog");
-  const [rooms, setRooms] = useState<any[]>([]);
+  const [rtid, setRtid] = useState(""); // selected room-type
+  const [types, setTypes] = useState<RoomTypeAvail[]>([]);
+  const [rooms, setRooms] = useState<Room[]>([]);
+  const [picked, setPicked] = useState<Room | null>(null);
 
+  /* load room-type availability once */
+  useEffect(() => {
+    (async () => {
+      const list = await api<RoomTypeAvail[]>("/room/available");
+      setTypes(list);
+      if (list.length) setRtid(list[0].RTID); // default selection
+    })();
+  }, []);
+
+  /* load rooms whenever rtid changes */
+  useEffect(() => {
+    if (!rtid) return;
+    (async () => {
+      const data = await api<Room[]>(`/room/search/${rtid}`);
+      setRooms(data);
+      setPicked(null);
+    })();
+  }, [rtid]);
+
+  /* flatpickr init */
   useEffect(() => {
     flatpickr("#startDate", {
       locale: Thai,
-      onChange: ([date]) => setStartDate(date.toISOString().split("T")[0]),
+      minDate: "today",
+      onChange: ([d]) => d && setStartDate(d.toISOString().split("T")[0]),
     });
     flatpickr("#endDate", {
       locale: Thai,
-      onChange: ([date]) => setEndDate(date.toISOString().split("T")[0]),
+      minDate: "today",
+      onChange: ([d]) => d && setEndDate(d.toISOString().split("T")[0]),
     });
   }, []);
 
-  useEffect(() => {
-    // Simulated data fetch
-    if (roomType === "dog") {
-      setRooms([
-        { name: "Dog Room A", detail: "Large dog room", price: 1200 },
-        { name: "Dog Room B", detail: "Medium dog room", price: 1000 },
-      ]);
-    } else {
-      setRooms([
-        { name: "Cat Room A", detail: "Sunny window spot", price: 900 },
-        { name: "Cat Room B", detail: "Quiet corner room", price: 850 },
-      ]);
-    }
-  }, [roomType]);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Form submitted. Move to next step.");
+    if (!picked || !startDate || !endDate) {
+      alert("Please pick room and dates");
+      return;
+    }
+    localStorage.setItem(
+      "booking_room_data",
+      JSON.stringify({ ...picked, startDate, endDate })
+    );
+    router.push("/booking/pet");
   };
 
   return (
     <div className="main-content">
+      {/* Tabs */}
       <div className="filter-section">
         <div className="tab-inside">
           <button
             className="choice"
-            onClick={() => (window.location.href = "/booking/customer")}
+            onClick={() => router.push("/booking/customer")}
           >
             Customer
           </button>
           <button
             className="choice"
-            onClick={() => (window.location.href = "/booking/emergency")}
+            onClick={() => router.push("/booking/emergency")}
           >
             Emergency
             <br />
@@ -65,13 +98,14 @@ export default function BookingRoomPage() {
           <button className="choice active">Room</button>
           <button
             className="choice"
-            onClick={() => (window.location.href = "/booking/pet")}
+            onClick={() => router.push("/booking/pet")}
           >
             Pet
           </button>
         </div>
       </div>
 
+      {/* Header with date pickers */}
       <div className="section-header">
         <h1 className="section-title">Select a room</h1>
         <div className="date-range-box">
@@ -82,7 +116,6 @@ export default function BookingRoomPage() {
           />
           <div className="date-group">
             <input
-              type="text"
               className="date-input"
               id="startDate"
               placeholder="Check-in"
@@ -93,7 +126,6 @@ export default function BookingRoomPage() {
           <div className="divider" />
           <div className="date-group">
             <input
-              type="text"
               className="date-input"
               id="endDate"
               placeholder="Check-out"
@@ -104,32 +136,47 @@ export default function BookingRoomPage() {
         </div>
       </div>
 
+      {/* Room-type dropdown */}
       <form onSubmit={handleSubmit}>
         <div className="form-section">
           <div className="filter-dropdown">
             <img src="/asset/dogSVG.svg" className="paw-icon" alt="paw" />
             <select
-              id="roomTypeSelect"
               className="dropdown-select"
-              value={roomType}
-              onChange={(e) => setRoomType(e.target.value)}
+              value={rtid}
+              onChange={(e) => setRtid(e.target.value)}
             >
-              <option value="dog">Room Type: Dog</option>
-              <option value="cat">Room Type: Cat</option>
+              {types.map((t) => (
+                <option key={t.RTID} value={t.RTID}>
+                  {t.RTID} – {t.AvailableRooms} available
+                </option>
+              ))}
             </select>
-            <span className="dropdown-arrow"></span>
+            <span className="dropdown-arrow" />
           </div>
 
+          {/* Room list */}
           <div className="room-list">
-            {rooms.map((room, idx) => (
-              <div key={idx} className="room-item">
+            {rooms.map((r) => (
+              <div
+                key={r.RID}
+                className={`room-item ${
+                  picked?.RID === r.RID ? "selected" : ""
+                }`}
+                onClick={() => setPicked(r)}
+              >
                 <div className="room-info">
-                  <span className="room-name">{room.name}</span>
-                  <span className="room-detail">{room.detail}</span>
+                  <span className="room-name">
+                    {r.RTID} #{r.RID}
+                  </span>
+                  <span className="room-detail">{r.RStatus}</span>
                 </div>
                 <div className="room-control">
-                  <span className="room-price">฿{room.price}</span>
-                  <span className="per-night">/ night</span>
+                  {picked?.RID === r.RID && (
+                    <span className="material-symbols-outlined">
+                      check_circle
+                    </span>
+                  )}
                 </div>
               </div>
             ))}

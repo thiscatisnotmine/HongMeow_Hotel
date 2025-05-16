@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Roomtype } from './entities/roomtype.entity';
+import { RoomType } from '../entities/roomtype.entity';
 import { CreateRoomtypeDto } from './dto/create-roomtype.dto';
 import { UpdateRoomtypeDto } from './dto/update-roomtype.dto';
 
 @Injectable()
 export class RoomtypeService {
   constructor(
-    @InjectRepository(Roomtype)
-    private readonly roomtypeRepo: Repository<Roomtype>,
+    @InjectRepository(RoomType)
+    private readonly roomtypeRepo: Repository<RoomType>,
   ) {}
 
   create(dto: CreateRoomtypeDto) {

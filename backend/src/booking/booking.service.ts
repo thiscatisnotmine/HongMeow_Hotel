@@ -1,8 +1,9 @@
-/* --- Begin hong-meow-hotel/backend/src/booking/booking.service.ts --- */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Booking } from '../entities/booking.entity';
 import { Repository, DataSource } from 'typeorm';
+
+// ✅ IMPORT FROM THE *LOCAL* ENTITIES FOLDER
+import { Booking } from '../entities/booking.entity';
 
 @Injectable()
 export class BookingService {
@@ -14,47 +15,34 @@ export class BookingService {
 
   async getCheckInBookings(cusId: string) {
     return this.bookingRepo.find({
-      where: {
-        CusCID: cusId,
-        BookingStatus: 'waiting',
-      },
+      where: { CusCID: cusId, BookingStatus: 'waiting' },
     });
   }
 
   async getCheckOutBookings(cusId: string) {
     return this.bookingRepo.find({
-      where: {
-        CusCID: cusId,
-        BookingStatus: 'check-in',
-      },
+      where: { CusCID: cusId, BookingStatus: 'check-in' },
     });
   }
 
   async updateStatus(BID: string, status: string) {
-    const result = await this.bookingRepo.update(
+    const { affected } = await this.bookingRepo.update(
       { BID },
       { BookingStatus: status },
     );
-    return result.affected === 1;
+    return affected === 1;
   }
 
   async getReceiptBookings(citizenId: string) {
     return this.bookingRepo.find({
-      where: {
-        CusCID: citizenId,
-        BookingStatus: 'check-out',
-      },
+      where: { CusCID: citizenId, BookingStatus: 'check-out' },
     });
   }
 
   async generateReceipt(bookingIds: string[]) {
     const bookings = await this.bookingRepo.findByIds(bookingIds);
     const total = bookings.reduce((sum, b) => sum + b.Total, 0);
-    return {
-      date: new Date(),
-      bookings,
-      total,
-    };
+    return { date: new Date(), bookings, total };
   }
 
   async getBookingHistory() {

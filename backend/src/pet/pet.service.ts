@@ -4,7 +4,7 @@ import { CreatePetDto } from './dto/create-pet.dto';
 import { UpdatePetDto } from './dto/update-pet.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Pet } from './entities/pet.entity';
+import { Pet } from '../entities/pet.entity';
 
 @Injectable()
 export class PetService {
@@ -23,7 +23,7 @@ export class PetService {
   }
 
   findOne(id: number) {
-    return this.petRepository.findOne({ where: { PID: id } });
+    return this.petRepository.findOne({ where: { PID: String(id) } });
   }
 
   update(id: number, updatePetDto: UpdatePetDto) {

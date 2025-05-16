@@ -1,9 +1,9 @@
 version: "3.8"
 
 services:
-  mysql-db:
+  mariadb: # ← renamed service
     image: mariadb:10.11
-    container_name: mysql-db
+    container_name: mariadb # ← renamed container
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
@@ -22,7 +22,7 @@ services:
     env_file:
       - ./backend/.env
     depends_on:
-      - mysql-db
+      - mariadb # ← updated dependency
     ports:
       - "5000:5000"
 

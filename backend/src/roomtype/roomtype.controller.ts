@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { RoomtypeService } from './roomtype.service';
 import { CreateRoomtypeDto } from './dto/create-roomtype.dto';
 import { UpdateRoomtypeDto } from './dto/update-roomtype.dto';
@@ -19,16 +27,16 @@ export class RoomtypeController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.roomtypeService.findOne(+id);
+    return this.roomtypeService.findOne(id); // ← removed “+”
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRoomtypeDto: UpdateRoomtypeDto) {
-    return this.roomtypeService.update(+id, updateRoomtypeDto);
+  update(@Param('id') id: string, @Body() dto: UpdateRoomtypeDto) {
+    return this.roomtypeService.update(id, dto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.roomtypeService.remove(+id);
+    return this.roomtypeService.remove(id);
   }
 }

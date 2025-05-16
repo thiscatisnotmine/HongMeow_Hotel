@@ -1,7 +1,7 @@
 /* --- Begin hong-meow-hotel/backend/src/room/room.controller.ts --- */
 import { Controller, Get, Param, Put, Body } from '@nestjs/common';
 import { RoomService } from './room.service';
-import { Room } from './entities/room.entity';
+import { Room } from '../entities/room.entity';
 
 @Controller('room')
 export class RoomController {

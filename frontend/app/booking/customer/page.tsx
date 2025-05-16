@@ -5,35 +5,84 @@ import "../../../styles/HTML_Components/Booking_Customer.css";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { api } from "../../../lib/api";
+
+interface Customer {
+  CusCID: string;
+  CusFname: string;
+  CusLname: string;
+  CusPhone: string;
+  CusEmail: string;
+}
 
 export default function BookingCustomerPage() {
   const router = useRouter();
+
   const [form, setForm] = useState({
-    idcard: "",
-    firstname: "",
-    lastname: "",
-    tel: "",
-    email: "",
+    CusCID: "",
+    CusFname: "",
+    CusLname: "",
+    CusPhone: "",
+    CusEmail: "",
   });
 
+  const [results, setResults] = useState<Customer[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  /* restore draft from localStorage */
   useEffect(() => {
     const saved = localStorage.getItem("booking_customer_data");
-    if (saved) {
-      const data = JSON.parse(saved);
-      setForm(data);
-    }
+    if (saved) setForm(JSON.parse(saved));
   }, []);
 
+  /* ------------------------- handlers ------------------------- */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSearch = async () => {
+    const { CusCID, CusFname, CusLname } = form;
+    if (!CusCID && !CusFname && !CusLname) return;
+
+    setLoading(true);
+    try {
+      const qs = new URLSearchParams({
+        cid: CusCID,
+        fname: CusFname,
+        lname: CusLname,
+      }).toString();
+
+      const data = await api<Customer[]>(`/customer/search?${qs}`);
+      setResults(data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const chooseResult = (c: Customer) => {
+    setForm({
+      CusCID: c.CusCID,
+      CusFname: c.CusFname,
+      CusLname: c.CusLname,
+      CusPhone: c.CusPhone,
+      CusEmail: c.CusEmail,
+    });
+    setResults([]);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    /* up-sert customer */
+    await api("/customer", {
+      method: "POST",
+      body: JSON.stringify(form),
+    });
+
     localStorage.setItem("booking_customer_data", JSON.stringify(form));
     router.push("/booking/emergency");
   };
 
+  /* --------------------------- UI ----------------------------- */
   return (
     <div className="main-content">
       {/* Tabs */}
@@ -70,14 +119,33 @@ export default function BookingCustomerPage() {
           <input
             className="search-inputs"
             type="text"
-            placeholder="search"
-            required
+            placeholder="search by CID or name"
+            onChange={(e) => setForm({ ...form, CusCID: e.target.value })}
           />
-          <button className="search-icon">
-            <span className="material-symbols-outlined">search</span>
+          <button className="search-icon" type="button" onClick={handleSearch}>
+            {loading ? (
+              "..."
+            ) : (
+              <span className="material-symbols-outlined">search</span>
+            )}
           </button>
         </div>
       </div>
+
+      {/* Search results dropdown */}
+      {results.length > 0 && (
+        <div className="search-results">
+          {results.map((c) => (
+            <div
+              key={c.CusCID}
+              className="result-row"
+              onClick={() => chooseResult(c)}
+            >
+              {c.CusCID} – {c.CusFname} {c.CusLname}
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Form */}
       <form id="bookingCustomerForm" onSubmit={handleSubmit}>
@@ -85,9 +153,8 @@ export default function BookingCustomerPage() {
           <div className="form-group">
             <label>ID Card Number:</label>
             <input
-              type="text"
-              name="idcard"
-              value={form.idcard}
+              name="CusCID"
+              value={form.CusCID}
               onChange={handleChange}
               required
             />
@@ -95,9 +162,8 @@ export default function BookingCustomerPage() {
           <div className="form-group">
             <label>First Name:</label>
             <input
-              type="text"
-              name="firstname"
-              value={form.firstname}
+              name="CusFname"
+              value={form.CusFname}
               onChange={handleChange}
               required
             />
@@ -105,9 +171,8 @@ export default function BookingCustomerPage() {
           <div className="form-group">
             <label>Last Name:</label>
             <input
-              type="text"
-              name="lastname"
-              value={form.lastname}
+              name="CusLname"
+              value={form.CusLname}
               onChange={handleChange}
               required
             />
@@ -115,9 +180,8 @@ export default function BookingCustomerPage() {
           <div className="form-group">
             <label>Tel.:</label>
             <input
-              type="text"
-              name="tel"
-              value={form.tel}
+              name="CusPhone"
+              value={form.CusPhone}
               onChange={handleChange}
               required
             />
@@ -126,14 +190,13 @@ export default function BookingCustomerPage() {
             <label>Email:</label>
             <input
               type="email"
-              name="email"
-              value={form.email}
+              name="CusEmail"
+              value={form.CusEmail}
               onChange={handleChange}
               required
             />
           </div>
 
-          {/* Next Button */}
           <div className="next-wrapper">
             <button className="next-btn" type="submit">
               Next

@@ -6,8 +6,9 @@ export class Room {
   @PrimaryColumn() RID: number;
   @Column() RTID: string;
   @Column() RState: string;
+  @Column() RStatus: string;
 
-  @ManyToOne(() => RoomType, (roomType) => roomType.rooms)
-  @JoinColumn({ name: 'RTID' })
+  @ManyToOne(() => RoomType, (rt) => rt.rooms)
+  @JoinColumn({ name: 'RTID', referencedColumnName: 'RTID' })
   roomType: RoomType;
 }

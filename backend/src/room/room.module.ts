@@ -1,14 +1,14 @@
-/* --- Begin hong-meow-hotel/backend/src/payment/payment.module.ts --- */
+/* --- Begin hong-meow-hotel/backend/src/room/room.module.ts --- */
 import { Module } from '@nestjs/common';
-import { PaymentService } from './payment.service';
-import { PaymentController } from './payment.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Payment } from './entities/payment.entity';
+import { Room } from '../entities/room.entity';
+import { RoomController } from './room.controller';
+import { RoomService } from './room.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Payment])],
-  controllers: [PaymentController],
-  providers: [PaymentService],
+  imports: [TypeOrmModule.forFeature([Room])],
+  controllers: [RoomController],
+  providers: [RoomService],
 })
-export class PaymentModule {}
-/* --- End hong-meow-hotel/backend/src/payment/payment.module.ts --- */
+export class RoomModule {}
+/* --- End hong-meow-hotel/backend/src/room/room.module.ts --- */

@@ -13,7 +13,7 @@ export class BookedroomService {
 
   async findByBookingId(bookingId: number) {
     return await this.bookedRoomRepo.find({
-      where: { BID: bookingId },
+      where: { BID: String(bookingId) },
       relations: ['room'],
     });
   }
@@ -21,7 +21,7 @@ export class BookedroomService {
   async updateStatus(dto: UpdateBookedRoomDto) {
     const room = await this.bookedRoomRepo.findOne({
       where: {
-        BID: dto.BID,
+        BID: String(dto.BID),
         RTID: dto.RTID,
         RID: dto.RID,
       },
