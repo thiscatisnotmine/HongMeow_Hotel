@@ -16,7 +16,7 @@ export class BookedRoom {
   @Column() BID: string;
   @Column() RTID: string;
   @Column() RID: number;
-  @Column() PID: string;
+  @Column({ type: 'int' }) PID: number;
   @Column() RoomStatus: string;
 
   @ManyToOne(() => Booking, (booking) => booking.bookedRooms)

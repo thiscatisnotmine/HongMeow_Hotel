@@ -16,7 +16,10 @@ export default function TopBar() {
           Staff Management
         </button>
       </div>
-      <button className="profile" onClick={() => router.push("/profile")}>
+      <button
+        className="profile"
+        onClick={() => router.push("/customer/profile/edit")}
+      >
         <Image
           src="/image/solar_user-outline.png"
           alt="Profile"

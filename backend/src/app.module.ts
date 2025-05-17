@@ -48,6 +48,8 @@ import { UrgentModule } from './urgent/urgent.module';
         Payment,
       ],
       synchronize: true, // set false on production
+      dropSchema: true, // This will drop all tables before creating new ones
+      migrationsRun: true,
     }),
 
     // Feature modules

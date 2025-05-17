@@ -1,8 +1,8 @@
-/* PATCH begins */
+// backend/src/entities/booking.entity.ts
 import {
-  Column,
   Entity,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
+  Column,
   OneToMany,
   ManyToOne,
   JoinColumn,
@@ -13,22 +13,37 @@ import { Customer } from './customer.entity';
 
 @Entity()
 export class Booking {
-  @PrimaryColumn() BID: string;
-  @Column() CusCID: string;
-  @Column() CheckInDate: string;
-  @Column() CheckOutDate: string;
-  @Column() Duration: number;
-  @Column() RoomAmount: number;
+  @PrimaryGeneratedColumn('uuid')
+  BID: string;
 
-  /* NEW ↓ */
-  @Column() BookingStatus: string; // waiting | check-in | check-out
-  @Column('float', { default: 0 }) Total: number;
+  @Column()
+  CusCID: string;
 
-  @ManyToOne(() => Customer, (c) => c.bookings)
+  @Column({ type: 'date' })
+  CheckInDate: string;
+
+  @Column({ type: 'date' })
+  CheckOutDate: string;
+
+  @Column()
+  Duration: number;
+
+  @Column()
+  RoomAmount: number;
+
+  @Column('float', { default: 0 })
+  Total: number;
+
+  @Column({ default: 'waiting' })
+  BookingStatus: string;
+
+  @ManyToOne(() => Customer, (customer) => customer.bookings)
   @JoinColumn({ name: 'CusCID' })
   customer: Customer;
 
-  @OneToMany(() => BookedRoom, (br) => br.booking) bookedRooms: BookedRoom[];
-  @OneToMany(() => Payment, (p) => p.booking) payments: Payment[];
+  @OneToMany(() => BookedRoom, (br) => br.booking)
+  bookedRooms: BookedRoom[];
+
+  @OneToMany(() => Payment, (p) => p.booking)
+  payments: Payment[];
 }
-/* PATCH ends */

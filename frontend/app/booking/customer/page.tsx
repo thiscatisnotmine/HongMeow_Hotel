@@ -1,3 +1,4 @@
+// frontend/app/booking/customer/page.tsx
 "use client";
 
 import "../../../styles/HTML_Components/title_search.css";
@@ -29,13 +30,12 @@ export default function BookingCustomerPage() {
   const [results, setResults] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(false);
 
-  /* restore draft from localStorage */
+  // Restore draft
   useEffect(() => {
     const saved = localStorage.getItem("booking_customer_data");
     if (saved) setForm(JSON.parse(saved));
   }, []);
 
-  /* ------------------------- handlers ------------------------- */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -46,14 +46,22 @@ export default function BookingCustomerPage() {
 
     setLoading(true);
     try {
-      const qs = new URLSearchParams({
-        cid: CusCID,
-        fname: CusFname,
-        lname: CusLname,
-      }).toString();
-
-      const data = await api<Customer[]>(`/customer/search?${qs}`);
+      let data: Customer[] = [];
+      if (CusCID) {
+        data = await api<Customer[]>(
+          `/customer/search-by-cid?cid=${encodeURIComponent(CusCID)}`
+        );
+      } else {
+        data = await api<Customer[]>(
+          `/customer/search-by-name?fname=${encodeURIComponent(
+            CusFname
+          )}&lname=${encodeURIComponent(CusLname)}`
+        );
+      }
       setResults(data);
+    } catch (err) {
+      console.error(err);
+      setResults([]);
     } finally {
       setLoading(false);
     }
@@ -72,17 +80,19 @@ export default function BookingCustomerPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    /* up-sert customer */
-    await api("/customer", {
-      method: "POST",
-      body: JSON.stringify(form),
-    });
-
-    localStorage.setItem("booking_customer_data", JSON.stringify(form));
-    router.push("/booking/emergency");
+    try {
+      // Upsert
+      await api("/customer", {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+      localStorage.setItem("booking_customer_data", JSON.stringify(form));
+      router.push("/booking/emergency");
+    } catch (err) {
+      console.error("Failed to save customer:", err);
+    }
   };
 
-  /* --------------------------- UI ----------------------------- */
   return (
     <div className="main-content">
       {/* Tabs */}
@@ -112,7 +122,7 @@ export default function BookingCustomerPage() {
         </div>
       </div>
 
-      {/* Page Title + Search */}
+      {/* Title + Search */}
       <div className="headline">
         <h2>Customer</h2>
         <div className="search-form">
@@ -120,7 +130,14 @@ export default function BookingCustomerPage() {
             className="search-inputs"
             type="text"
             placeholder="search by CID or name"
-            onChange={(e) => setForm({ ...form, CusCID: e.target.value })}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                CusCID: e.target.value,
+                CusFname: "",
+                CusLname: "",
+              })
+            }
           />
           <button className="search-icon" type="button" onClick={handleSearch}>
             {loading ? (
@@ -132,7 +149,7 @@ export default function BookingCustomerPage() {
         </div>
       </div>
 
-      {/* Search results dropdown */}
+      {/* Results */}
       {results.length > 0 && (
         <div className="search-results">
           {results.map((c) => (

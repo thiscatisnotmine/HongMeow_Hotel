@@ -23,7 +23,7 @@ export class PetService {
   }
 
   findOne(id: number) {
-    return this.petRepository.findOne({ where: { PID: String(id) } });
+    return this.petRepository.findOne({ where: { PID: id } });
   }
 
   update(id: number, updatePetDto: UpdatePetDto) {

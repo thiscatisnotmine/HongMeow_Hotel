@@ -1,6 +1,8 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+// backend/src/customer/customer.controller.ts
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { Customer } from '../entities/customer.entity';
+import { CreateCustomerDto } from './dto/create-customer.dto';
 
 @Controller('customer')
 export class CustomerController {
@@ -32,5 +34,11 @@ export class CustomerController {
   @Get('upcoming-bookings')
   getCustomersWithUpcomingBookings() {
     return this.customerService.getCustomersWithUpcomingBookings();
+  }
+
+  // ← new endpoint
+  @Post()
+  createOrUpdate(@Body() dto: CreateCustomerDto): Promise<Customer> {
+    return this.customerService.createOrUpdate(dto);
   }
 }

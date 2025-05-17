@@ -80,7 +80,7 @@ export default function EditCustomerProfile() {
       <div className="tab-inside flex h-[60px] mb-4">
         <button
           className="choice"
-          onClick={() => (window.location.href = "/customer")}
+          onClick={() => (window.location.href = "/customer/profile/edit")}
         >
           Customer
         </button>

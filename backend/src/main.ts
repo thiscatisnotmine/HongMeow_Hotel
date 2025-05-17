@@ -15,13 +15,17 @@ async function bootstrap() {
   /* 🔓  DEV-only – allow ANY origin */
   app.enableCors({
     origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    methods: '*',
     allowedHeaders: '*',
   });
 
   app.useStaticAssets(join(__dirname, '..', 'public'));
 
   const dataSource = app.get(DataSource);
+
+  // Wait a bit for database to be ready
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+
   await seedData(dataSource);
 
   await app.listen(5000, '0.0.0.0');

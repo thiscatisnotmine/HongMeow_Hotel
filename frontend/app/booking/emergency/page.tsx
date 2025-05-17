@@ -1,3 +1,4 @@
+// frontend/app/booking/emergency/page.tsx
 "use client";
 
 import "../../../styles/HTML_Components/Booking_Urgent.css";
@@ -15,59 +16,64 @@ interface EmergencyContact {
 export default function EmergencyContactPage() {
   const router = useRouter();
 
-  /** load customer ID saved in Step 1 */
-  const customer = JSON.parse(
+  // Step 1: load the CID from step 1
+  const stored =
     typeof window !== "undefined"
-      ? localStorage.getItem("booking_customer_data") ?? "{}"
-      : "{}"
-  ) as { CusCID?: string };
+      ? localStorage.getItem("booking_customer_data")
+      : null;
+  const customer = stored ? JSON.parse(stored) : {};
+  const CusCID = (customer as { CusCID?: string }).CusCID;
 
   const [contacts, setContacts] = useState<EmergencyContact[]>([
     { firstname: "", lastname: "", tel: "", relationship: "" },
   ]);
-
   const [saving, setSaving] = useState(false);
 
-  /* restore draft if present */
+  // Step 2: restore draft
   useEffect(() => {
-    const saved = localStorage.getItem("booking_urgent_data");
-    if (saved) setContacts(JSON.parse(saved));
+    const draft = localStorage.getItem("booking_urgent_data");
+    if (draft) {
+      setContacts(JSON.parse(draft));
+    }
   }, []);
 
-  /* ----- handlers -------------------------------------------------- */
+  // handlers
   const handleChange = (
-    index: number,
+    idx: number,
     field: keyof EmergencyContact,
     value: string
   ) => {
-    const clone = structuredClone(contacts);
-    clone[index][field] = value;
-    setContacts(clone);
+    setContacts((curr) => {
+      const copy = [...curr];
+      copy[idx] = { ...copy[idx], [field]: value };
+      return copy;
+    });
   };
 
   const addContact = () => {
-    setContacts((prev) => [
-      ...prev,
+    setContacts((curr) => [
+      ...curr,
       { firstname: "", lastname: "", tel: "", relationship: "" },
     ]);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!customer.CusCID) {
-      alert("Missing customer information – please complete previous step.");
+
+    if (!CusCID) {
+      alert("No customer found — please complete the Customer step first.");
       return;
     }
 
     setSaving(true);
     try {
-      /* send each contact */
+      // POST each contact
       await Promise.all(
         contacts.map((c) =>
-          api("/urgent", {
+          api<void>("/urgent", {
             method: "POST",
             body: JSON.stringify({
-              CusCID: customer.CusCID,
+              CusCID,
               UrFname: c.firstname,
               UrLname: c.lastname,
               UrPhone: c.tel,
@@ -77,19 +83,20 @@ export default function EmergencyContactPage() {
         )
       );
 
+      // persist locally and advance
       localStorage.setItem("booking_urgent_data", JSON.stringify(contacts));
       router.push("/booking/room");
     } catch (err) {
       console.error(err);
-      alert("Failed to save emergency contacts.");
+      alert("Failed to save emergency contacts. Please try again.");
     } finally {
       setSaving(false);
     }
   };
 
-  /* ----- UI -------------------------------------------------------- */
   return (
     <div className="main-content">
+      {/* Tabs */}
       <div className="filter-section">
         <div className="tab-inside">
           <button
@@ -126,12 +133,14 @@ export default function EmergencyContactPage() {
                 <h2>Contact {idx + 1}</h2>
               </div>
 
+              {/* firstname, lastname, tel, relationship */}
               {(["firstname", "lastname", "tel", "relationship"] as const).map(
                 (field) => (
                   <div className="form-group" key={field}>
                     <label>
                       {field.charAt(0).toUpperCase() + field.slice(1)}:
                     </label>
+
                     {field === "relationship" ? (
                       <select
                         required
@@ -166,7 +175,12 @@ export default function EmergencyContactPage() {
         </div>
 
         <div className="add-btn-wrapper">
-          <button type="button" className="add-btn" onClick={addContact}>
+          <button
+            type="button"
+            className="add-btn"
+            onClick={addContact}
+            disabled={saving}
+          >
             + Add More Contact
           </button>
         </div>

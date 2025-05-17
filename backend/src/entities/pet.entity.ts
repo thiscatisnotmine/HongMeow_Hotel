@@ -1,18 +1,41 @@
-import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
+// backend/src/entities/pet.entity.ts
+
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Customer } from './customer.entity';
 
-@Entity()
+@Entity({ name: 'pet' })
 export class Pet {
-  @PrimaryColumn() PID: string;
-  @Column() CusCID: string;
-  @Column() PName: string;
-  @Column() PType: string;
-  @Column() PBreeds: string;
-  @Column() PAge: number;
-  @Column() PVaccine: string;
-  @Column() PDisease: string;
+  @PrimaryGeneratedColumn({ name: 'PID', type: 'int' })
+  PID: number;
 
-  @ManyToOne(() => Customer, (customer) => customer.pets)
+  @Column({ name: 'CusCID' })
+  CusCID: string;
+
+  @Column({ name: 'PName' })
+  PName: string;
+
+  @Column({ name: 'PType' })
+  PType: string;
+
+  @Column({ name: 'PBreeds' })
+  PBreeds: string;
+
+  @Column({ name: 'PAge', type: 'int' })
+  PAge: number;
+
+  @Column({ name: 'PVaccine', type: 'boolean', default: false })
+  PVaccine: boolean;
+
+  @Column({ name: 'PDisease', nullable: true })
+  PDisease: string;
+
+  @ManyToOne(() => Customer, (cust) => cust.pets)
   @JoinColumn({ name: 'CusCID' })
   customer: Customer;
 }

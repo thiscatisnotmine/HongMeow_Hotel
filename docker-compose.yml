@@ -24,7 +24,7 @@ services:
     depends_on:
       - mariadb # ← updated dependency
     ports:
-      - "5000:5000"
+      - "5050:5000"
 
   frontend:
     build:
