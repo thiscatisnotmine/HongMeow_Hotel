@@ -1,0 +1,240 @@
+* {
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  box-sizing: content-box;
+}
+
+/* Head line and Edit button*/
+.headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* เว้นพื้นที่ให้ซ้าย-ขวาอยู่คนละด้าน */
+    margin-top: 25px;
+}
+
+h2 {
+    color: #000000;
+}
+
+.edit{
+    border-radius: 40px;
+    background-color: #FFFAA2;
+    font-size: 20px;
+    cursor: pointer;
+    border:none ;
+    width: 10%;
+    height: 40px;
+    color: #5C4538;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit:hover {
+    background-color:rgb(255, 240, 128) ;
+    transform: translateY(-5px);
+
+}
+
+/* employee Info */
+.employee-info {
+    font-size: 18px;
+    color: #5C4538;
+}
+
+.edit-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+
+.edit-row label {
+    margin-right: 10px;
+    width: 100px; /* หรือปรับขนาดตามต้องการ */
+}
+
+input {
+    height: 20px;
+}
+
+/* Hidden button */
+.hidden-space {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* เว้นพื้นที่ให้ซ้าย-ขวาอยู่คนละด้าน */
+    margin-top: 25px;
+}
+
+.button-group {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: flex-end;
+  }
+
+.hidden-btn {
+    display: none;
+}
+
+.confirm {
+    width: 80%;
+    height: 5vh;
+    font-size: 20px;
+    background-color: #89D3FF;
+    color: #FFFFFF;
+    border-radius: 40px;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+
+
+}
+
+.confirm:hover {
+    background-color:#6ecaff ;
+    transform: translateY(-5px);
+
+}
+
+.cancel {
+    width: 80%;
+    height: 5vh;
+    font-size: 20px;
+    background-color: #E41D1D;
+    color: #FFFFFF;
+    border-radius: 40px;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+
+
+}
+
+.cancel:hover {
+    background-color:#d80202 ;
+    transform: translateY(-5px);
+
+}
+
+
+
+/*
+.profile-container {
+  margin-left: 390px;
+  margin-top: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
+  position: relative;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.back-button {
+  background-color: transparent;
+  border: none;
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.profile-title {
+  font-weight: 500;
+  font-size: 40px;
+  color: #000;
+  margin: 0;
+}
+
+.profile-details {
+  display: flex;
+  gap: 40px;
+  flex-direction: column; 
+  align-items: center; 
+  margin-top: 20px;
+}
+
+.profile-picture-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.profile-picture {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info {
+  max-width: 600px;
+  margin-left: 20px;
+}
+
+.profile-info p {
+  font-size: 24px;
+  margin: 5px 0;
+}
+
+.profile-info strong {
+  font-weight: 500;
+}
+
+.profile-info input {
+  font-size: 24px;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-info input[type="password"] {
+  font-family: 'Inter', sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+body.view-page .profile-picture-container {
+  width: 300px;
+  height: 300px;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    margin-left: 20px;
+    margin-top: 40px;
+  }
+
+  .profile-details {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-info {
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .profile-picture-container {
+    margin-bottom: 20px;
+  }
+}
+*/

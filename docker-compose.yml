@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  mariadb: # ← renamed service
+    image: mariadb:10.11
+    container_name: mariadb # ← renamed container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: hongmeow
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - mariadb # ← updated dependency
+    ports:
+      - "5050:5000"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    env_file:
+      - ./frontend/.env.local
+    ports:
+      - "3000:3000"
+
+volumes:
+  dbdata:

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notification - Hong Meow Hotel</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../../HTML_Components/side-bar.css" />
+  <link rel="stylesheet" href="../../HTML_Components/top-bar.css" />
+  <link rel="stylesheet" href="../../HTML_Components/table.css" />
+  <link rel="stylesheet" href="../../HTML_Components/title_search.css" />
+  <link rel="stylesheet" href="notification.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <my-sidebar></my-sidebar>
+
+  <!-- Topbar -->
+  <my-topbar></my-topbar>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!--Name of page and Search box-->
+    <div class="headline">
+        <h2>Notification</h2>
+        <div class="search-form" id="searchForm">
+            <input class="search-inputs" type="text" id="searchInput" placeholder="search" required>
+            <button class="search-icon"  type="submit" onclick="handleSearch()">
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+            </button>
+          </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID Card No.</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody id="resultBox"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script src="../../HTML_Components/side-bar.js"></script>
+  <script src="../../HTML_Components/top-bar.js"></script>
+  <script src="../../HTML_Components/redirect.js"></script>
+  <script src="javascript/btn.js"></script>
+  <script src="notification.js"></script>
+</body>
+</html>
